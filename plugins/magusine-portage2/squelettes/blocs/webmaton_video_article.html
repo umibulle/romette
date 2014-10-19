@@ -1,0 +1,78 @@
+<BOUCLE_recup(ARTICLES){id_article}>
+#SET{critere_in,#ARRAY{0,0}}
+
+<BOUCLE_galerievideo(DOCUMENTS){id_article}{extension==avi|mov|qt|mpg|rm|mp4}{doublons}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_galerievideo>
+
+<BOUCLE_questions_webmaton(DOCUMENTS){id_rubrique}{fichier==^.*questions(-[0-9]*)?\.xml$}{0,1}>
+<?php
+include_spip('inc/xml-parser');
+
+$questions = array();
+
+if (file_exists('#FICHIER')) {
+ $p =& new xmlParser();
+ $p->parse('#FICHIER');
+  /* décommenter ceci pour vérifier si le fichier est correctement lu */
+   //print_r($p->output);
+
+  foreach($p->output[0]['child'] as $groupe) {
+    foreach($groupe["child"] as $prop){
+      if ($prop["name"] == "QUESTIONS") {
+        foreach($prop["child"] as $question) {
+          $questions[strtolower($groupe["attrs"]["PREFIX"])][$question["attrs"]["ID"]] = $question["content"];
+        }
+      }
+    }
+  }
+}
+
+//print_r($questions);
+?>
+</BOUCLE_questions_webmaton>
+<B_choosedocs>
+<div id="galerieimg" class="listagebloc">
+<h2><:les_webmatons:></h2>
+<ul class="listageconteneur"><li>
+<BOUCLE_choosedocs(DOCUMENTS){id_document IN #GET{critere_in}}{!par date}>
+<div class="webmaton" style="float:left;position:relative;">
+<a href="javascript:void(0);" onclick="popup_page('spip.php?page=popup-webmaton&id_rubrique=#ID_RUBRIQUE&id_document=#ID_DOCUMENT',500,400);">
+[(#INCLURE{fond=formatage_vignette_webmaton}{id_document}{conteneur=#ENV{conteneur}})]
+</a><div class="question" style="position:absolute;bottom:0;z-index:100;display:none;margin:0px;padding:2px;font-size:9px;background-color:#fff;"><a href="javascript:void(0);" onclick="popup_page('spip.php?page=popup-webmaton&id_rubrique=#ID_RUBRIQUE&id_document=#ID_DOCUMENT',500,400);"><?php
+$morceaux = split("/", "#FICHIER");
+$fichier = end($morceaux);
+$resultats = array();
+eregi("([^\-]+)-q([0-9]+)-", $fichier, $resultats);
+if (count($resultats) > 2) {
+  $groupe = $resultats[1];
+  $question = $resultats[2];
+  echo $questions[strtolower($groupe)][$question];
+}
+?></a></div></div>
+
+</BOUCLE_choosedocs>
+<li style="clear:left"></li>
+</li></ul>
+<!-- effet de survol -->
+<script language="javascript">
+
+$("#galerieimg .webmaton").each(function(){
+	$(this).mouseover(function(){
+	largeur=$(this).find("img").width() -4;
+	hauteur=$(this).find("img").height();
+	$(this).height(hauteur);
+	$(this).children(".question").css("width",largeur + "px").css("display","block");
+	});
+	
+	$(this).mouseout(function(){
+		$(this).children(".question").css("display","none");
+	});
+});
+
+</script>
+
+</div>
+</B_choosedocs>
+
+</BOUCLE_recup>

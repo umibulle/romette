@@ -1,0 +1,141 @@
+#general {
+width: 660px;
+margin: 0 auto;
+font-family: arial, verdana, sans-serif;	
+}
+
+.conteneur_bloc {
+float: left;
+width: 145px;
+font-size: 10px;
+border: 1px solid #555;
+
+list-style-type: none;
+padding: 6px;
+margin: 0;
+}
+
+#reserves .conteneur_bloc {
+float:none;
+}
+
+#reserves {
+width: 155px;
+float: right;
+}
+
+#reserves #avance {
+margin-top:6px;
+}
+
+.bloc {
+padding: 4px;
+margin: 4px 0;
+border: 1px solid #666;
+background-color:white;
+}
+
+.sortableactive {
+border: 1px solid red;	
+}
+
+.sortablehover {
+	border: 1px solid green;
+}
+
+.sorthelper {
+	border: 1px dashed green;
+}
+
+.poignee {
+width: 10px;
+height: 10px;
+background-color: green;
+float: left;
+margin-right: 4px;
+margin-bottom: 2px;
+cursor: move;	
+}
+
+.titre-bloc {
+font-size: 10px;
+font-weight: bold;
+}
+
+.selecteur-param {
+font-size: 9px;
+width: 99%;
+}
+
+.clearer {
+clear: both;	
+}
+
+#pageweb {
+float: left;
+border: 1px solid #ccc;
+width:486px;
+padding:4px;
+background-color: #fff;
+margin-bottom:6px;
+}
+
+#bandeau, #footer {
+height: 40px;
+border: 1px solid #ccc;	
+background-image:url(../images/stripes.gif);
+}
+
+#bandeau {
+margin-bottom: 4px;
+}
+
+#footer {
+margin-top: 4px;
+}
+
+.option-bloc {
+display: none;
+}
+
+
+#contexte2 {
+margin:0 4px;
+}
+
+#contexte1 .option-bloc {
+display: block;
+}
+
+#contexte2 .option-bloc {
+display: block;
+}
+
+#corps .option-bloc {
+display: block;
+}
+
+.option-bloc select {
+font-size: 9px;
+}
+
+#reponse {
+  float:right;
+  font-weight:bold;
+  color:white;
+}
+
+#source {
+width:90%;
+}
+
+#deroulant-gabarits {
+text-align:right;
+font-family:arial, verdana, sans-serif;
+font-size:12px;
+margin:6px 170px 6px 0;
+}
+
+#deroulant-gabarits select {
+font-size:10px;
+}

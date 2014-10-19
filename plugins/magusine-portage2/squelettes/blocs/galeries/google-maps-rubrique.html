@@ -1,0 +1,34 @@
+<B_documents_gmap>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<BOUCLE_api_key(spip_arty_parametres){parametre=google_api_key}>#VALEUR</BOUCLE_api_key>" type="text/javascript"></script>
+<style type="text/css">
+.gmaps {
+  width: [(#ENV{conteneur}|=={1}|?{'[(#LARGEUR_CONTEXTE1|moins{6})]',''})][(#ENV{conteneur}|=={2}|?{'[(#LARGEUR_CONTEXTE2|moins{6})]',''})][(#ENV{conteneur}|=={3}|?{'#LARGEUR_CORPS',''})]px;
+  height: #ENV{parametre}px;
+}
+</style>
+<BOUCLE_documents_gmap(DOCUMENTS){id_rubrique}{extension==kml|kmz}{par num titre}>
+<div id="googlemap" class="listagebloc googlemap#ID_DOCUMENT">
+[<h2>(#TITRE|supprimer_numero)</h2>]
+<li><div id="map#ID_DOCUMENT" class="gmaps"></div></li>
+[<li class="listageinfo">(#DESCRIPTIF)</li>]
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var map#ID_DOCUMENT;
+var geoXml#ID_DOCUMENT = new GGeoXml("#URL_SITE_SPIP/#FICHIER");
+
+jQuery(document).ready(function(){
+  if (GBrowserIsCompatible()) {
+    map#ID_DOCUMENT = new GMap2(document.getElementById("map#ID_DOCUMENT"));
+    <BOUCLE_parametres(spip_arty_parametres){parametre=gmaps_afficher_controles}{valeur=true}{0, 1}>
+    map#ID_DOCUMENT.addControl(new GSmallMapControl());
+    map#ID_DOCUMENT.addControl(new GMapTypeControl());
+    </BOUCLE_parametres>
+    map#ID_DOCUMENT.setCenter(new GLatLng(41.875696,-87.624207), 2); 
+    map#ID_DOCUMENT.addOverlay(geoXml#ID_DOCUMENT);
+    geoXml#ID_DOCUMENT.gotoDefaultViewport(map#ID_DOCUMENT); 
+  }
+});
+//]]>
+</script>
+</BOUCLE_documents_gmap>

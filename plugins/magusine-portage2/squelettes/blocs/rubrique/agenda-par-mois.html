@@ -1,0 +1,35 @@
+<B_article>
+<BOUCLE_cachearts(ARTICLES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<div id="agenda" class="listagebloc">
+<BOUCLE_article(ARTICLES){id_rubrique}{par date}>
+
+<BOUCLE_premierdumois(ARTICLES){id_article}{doublons}{doublons cacher}>
+<h2> [(#DATE|nom_mois|majuscules)] [(#DATE|annee)] </h2>
+<ul class="listageconteneur">
+
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+<h4 [class="(#EDIT{titre})"]>[(#TITRE|supprimer_numero)]</h4>
+<p class="listageinfo">[(#DATE|jour)]/[(#DATE|mois)]</p>
+<p class="listagetexte #EDIT{texte}">[(#CHAPO)<br />][(#TEXTE|couper{300})]</p>
+
+[(#TEXTE|strlen|>={300}|?{' ',''})
+<p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p>]
+
+</li>
+</BOUCLE_premierdumois>
+
+<BOUCLE_MOIS(ARTICLES){id_rubrique}{mois_relatif=0}{doublons}{par date}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+<h4 [class="(#EDIT{titre})"]>[(#TITRE|supprimer_numero)]</h4>
+<p class="listageinfo">[(#DATE|jour)]/[(#DATE|mois)]</p>
+<p class="listagetexte #EDIT{titre}">[(#CHAPO)<br />][(#TEXTE|couper{300})]</p>
+[(#TEXTE|strlen|>={300}|?{' ',''})
+<p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p>]</li>
+</BOUCLE_MOIS>
+
+</ul>
+</BOUCLE_article>
+</div>
+</B_article>

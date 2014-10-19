@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+#contexte1 {
+  display:none;
+}
+
+.texte {
+  background-image:url(traits.png);
+background-repeat:no-repeat;
+}
+
+#general {
+background-image:url(fond_corps.png);}
+

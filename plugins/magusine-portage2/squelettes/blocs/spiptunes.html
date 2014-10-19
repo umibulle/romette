@@ -1,0 +1,91 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?php
+        echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n";
+?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0"> 
+  <channel> 
+  <BOUCLE_un_article(ARTICLES){id_article}>
+    <title>[(#TITRE|textebrut|entites_html|entites_unicode)]</title> 
+    <itunes:author>[(#EMAIL_WEBMASTER|liens_absolus|texte_backend)]</itunes:author> 
+    <link>#URL_SITE_SPIP</link> 
+    <description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description> 
+    <itunes:subtitle>[(#SOUSTITRE|liens_absolus|texte_backend)]</itunes:subtitle> 
+    <itunes:summary>[(#DESCRIPTIF|liens_absolus|texte_backend)]</itunes:summary> 
+    <language>#LANG</language> 
+    <copyright>[(#NOM_SITE_SPIP|texte_backend)] 2005</copyright> 
+    <itunes:owner> 
+      <itunes:name> <BOUCLE_webmaster(AUTEURS) {id_auteur=1}>[(#NOM|texte_backend)]</BOUCLE_webmaster></itunes:name> 
+      <itunes:email>#EMAIL_WEBMASTER</itunes:email> 
+    </itunes:owner>
+    <itunes:category text="International">
+    <itunes:category text="Belgian" />
+    </itunes:category> 
+    <itunes:explicit>no</itunes:explicit>
+    [<image> 
+      <url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url> 
+      [<title>(#NOM_SITE_SPIP|texte_backend)</title>] 
+      <link>#URL_SITE_SPIP</link> 
+    </image>]
+        <!-- the max size for rss image is 144x400 --> 
+        <!-- iTunes allows images larger than that --> 
+    [<itunes:link rel="image" type="video/jpeg" href="(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)">[(#NOM_SITE_SPIP|texte_backend)]</itunes:link>] 
+
+<BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}{extension==mp3|m4a|m4b|aac|wav|mp4|mov|mpg|ogg}>
+   <item> 
+      <title>[(#TITRE|texte_backend)]</title> 
+      <itunes:author><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></itunes:author>
+      <description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description>  
+		  <itunes:summary>[(#DESCRIPTIF|liens_absolus|texte_backend)]</itunes:summary>
+      <enclosure url="[(#URL_DOCUMENT|url_absolue|unique)]" length="[(#TAILLE)]" type="#MIME_TYPE" />
+      <guid isPermaLink="false">#TAILLE.#ID_DOCUMENT</guid> 
+      <pubDate>[(#DATE|affdate{'r'})]</pubDate>  
+      <itunes:explicit>no</itunes:explicit> 
+      <itunes:keywords><BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,4}>#TITRE</BOUCLE_articles_mots></itunes:keywords>
+    </item>
+    </BOUCLE_podcast>
+  </BOUCLE_un_article>
+  
+  <BOUCLE_une_rubrique(RUBRIQUES){id_rubrique}>
+    <title>[(#TITRE|textebrut|entites_html|entites_unicode)]</title> 
+    <itunes:author>[(#EMAIL_WEBMASTER|liens_absolus|texte_backend)]</itunes:author> 
+    <link>#URL_SITE_SPIP</link> 
+    <description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description> 
+    <itunes:subtitle>[(#SOUSTITRE|liens_absolus|texte_backend)]</itunes:subtitle> 
+    <itunes:summary>[(#DESCRIPTIF|liens_absolus|texte_backend)]</itunes:summary> 
+    <language>#LANG</language> 
+    <copyright>[(#NOM_SITE_SPIP|texte_backend)] 2005</copyright> 
+    <itunes:owner> 
+      <itunes:name> <BOUCLE_webmaster(AUTEURS) {id_auteur=1}>[(#NOM|texte_backend)]</BOUCLE_webmaster></itunes:name> 
+      <itunes:email>#EMAIL_WEBMASTER</itunes:email> 
+    </itunes:owner> 
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:category text="International">
+    <itunes:category text="Belgian" />
+    </itunes:category> 
+    [<image> 
+      <url>(#LOGO_RUBRIQUE||extraire_attribut{src}|url_absolue|texte_backend)</url> 
+      <title>(#TITRE|texte_backend)</title> 
+      <link>#URL_RUBRIQUE</link> 
+    </image>] 
+        <!-- the max size for rss image is 144x400 --> 
+        <!-- iTunes allows images larger than that --> 
+    [<itunes:link rel="image" type="video/jpeg" href="(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)">[(#NOM_SITE_SPIP|texte_backend)]</itunes:link>] 
+
+  <BOUCLE_articles(ARTICLES){id_rubrique}>
+  <BOUCLE_podcast2(DOCUMENTS){id_article}{mode=document}{extension==mp3|m4a|m4b|aac|wav|mp4|mov|mpg|ogg}>
+   <item> 
+      <title>[(#TITRE|texte_backend)]</title> 
+      <itunes:author><BOUCLE_auteursb2(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb2></itunes:author>
+      <description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description>  
+		  <itunes:summary>[(#DESCRIPTIF|liens_absolus|texte_backend)]</itunes:summary>
+      <enclosure url="[(#URL_DOCUMENT|url_absolue|unique)]" length="[(#TAILLE)]" type="#MIME_TYPE" />
+      <guid isPermaLink="false">#TAILLE.#ID_DOCUMENT</guid> 
+      <pubDate>[(#DATE|affdate{'r'})]</pubDate>  
+      <itunes:explicit>no</itunes:explicit> 
+      <itunes:keywords><BOUCLE_articles_mots2(ARTICLES) {id_mot} {par hasard} {0,4}>#TITRE</BOUCLE_articles_mots2></itunes:keywords>
+    </item>
+    </BOUCLE_podcast2>
+  </BOUCLE_articles>
+  </BOUCLE_une_rubrique>		
+  </channel> 
+</rss>

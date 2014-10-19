@@ -1,0 +1,16 @@
+<B_listesites>
+<div id="mot-sites" class="listagebloc">
+<h2><:mot_sites:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesites(SITES){id_mot}{par nom_site}>
+<li>
+<a name="[(#NOM_SITE|nospace|entites_html)]"></a>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_SITE">[(#NOM_SITE|supprimer_numero)]</a></h4>
+<B_autresmots><div class="listageinfo"><BOUCLE_autresmots(MOTS){id_syndic}{" - "}{exclus}><a href="#URL_MOT">#TITRE</a></BOUCLE_autresmots></div></B_autresmots>
+[<p class="listagetexte">(#DESCRIPTIF)</p>]
+</li>
+</BOUCLE_listesites>
+</ul>
+</div>
+</B_listesites>

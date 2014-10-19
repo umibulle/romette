@@ -1,0 +1,35 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==mp3}{mode=document}{0,1}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article=#ID_ARTICLE}
+#TITRE
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==mp3}{mode=document}{0,1}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique=#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc>
+<div id="galerie_audio" class="listagebloc">
+<h2><:galerie_audio:></h2>
+<script type="text/javascript">
+function ouvrirPopup(id_doc, titre) 
+{
+  left = (screen.width) ? (screen.width-400)/2 : 0;
+  top = (screen.height) ? (screen.height-240)/2 : 0;
+  params = 'height='+240+',width='+400+',top='+top+',left='+left+',scrollbars=no,resizable=yes,menubar=no,toolbar=no,status=no';
+  window.open('#URL_SITE_SPIP/spip.php?page=popup-galerie-audio&#GET{vers}&id_document='+id_doc, titre, params);
+}
+</script>
+<ul class="listageconteneur">
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}>
+<li>
+<div class="listagetitre"><a href="javascript:ouvrirPopup('#ID_DOCUMENT');"><:pour_ecouter_cliquez:> <:lien_lecteur_standalone:></a>
+</div>
+</li>
+</BOUCLE_doc>
+</ul>
+</div>
+</B_doc>

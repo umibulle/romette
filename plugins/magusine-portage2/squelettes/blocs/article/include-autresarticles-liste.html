@@ -1,0 +1,8 @@
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_autresarticles(ARTICLES){id_rubrique}{exclus}{par num titre, id_article}>
+<li>
+#SURTITRE
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+</li>
+</BOUCLE_autresarticles>
+</BOUCLE_recup>

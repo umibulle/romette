@@ -1,0 +1,103 @@
+.conteneur-theme {
+margin: 10px 0;
+position: relative;
+}
+
+.declinaison {
+}
+
+.theme_deplier {
+clear: left;
+font-size: 12px;
+font-weight: bold;
+margin: 0 0 6px 0;
+padding:0 0 0 20px;
+background:url('../images/deplierhaut.gif') no-repeat 4px 0 ;
+}
+
+.theme-actuel {
+padding: 5px;
+background-color: #eee;
+border: 3px solid #ddd;
+}
+
+#lavignette {
+position:absolute;
+left: -270px;
+padding: 5px;
+background-color: #eee;
+border: 3px solid #ddd;
+width: 250px;
+}
+
+.liste-declinaison {
+margin-left:28px;
+}
+
+.theme-actuel h4 {
+margin: 0 0 10px 0;
+color: #333;
+}
+
+.clearer {
+clear: left;	
+}
+	
+.vignette-theme {
+float: left;
+display: block;
+border: 1px solid #000;
+margin: 0 10px 10px 0;
+width: 200px;
+/* pour ie :*/
+position:relative;
+}
+
+.cadre-padding {
+padding:8px;
+font-family:verdana,arial,helvetica,sans;
+font-size:12px;
+}
+.cadre-padding p {
+margin:0px 0px 8px 0px;
+}
+
+h5 {
+font-size: 14px;
+margin: 0 0 10px 0;
+}
+
+.meta {
+border-bottom:1px dashed #ccc;
+padding:5px;
+margin-bottom:10px;
+}
+
+.liste-association {
+  list-style:none;
+  margin-left:0px;
+  padding-left:3px;
+  margin-top:0px;
+}
+
+.liste-association img {
+margin:0px 5px;
+}
+
+.bouton-montrer-options {
+display:block;
+margin:5px 0px 2px 0px;
+font-weight:bold;
+}
+
+p.label_radio {
+margin-top:8px;
+margin-bottom:2px;
+}
+
+#cacher_edito, .radio{
+position:relative;
+top:2px;
+_top:0px;
+}
+

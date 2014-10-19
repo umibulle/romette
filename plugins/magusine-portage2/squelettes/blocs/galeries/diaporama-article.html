@@ -1,0 +1,33 @@
+<B_lesimagesliste><link href='#CHEMIN{themes/#THEME/addfiles/diaporama.css}' rel='stylesheet' type='text/css' />
+<style type="text/css">
+#slideShow
+{
+	width:[(#ENV{conteneur}|=={1}|?{' ',''})[(#LARGEUR_CONTEXTE1)]][(#ENV{conteneur}|=={2}|?{' ',''})[(#LARGEUR_CONTEXTE2)]][(#ENV{conteneur}|=={3}|?{' ',''})[(#LARGEUR_CORPS)]]px;
+	height: #ENV{parametre}px;
+}
+</style>
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.innerfade.js}"></script>
+<script type="text/javascript">
+$(document).ready(
+				function(){
+					$('ul#portfolio').innerfade({
+						speed: 800,
+						timeout: 4000,
+						type: 'sequence',
+						containerheight: '#ENV{parametre}px'
+					});
+					
+			});
+</script>
+<div id="cadre-slideshow" class="listagebloc">
+<div id="slideShow">
+<ul id="portfolio">
+<BOUCLE_lesimagesliste(DOCUMENTS){id_article}{mode=document}{extension==png|gif|jpg}{par num titre}>
+	<li>
+		<img src="[(#FICHIER||image_reduire{[(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})]|,#ENV{parametre}}|extraire_attribut{src})]" alt="[(#TITRE|texte_script)]" align="center"/>
+	</li>
+</BOUCLE_lesimagesliste>					
+</ul>
+
+</div></div>
+</B_lesimagesliste>

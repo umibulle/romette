@@ -1,0 +1,18 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_lesbr(spip_arty_bloclibreassoc){type=rubrique}{id=#ID_RUBRIQUE}{lang}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_BLOC_LIBRE}}}
+</BOUCLE_lesbr>
+<BOUCLE_bloc_rub(spip_arty_bloclibre){id_bloc_libre IN #GET{critere_in}}{par num titre}>
+<div class="bloclibre [(#TITRE|supprimer_numero|no_accent|nospace)] bloc#COMPTEUR_BOUCLE listagebloc">
+<h2>[(#TITRE|supprimer_numero)]</h2>
+<ul class="listageconteneur"><li>
+[<a href="(#LIEN|propre|nospace)">][(#INCLURE{fond=formatage_bloclibre}{conteneur=#ENV{conteneur}}{id_bloc_libre})]
+[(#LIEN|!={""}|?{'</a>',''})]
+<div class="listagetexte">
+[<a href="(#LIEN|propre|nospace)">]
+[(#CONTENU|propre)]
+[(#LIEN|!={""}|?{'</a>',''})]
+</div>
+</li></ul>
+</div>
+</BOUCLE_bloc_rub>

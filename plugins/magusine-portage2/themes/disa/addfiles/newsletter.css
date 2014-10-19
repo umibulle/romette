@@ -1,0 +1,18 @@
+h1 {
+ margin:10px 0px 4px;
+}
+#conteneur-texte {
+ margin:0px;
+}
+#general {
+ background-color:#fff;
+ background-image:none;
+ margin-top:0px;
+}
+#bandeau {
+ position: static;
+}
+#footer {
+ background-color:#fff;
+ left:0px;
+}

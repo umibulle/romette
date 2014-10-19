@@ -1,0 +1,116 @@
+.autocompleter{
+  width:250px;
+  background-color:#ddd;
+}
+.selectAutocompleter{
+  background-color:#aaa;
+}
+.rubrique{
+  font-weight:bold;
+}
+.article{
+  font-style: italic; 
+}
+
+#selection {
+font-family: verdana, sans-serif;
+font-size: 12px;
+list-style-type: none;
+padding: 0px;
+border: 1px solid #ccc;
+}
+
+#selection li {
+font-size: 14px;
+font-weight: bold;
+background-color: #dedede;
+margin: 4px;
+padding: 4px;
+}
+
+#selection li a {
+padding: 2px;
+color: red;
+margin-left: 10px;
+}
+
+.sortHelper {
+background-color: white;
+border: 1px dashed #ccc;
+}
+
+.sortableactive {
+
+}
+
+.sortablehover {
+border: 1px solid green;
+}
+
+.sortable {
+background-color: green;
+font-size: 14px;
+padding: 4px;
+}
+
+.selecteur {
+font-family: verdana, sans-serif;
+font-size: 10px;
+list-style-type: none;
+padding: 0px;
+border: 1px solid #ccc;
+
+}
+
+.section, .groupe {
+padding: 4px;
+margin: 4px;
+background-color: #ddd;
+}
+
+#bloc_sauver {
+border: 1px solid green;
+background-color: green;
+padding: 4px;
+}
+
+#bloc_sauver a {
+color: #fff;
+font-size: 12px;
+text-transform: uppercase;
+}
+
+#ajout_lien {
+border:1px solid #ccc;
+padding:5px; 
+margin-bottom:10px;
+}
+#ajout_lien_contenu{
+background-color:#ddd;
+padding:5px; 
+font-weight:bold;
+font-size:10px;
+font-family: verdana, sans-serif;
+}
+#ajout_lien p {
+margin:0px 0px 8px 0px;
+}
+#ajout_lien label {  
+float: left;  
+width: 7em;  
+margin-right: 1em;
+padding-top:4px;
+}
+#ajout_lien input{
+margin-bottom:2px;
+}
+#ajout_lien a{
+display:block;
+font-weight:bold;
+margin-top:5px;
+}
+.url_petit {
+color:#333;
+font-size:0.75em;
+font-weight: normal;
+}

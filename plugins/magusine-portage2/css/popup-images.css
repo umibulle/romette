@@ -1,0 +1,59 @@
+#popup-image {
+padding: 6px;
+color:#aaa;
+}
+
+#grand-format {
+text-align:center;
+}
+
+#grand-format #image {
+margin-bottom:6px;
+}
+
+#grand-format img {
+border: 1px #333 solid;
+}
+
+#popup-image a img {
+border: 1px #333 solid;
+margin: 0 2px;
+}
+
+#popup-image #titre {
+font-weight:bold;
+text-align:center;
+}
+
+#popup-image #descriptif {
+text-align:center;
+}
+
+#vignettes {
+text-align:center;
+margin-top:20px;
+position:absolute;
+bottom:0;
+width:100%;
+margin-bottom:8px;
+}
+
+#vignettes img {
+border: 1px #fff solid;
+}
+
+#vignettes .actuelle img {
+border: 3px #fff solid;
+}
+
+#vignettes li {
+display:inline;
+}
+
+#start {
+
+}
+
+#end {
+
+}

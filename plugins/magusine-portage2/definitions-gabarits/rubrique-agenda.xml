@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+statut : reserve : 0, contexte1 : 1, contexte 2: 2, corps: 3
+param : ce qui apparait comme choix, soit separe par des virgules (1,2,3 par ex)
+
+
+
+soit une requete sql 
+Dans ce cas d'autres arguments a entrer
+param="SELECT * FROM spip_groupes_mots" 
+paramvalue="id_groupe" : la colonne selectionnee
+paramdescr="Groupe de mots-cles" ce qui apparait dans le bloc
+paramtext="titre" la colonne affiche dans le selecteur
+paramdefaut="" le parametre par defaut eventuel
+
+Si champ à remplir
+
+-->
+<gabarit type="rubrique">
+
+<!-- contexte 1 -->
+<bloc statut="1">bloc_libre_rubrique</bloc>
+
+<!-- contexte 2 -->
+<bloc statut="2">rechercher</bloc>
+<bloc statut="2">mots-cles</bloc>
+
+<!-- corps -->
+<bloc statut="3">rubrique-head</bloc>
+<bloc statut="3">rubrique-texte</bloc>
+<bloc statut="3" param="par_mois,par_semaine,par_jour" paramdefaut="par_mois" paramdescr="Type de listage">liste-agenda</bloc>
+
+<!-- reserve -->
+<bloc statut="0" param="par date,par titre" paramdefaut="par titre" paramdescr="Type de listage">liste-rubriques</bloc>
+<bloc statut="0">rubrique_podcast</bloc>
+<bloc statut="0">abo-newsletter</bloc>
+<bloc statut="0" param="galerie simple,thickbox,fancybox,galerie liste,galerie popup" paramdefaut="galerie simple" paramdescr="Type de galerie">galerie-image</bloc>
+<bloc statut="3" param="liste,flv_liste,flv_320_240,flv_largeur_totale_4_3,flv_largeur_totale_16_9,popup" paramdefaut="popup" paramdescr="Type de galerie">galerie-videos</bloc>
+<bloc statut="0" param="liste,lecteur_flash,lecteur_flash_liste,popup" paramdefaut="lecteur flash" paramdescr="Type de galerie">galerie-audios</bloc>
+<bloc statut="3" param="champmp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv" paramdefaut="mp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv|kml" paramdescr="liste_extension_exclure">pieces_jointes</bloc><bloc statut="0" param="par date,par date inverse,par titre" paramdefaut="par date inverse" paramdescr="Type de listage">liste-articles</bloc>
+<bloc statut="0">feed</bloc>
+<bloc statut="0" param="1,2,3,4,5,6,7,8,9,10" paramdefaut="5" paramdescr="nombre_playlist">bloc_sons_hasard_branche</bloc>
+<bloc statut="0">bloc_proposer_lien</bloc>
+<bloc statut="4">aide_admin_rubrique</bloc>
+</gabarit>

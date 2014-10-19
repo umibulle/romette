@@ -1,0 +1,25 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_piecesjointes>
+<div id="galerieimg" class="listagebloc">
+<h2><:galerie_image:></h2>
+<ul class="listageconteneur">
+<BOUCLE_piecesjointes(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CORPS,0})]]
+[<h4 class="listagetitre">(#TITRE|sinon{<:pas_de_titre:>})</h4>]
+[<p class="listagetexte">(#DESCRIPTIF|ptobr)</p>]
+<div class="listageinfo">#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)]</div>
+</li>
+</BOUCLE_piecesjointes>
+</ul></div></B_piecesjointes>

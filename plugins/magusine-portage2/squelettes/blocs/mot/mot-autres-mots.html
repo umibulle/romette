@@ -1,0 +1,12 @@
+<BOUCLE_texte(MOTS){id_mot}>
+<B_autres_mots>
+<div id="autres-mots" class="listagebloc">
+<h2><:autres_mots:></h2>
+<ul class="listageconteneur">
+<BOUCLE_autres_mots(MOTS){id_groupe}{par num titre}{par titre}{exclus}>
+<li><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></li>
+</BOUCLE_autres_mots>
+</ul>
+</div>
+</B_autres_mots>
+</BOUCLE_texte>

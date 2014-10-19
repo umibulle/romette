@@ -1,0 +1,29 @@
+#SET{liens, #ARRAY{0,0}}
+<BOUCLE_lesliens(RUBRIQUES){id_rubrique}>
+<BOUCLE_liens(SITES){id_rubrique}>#SET{liens,#GET{liens}|array_merge{#ARRAY{#ID_SYNDIC,#ID_SYNDIC}}}</BOUCLE_liens>
+<BOUCLE_srub(RUBRIQUES){id_parent}>
+<BOUCLE_liens2(SITES){id_rubrique}>#SET{liens,#GET{liens}|array_merge{#ARRAY{#ID_SYNDIC,#ID_SYNDIC}}}</BOUCLE_liens2>
+<BOUCLE_ssrb(boucle_srub)></BOUCLE_ssrb>
+</BOUCLE_srub>
+
+</BOUCLE_lesliens>
+<B_lastarts>
+<div id="dernliens" class="listagebloc dernliens-branche">
+<h2><:derniers_liens:></h2>    
+<ul class="listageconteneur">
+<BOUCLE_lastarts(SITES){!par date}{0,#ENV{parametre}}{id_syndic IN #GET{liens}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+
+[<h4 class="listagetitre #EDIT{nom_site}"><a href="#URL_SITE">(#NOM_SITE|supprimer_numero)</a></h4>]
+
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+<p class="listageinfo"><:rubrique:> <BOUCLE_larub(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero)]</BOUCLE_larub>, <:Propose_le:> [(#DATE|affdate)]</p>
+</BOUCLE_date>
+
+[<p class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF|couper{120})</p>]
+</li>
+
+</BOUCLE_lastarts></ul>
+</div>
+</B_lastarts>

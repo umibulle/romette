@@ -1,0 +1,13 @@
+<div id="liste-articles-mot" class="listagebloc">
+<h2><:derniere_entree_groupe:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listemot(MOTS){id_groupe}{par num titre}{par titre}>
+<BOUCLE_lastforums(ARTICLES){id_mot}{par num titre}{par titre}{0,1}>
+<li>
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+<div class="listageinfo">[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]</div>
+<p class="listagetexte">[(#TEXTE|couper{120})]</p>
+</li>
+</BOUCLE_lastforums></BOUCLE_listemot>
+</ul>
+</div>

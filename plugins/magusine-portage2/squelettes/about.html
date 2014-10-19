@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>About</title>
+[(#INSERT_HEAD)]
+</head>
+<body>
+<div id="corps" style="margin-right:0;padding:0.4em;">
+<BOUCLE_larticle(ARTICLES){id_article=1765}>
+<h1>#TITRE</h1>
+<div class="texte">#TEXTE</div>
+</BOUCLE_larticle>
+
+<div id="listagebloc">
+<h2>Documentation Magusine</h2>
+<ul class="listageconteneur">
+<BOUCLE_lesrubs(RUBRIQUES){id_parent=655}{par num titre}{par titre}>
+<li>
+<h4 class="listagetitre"><a href="#URL_SITE_SPIP/#URL_RUBRIQUE" target="_blank">[(#TITRE|supprimer_numero)]</a></h4>
+<div class="listagetexte">[(#DESCRIPTIF|sinon{#INTRODUCTION})]</div>
+</li>
+</BOUCLE_lesrubs></ul>
+</div>
+
+</div>
+</body>
+</html>
+
+

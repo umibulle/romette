@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+	<titre>Disa</titre>
+	<description><![CDATA[
+  Disa, simple, straight, rouge.
+  ]]></description>
+	<auteur><![CDATA[Stephane Noel - Les corsaires]]></auteur>
+	<separateur> || </separateur>
+	<navigation>general</navigation>
+	<chemin_page>corps</chemin_page>
+
+	<audiovars><![CDATA[displayheight=80&repeat=true&shuffle=false&lightcolor=0xff0000&backcolor=0xffffff&frontcolor=0x000000&overstretch=true]]></audiovars>
+	<audiolistheight>80</audiolistheight>
+	<videolistheight>80</videolistheight>
+	<videovars>frontcolor=0xCC0000</videovars>
+
+	<largeurcorps>600</largeurcorps>
+	<largeurcontexte1>220</largeurcontexte1>
+	<largeurcontexte2>220</largeurcontexte2>
+
+	<declinaison chemin="compagnie.css" titre="Compagnie">
+		<description><![CDATA[
+  	Thème de la compagnie
+  	]]></description>
+
+	</declinaison>
+	
+	<declinaison chemin="historic.css" titre="Historic">
+		<description><![CDATA[
+  	Thème de l'historique avec traits
+  	]]></description>
+
+	</declinaison>
+	
+	<declinaison chemin="actu.css" titre="Actu">
+		<description><![CDATA[
+  	Actu de la compagnie
+  	]]></description>
+
+	</declinaison>
+	
+	<declinaison chemin="cie.css" titre="Cie (ex actu)">
+		<description><![CDATA[
+  		Compagnie
+  	]]></description>
+
+	</declinaison>
+	
+	<declinaison chemin="historique.css" titre="Historique">
+		<description><![CDATA[
+  	Thème de l'historique
+  	]]></description>
+
+	</declinaison>
+
+</theme>

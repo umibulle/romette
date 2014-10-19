@@ -1,0 +1,6 @@
+<BOUCLE_autresarts(BREVES){id_rubrique}{exclus}{0,1}>
+[(#ENV{parametre}|=={liste_courte}|?{' ',''})<INCLURE{fond=include-autresbreves-listecourte}{id_breve=#ENV{id_breve}}{id_rubrique}>]
+[(#ENV{parametre}|=={liste_complete}|?{' ',''})<INCLURE{fond=include-autresbreves-listecomplete}{id_breve=#ENV{id_breve}}{id_rubrique}>]
+[(#ENV{parametre}|=={prec-suiv}|?{' ',''})<li>ici les autres articles precedent-suivant<a href="#URL_BREVE">#TITRE</a></li>]
+[(#ENV{parametre}|=={deroulant}|?{' ',''})<INCLURE{fond=include-autresbreves-dropdown}{id_breve=#ENV{id_breve}}{id_rubrique}>]
+</BOUCLE_autresarts>

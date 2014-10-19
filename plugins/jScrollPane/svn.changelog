@@ -1,0 +1,98 @@
+2011-06-13 | Piero Wbmstr <contact@pierowbmstr.fr>
+
+	* [r575] jscrollpane/plugin.xml :
+	  Refonte du "plugin.xml" pour SVP (+ montée en version 1.02)
+
+2011-03-25 | Piero Wbmstr <contact@pierowbmstr.fr>
+
+	* [r426] jscrollpane/plugin.xml :
+	  Montée en version vers 1.01 suite à commit 421
+
+	* [r421] jscrollpane/plugin.xml :
+	  Ajout de l'information "categorie" dans le fichier "plugin.xml"
+
+2011-01-02 | Piero Wbmstr <contact@pierowbmstr.fr>
+
+	* [r140]
+	  Retour aux underscores (7 commits annulés pour suivi d'historique - pardon, c'était con de
+	  ma part ;-)
+
+2010-12-30 | Piero Wbmstr <contact@pierowbmstr.fr>
+
+	* [r83] INFO.txt[ADD], jscrollpane[ADD], jscrollpane/balise[ADD],
+	  jscrollpane/balise/scrollbox.php[ADD], jscrollpane/contenu[ADD],
+	  jscrollpane/contenu/doc_scrollbox.html[ADD], jscrollpane/css[ADD],
+	  jscrollpane/css/jScrollPane.css[ADD], jscrollpane/img_pack[ADD],
+	  jscrollpane/img_pack/apercu_scrollbox.png[ADD],
+	  jscrollpane/img_pack/arrows_down_black.png[ADD],
+	  jscrollpane/img_pack/arrows_down_white.png[ADD],
+	  jscrollpane/img_pack/arrows_up_black.png[ADD],
+	  jscrollpane/img_pack/arrows_up_white.png[ADD],
+	  jscrollpane/img_pack/basic_arrow_down.gif[ADD],
+	  jscrollpane/img_pack/basic_arrow_up.gif[ADD], jscrollpane/img_pack/drag_grab.gif[ADD],
+	  jscrollpane/img_pack/dragger_black.png[ADD],
+	  jscrollpane/img_pack/dragger_bottom_black.png[ADD],
+	  jscrollpane/img_pack/dragger_bottom_white.png[ADD],
+	  jscrollpane/img_pack/dragger_top_black.png[ADD],
+	  jscrollpane/img_pack/dragger_top_white.png[ADD],
+	  jscrollpane/img_pack/dragger_white.png[ADD], jscrollpane/img_pack/osx_arrow_down.gif[ADD],
+	  jscrollpane/img_pack/osx_arrow_down.png[ADD], jscrollpane/img_pack/osx_arrow_up.gif[ADD],
+	  jscrollpane/img_pack/osx_arrow_up.png[ADD], jscrollpane/img_pack/osx_drag_bottom.gif[ADD],
+	  jscrollpane/img_pack/osx_drag_middle.gif[ADD], jscrollpane/img_pack/osx_drag_top.gif[ADD],
+	  jscrollpane/img_pack/osx_track.gif[ADD], jscrollpane/img_pack/scrollbox_logo.png[ADD],
+	  jscrollpane/img_pack/windows_arrow_down.gif[ADD],
+	  jscrollpane/img_pack/windows_arrow_up.gif[ADD],
+	  jscrollpane/img_pack/windows_drag_bottom.gif[ADD],
+	  jscrollpane/img_pack/windows_drag_middle.gif[ADD],
+	  jscrollpane/img_pack/windows_drag_top.gif[ADD],
+	  jscrollpane/img_pack/windows_track.gif[ADD], jscrollpane/javascript[ADD],
+	  jscrollpane/javascript/jquery.mousewheel.js[ADD],
+	  jscrollpane/javascript/jquery.scrollpane.js[ADD], jscrollpane/lang[ADD],
+	  jscrollpane/lang/scrollbox_fr.php[ADD], jscrollpane/photoshop[ADD],
+	  jscrollpane/photoshop/arrows.psd[ADD], jscrollpane/photoshop/scroller_handler.psd[ADD],
+	  jscrollpane/plugin.xml[ADD], jscrollpane/scrollbox_documentation.html[ADD],
+	  jscrollpane/scrollbox_options.php[ADD], lame_CouteauSuisse[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs.zip[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/README.txt[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/arrows_down_black.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/arrows_down_white.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/arrows_up_black.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/arrows_up_white.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/basic_arrow_down.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/basic_arrow_up.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/drag_grab.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_black.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_bottom_black.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_bottom_white.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_top_black.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_top_white.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/dragger_white.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_arrow_down.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_arrow_down.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_arrow_up.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_arrow_up.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_drag_bottom.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_drag_middle.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_drag_top.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/osx_track.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/scrollbox_logo.png[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_arrow_down.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_arrow_up.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_drag_bottom.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_drag_middle.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_drag_top.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/img/scrollbox/windows_track.gif[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/lang[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/lang/scrollbox_cs_fr.php[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/outils[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/outils/scrollbox_cs.css.html[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/outils/scrollbox_cs_config.php[ADD],
+	  lame_CouteauSuisse/jscrollpane_lame_cs/outils/scrollbox_cs_fonctions.php[ADD] :
+	  Première version + docs (mails / screenshots et fichier INFO) pour chacun
+
+	* [r82] .[ADD] :
+	  Structure SVN simplifiée (pas de branche ...)
+

@@ -1,0 +1,75 @@
+<?php
+// récupération de la hiérarchie courante
+$hierarchie = array();
+<BOUCLE_principale(RUBRIQUES){id_rubrique}{tout}>
+	<BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = "rubrique#ID_RUBRIQUE";
+	</BOUCLE_hierarchie>
+	$hierarchie[] = "rubrique#ID_RUBRIQUE";
+</BOUCLE_principale>
+<BOUCLE_mot(MOTS){id_mot}>
+$hierarchie[] ="groupe#ID_GROUPE";
+$hierarchie[] ="mot#ID_MOT";
+</BOUCLE_mot>
+$hierarchie[]="article#ENV{id_article}";
+?><!-- menu manuel -->
+<BOUCLE_menumanu(spip_arty_menu){par ordre}{id_parent=0}{langue==#LANG}>
+[(#TYPE|=={"lien"}|?{' ',''})<li class="niveau1 item#COMPTEUR_BOUCLE"><a class="menu-lien" href="#URL" accesskey="#COMPTEUR_BOUCLE">#NOM</a>]
+<BOUCLE_type_rubrique(ARTICLES){0,1}>[(#TYPE|=={rubrique}|?{' ',''})]</BOUCLE_type_rubrique>
+<BOUCLE_info_titre_rubrique(RUBRIQUES){id_rubrique=#ID}>
+<li class="niveau1 item#_menumanu:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo" courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menumanu:COMPTEUR_BOUCLE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_rubrique>
+</B_type_rubrique>
+<BOUCLE_type_article(ARTICLES){0,1}>[(#TYPE|=={article}|?{' ',''})]</BOUCLE_type_article>
+<BOUCLE_info_titre_article(ARTICLES){id_article=#ID}>
+<li class="niveau1 item#_menumanu:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo" courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menumanu:COMPTEUR_BOUCLE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_article>
+</B_type_article>
+<BOUCLE_type_mot(ARTICLES){0,1}>[(#TYPE|=={mot}|?{' ',''})]</BOUCLE_type_mot>
+<BOUCLE_info_titre_mot(MOTS){id_mot=#ID}>
+<li class="niveau1 item#_menumanu:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo" courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menumanu:COMPTEUR_BOUCLE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_mot>
+</B_type_mot>
+<BOUCLE_type_groupe(ARTICLES){0,1}>[(#TYPE|=={groupe}|?{' ',''})]</BOUCLE_type_groupe>
+<BOUCLE_info_titre_groupe(GROUPES_MOTS){id_groupe=#ID}>
+<li class="niveau1 item#_menumanu:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo" courante"; } ?>"><a class="menu-#TYPE" href="spip.php?spip.php&page=#TYPE&id_groupe=#ID" accesskey="#_menumanu:COMPTEUR_BOUCLE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_groupe>
+</B_type_groupe>
+
+
+<?php $compteur_recu = 1; ?>
+<B_secondniv>
+<?php $compteur_recu++; ?>
+<ul class="ulniveau<?=$compteur_recu?>">
+<BOUCLE_secondniv(spip_arty_menu){par ordre}{id_parent=#ID}{type_parent=#TYPE}{langue==#LANG}>
+<li class="niveau<?php echo $compteur_recu; if(in_array("#TYPE#ID",$hierarchie)) { echo" courante"; } ?>">
+[(#TYPE|=={"lien"}|?{' ',''})<a class="menu-lien" href="#URL">#NOM</a>]
+
+<BOUCLE_type_rubrique2(ARTICLES){0,1}>[(#TYPE|=={rubrique}|?{' ',''})]</BOUCLE_type_rubrique2>
+<BOUCLE_info_titre_rubrique2(RUBRIQUES){id_rubrique=#ID}>
+<a class="menu-#TYPE" href="spip.php?#TYPE#ID">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_rubrique2>
+</B_type_rubrique2>
+<BOUCLE_type_article2(ARTICLES){0,1}>[(#TYPE|=={article}|?{' ',''})]</BOUCLE_type_article2>
+<BOUCLE_info_titre_article2(ARTICLES){id_article=#ID}>
+<a class="menu-#TYPE" href="spip.php?#TYPE#ID">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_article2>
+</B_type_article2>
+<BOUCLE_type_mot2(ARTICLES){0,1}>[(#TYPE|=={mot}|?{' ',''})]</BOUCLE_type_mot2>
+<BOUCLE_info_titre_mot2(MOTS){id_mot=#ID}>
+<a class="menu-#TYPE" href="spip.php?#TYPE#ID">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_mot2>
+</B_type_mot2>
+<BOUCLE_type_groupe2(ARTICLES){0,1}>[(#TYPE|=={groupe}|?{' ',''})]</BOUCLE_type_groupe2>
+<BOUCLE_info_titre_groupe2(GROUPES_MOTS){id_groupe=#ID}>
+<a class="menu-#TYPE" href="spip.php?spip.php&page=#TYPE&id_groupe=#ID">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_info_titre_groupe2>
+</B_type_groupe2>
+
+<BOUCLE_niv_recursive(BOUCLE_secondniv)></BOUCLE_niv_recursive>
+</li>
+</BOUCLE_secondniv>
+</ul>
+</B_secondniv><?php $compteur_recu = 2; ?><//B_secondniv>
+</li>
+</BOUCLE_menumanu><INCLURE{fond=navigation/defaut}><//B_menumanu>

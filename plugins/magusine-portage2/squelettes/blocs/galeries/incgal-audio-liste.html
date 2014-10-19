@@ -1,0 +1,33 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==mp2|mp3|wma|aac|ac4}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==mp2|mp3|wma|aac|ac4}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc><div id="galerie-audio" class="listagebloc">
+<a name="audio"></a>
+<h2><:galerie_audio:></h2>
+<ul class="listageconteneur">
+<li id="audio-viewer">
+<BOUCLE_lecture_doc(DOCUMENTS){id_document=#ENV{document}}>
+<INCLURE{fond=embed_video}{id_document}>
+</BOUCLE_lecture_doc>
+</li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+<a class="liens_audis listagelogo audio #EDIT{logo}" rel="audio#ID_DOCUMENT" href="#URL_DOCUMENT">[(#INCLURE{fond=formatage_logo_liste_doc}{id_document}{conteneur=#ENV{conteneur}})]</a>
+<p class="listagetitre #EDIT{titre}"><a class="liens_audios" rel="audio#ID_DOCUMENT" href="#URL_DOCUMENT">[(#TITRE|supprimer_numero|sinon{<:pas_de_titre:>})]</a></p>
+[<p class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF|ptobr)</p>]
+<div class="listageinfo">#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)]</div>
+</li>
+</BOUCLE_doc>
+</ul>
+</div>
+<script type="text/javascript" language="javascript">
+
+</script>
+</B_doc>

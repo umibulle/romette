@@ -1,0 +1,192 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=fancybox -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_fancy">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+		
+		[(#SAISIE{input,selecteur_commun,
+			label=<:fancybox:cfg_lbl_selecteur_commun:>,
+			explication=<:fancybox:cfg_inf_selecteur_commun:>,
+			defaut=.fancybox})]
+		
+		[(#SAISIE{input,selecteur_galerie,
+			label=<:fancybox:cfg_lbl_selecteur_galerie:>,
+			explication=<:fancybox:cfg_inf_selecteur_galerie:>,
+			defaut=#documents_portfolio .fancybox[(#VAL{','})] .documents_portfolio .fancybox})]
+
+		[(#SAISIE{input,selecteur_frame,
+			label=<:fancybox:cfg_lbl_selecteur_frame:>,
+			explication=<:fancybox:cfg_inf_selecteur_frame:>,
+			defaut=.iframe})]
+			
+		[(#SAISIE{input,padding,
+			label=<:fancybox:cfg_lbl_padding:>,
+			explication=<:fancybox:cfg_inf_padding:>,
+			defaut=10})]
+		
+		[(#SAISIE{input,margin,
+			label=<:fancybox:cfg_lbl_margin:>,
+			explication=<:fancybox:cfg_inf_margin:>,
+			defaut=20})]
+
+		[(#SAISIE{true_false,opacity,
+			label=<:fancybox:cfg_lbl_opacity:>,
+			explication=<:fancybox:cfg_inf_opacity:>,
+			defaut=false})]
+		
+		[(#SAISIE{true_false,cyclic,
+			label=<:fancybox:cfg_lbl_cyclic:>,
+			explication=<:fancybox:cfg_inf_cyclic:>,
+			defaut=false})]
+
+		[(#SAISIE{oui_non,molette,
+			label=<:fancybox:cfg_lbl_molette:>,
+			explication=<:fancybox:cfg_inf_molette:>})]
+		
+		[(#SAISIE{selection,scrolling,
+			label=<:fancybox:cfg_lbl_scrolling:>,
+			cacher_option_intro=oui,
+			defaut=auto,
+			datas=#ARRAY{
+				auto,<:fancybox:cfg_lbl_scrolling_auto:>,
+				yes,<:item_oui:>,
+				no,<:item_non:>}})]
+
+		[(#SAISIE{input,width,
+			label=<:fancybox:cfg_lbl_width:>,
+			explication=<:fancybox:cfg_inf_width:>,
+			defaut=560})]
+		
+		[(#SAISIE{input,height,
+			label=<:fancybox:cfg_lbl_height:>,
+			explication=<:fancybox:cfg_inf_height:>,
+			defaut=340})]
+
+		[(#SAISIE{true_false,autoscale,
+			label=<:fancybox:cfg_lbl_imagescale:>,
+			explication=<:fancybox:cfg_inf_imagescale:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,autodimensions,
+			label=<:fancybox:cfg_lbl_autodimensions:>,
+			explication=<:fancybox:cfg_inf_autodimensions:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,centeronscroll,
+			label=<:fancybox:cfg_lbl_centeronscroll:>,
+			explication=<:fancybox:cfg_inf_centeronscroll:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,hideonoverlayclick,
+			label=<:fancybox:cfg_lbl_hideonoverlayclick:>,
+			explication=<:fancybox:cfg_inf_hideonoverlayclick:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,hideoncontentclick,
+			label=<:fancybox:cfg_lbl_hideoncontentclick:>,
+			explication=<:fancybox:cfg_inf_hideoncontentclick:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,overlayshow,
+			label=<:fancybox:cfg_lbl_overlayshow:>,
+			explication=<:fancybox:cfg_inf_overlayshow:>,
+			defaut=true})]
+		
+		[(#SAISIE{input,overlayopacity,
+			label=<:fancybox:cfg_lbl_overlayopacity:>,
+			explication=<:fancybox:cfg_inf_overlayopacity:>,
+			defaut=0.3})]
+		
+		[(#SAISIE{input,overlaycolor,
+			label=<:fancybox:cfg_lbl_overlaycolor:>,
+			explication=<:fancybox:cfg_inf_overlaycolor:>,
+			defaut=#666})]
+
+		[(#SAISIE{true_false,titleshow,
+			label=<:fancybox:cfg_lbl_titleshow:>,
+			explication=<:fancybox:cfg_inf_titleshow:>,
+			defaut=true})]
+
+		[(#SAISIE{selection,titleposition,
+			label=<:fancybox:cfg_lbl_titleposition:>,
+			cacher_option_intro=oui,
+			defaut=float,
+			datas=#ARRAY{
+				float,<:fancybox:cfg_lbl_titleposition_float:>,
+				outside,<:fancybox:cfg_lbl_titleposition_outside:>,
+				inside,<:fancybox:cfg_lbl_titleposition_inside:>,
+				over,<:fancybox:cfg_lbl_titleposition_over:>}})]
+
+		[(#SAISIE{textarea,titleformat,
+			label=<:fancybox:cfg_lbl_titleformat:>,
+			explication=<:fancybox:cfg_inf_titleformat:>,
+			defaut=null,
+			rows=10})]
+
+		[(#SAISIE{selection,transitionin,
+			label=<:fancybox:cfg_lbl_transitionin:>,
+			cacher_option_intro=oui,
+			defaut=fade,
+			datas=#ARRAY{
+				elastic,<:fancybox:cfg_lbl_transition_elastic:>,
+				fade,<:fancybox:cfg_lbl_transition_fade:>,
+				none,<:fancybox:cfg_lbl_transition_none:>}})]
+		
+		[(#SAISIE{selection,transitionout,
+			label=<:fancybox:cfg_lbl_transitionout:>,
+			cacher_option_intro=oui,
+			defaut=fade,
+			datas=#ARRAY{
+				elastic,<:fancybox:cfg_lbl_transition_elastic:>,
+				fade,<:fancybox:cfg_lbl_transition_fade:>,
+				none,<:fancybox:cfg_lbl_transition_none:>}})]
+
+		[(#SAISIE{input,speedin,
+			label=<:fancybox:cfg_lbl_speedin:>,
+			explication=<:fancybox:cfg_inf_speed:>,
+			defaut=300})]
+		
+		[(#SAISIE{input,speedout,
+			label=<:fancybox:cfg_lbl_speedout:>,
+			explication=<:fancybox:cfg_inf_speed:>,
+			defaut=300})]
+		
+		[(#SAISIE{input,changespeed,
+			label=<:fancybox:cfg_lbl_changespeed:>,
+			explication=<:fancybox:cfg_inf_changespeed:>,
+			defaut=300})]
+
+		[(#SAISIE{true_false,showclosebutton,
+			label=<:fancybox:cfg_lbl_showclosebutton:>,
+			explication=<:fancybox:cfg_inf_showclosebutton:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,shownavarrows,
+			label=<:fancybox:cfg_lbl_shownavarrows:>,
+			explication=<:fancybox:cfg_inf_shownavarrows:>,
+			defaut=true})]
+		
+		[(#SAISIE{true_false,enableescapebutton,
+			label=<:fancybox:cfg_lbl_enableescapebutton:>,
+			explication=<:fancybox:cfg_inf_enableescapebutton:>,
+			defaut=true})]
+		
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:fancybox:cfg_effacer:>" />
+	</p>
+</div></form>
+#CFG_ARBO{fancybox}
+</div>

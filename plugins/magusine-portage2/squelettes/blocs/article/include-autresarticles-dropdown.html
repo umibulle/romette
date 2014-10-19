@@ -1,0 +1,13 @@
+<BOUCLE_recup(ARTICLES){id_article}>
+<form action="spip.php?" method="get" class="forml">
+<select name="article" onchange="document.location.href='spip.php?article'+this.options[this.selectedIndex].value">
+<option value="#ID_ARTICLE"> --- </option>
+<BOUCLE_autresarticles(ARTICLES){id_rubrique}{exclus}{par num titre, titre}>
+<option value="#ID_ARTICLE">[(#TITRE|supprimer_numero)]</option>
+</BOUCLE_autresarticles>
+</select>
+<noscript>
+<div><input type='submit' class='fondo' value='Changer' /></div>
+</noscript>
+</form>
+</BOUCLE_recup>

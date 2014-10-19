@@ -1,0 +1,82 @@
+ul.selecteur {
+ padding-left:0px;
+ margin-left:0px;
+ border-bottom:1px solid #EEE;
+}
+ul.selecteur, ul.selecteur  ul {
+  list-style:none;
+}
+ul.selecteur ul {
+  padding-left:20px;
+  margin-left:0px;
+}
+li.section {
+ font-weight:bold;
+ border-top:1px solid #EEE;
+ padding-bottom:5px;
+
+}
+li.rubrique {
+ color:#555;
+ border-top:1px solid #EEE;
+ padding-bottom:5px;
+}
+li.article {
+  font-weight:normal;
+  background-color:#EEE; 
+  border:1px solid #CCC;
+  margin:1px;
+  padding:6px;
+margin-top: 6px;
+  color:black;
+}
+
+.titre_section, .titre_rubrique, .titre_article {
+padding-left:14px;
+background-repeat: no-repeat;
+background-position: left center;
+}
+.titre_section {
+background-image:url(../images/secteur-12.gif);
+}
+.titre_rubrique {
+background-image:url(../images/rubrique-12.gif);
+}
+.titre_article {
+background-image:url(../images/article.png);
+}
+a.ajouter {
+  text-decoration:none;
+  float:right;
+  position:relative;
+}
+a.ajouter img {
+ border:none;
+ margin:2px 2px 0px 0px;
+}
+
+li.groupe {
+ font-weight:bold;
+ border-top:1px solid #EEE;
+ padding-bottom:5px;
+}
+li.mot {
+  font-weight:normal;
+  background-color:#EEE; 
+  border:1px solid #CCC;
+  margin:1px;
+  padding:6px;
+  color:black;
+}
+
+.titre_groupe, .titre_mot {
+padding:4px 4px 4px 26px;
+background-repeat: no-repeat;
+background-position: left center;
+}
+.titre_groupe {
+background-image:url(../images/groupe-mot-24.gif);
+}
+.titre_mot {
+background-image:url(../images/mot.gif);
+}

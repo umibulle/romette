@@ -1,0 +1,99 @@
+<BOUCLE_formateart(ARTICLES){id_article}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formateart>
+
+<BOUCLE_formaterub(RUBRIQUES){id_rubrique}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formaterub>
+
+<BOUCLE_formatemot(MOTS){id_mot}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_MOT||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_MOT||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_MOT||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formatemot>
+
+<BOUCLE_formatebreve(BREVES){id_breve}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formatebreve>

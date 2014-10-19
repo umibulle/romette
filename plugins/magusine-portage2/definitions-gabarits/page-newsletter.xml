@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+statut : reserve : 0, contexte1 : 1, contexte 2: 2, corps: 3
+param : ce qui apparait comme choix, soit séparé par des virgules (1,2,3 par ex)
+
+soit une requete sql 
+Dans ce cas d'autres arguments a entrer
+param="SELECT * FROM spip_groupes_mots" 
+paramvalue="id_groupe" : la colonne selectionnee
+paramdescr="Groupe de mots-cles" ce qui apparait dans le bloc
+paramtext="titre" la colonne affiche dans le selecteur
+paramdefaut="" le parametre par defaut eventuel
+-->
+<gabarit type="article">
+
+<!-- contexte 1 -->
+<bloc statut="1" param="blocs_article,blocs_article_rubrique" paramdefaut="article" paramdescr="quels_blocs">bloc_libre_article</bloc>
+<bloc statut="1" param="liste,prec-suiv,deroulant" paramdefaut="popup" paramdescr="Type de liste">autres-articles</bloc>
+<!-- contexte 2 -->
+
+<bloc statut="2">rechercher</bloc>
+<bloc statut="2">mots-cles</bloc>
+
+<!-- corps -->
+<bloc statut="3">article-head</bloc>
+<bloc statut="3">article-texte</bloc>
+<bloc statut="3" paramdescr="plugin_spip-listes">abo-newsletter</bloc>
+
+<!-- reserve -->
+<bloc statut="0">article-podcast</bloc>
+
+<bloc statut="0" param="1 niveau,2 niveaux,multithread" paramdefaut="2 niveaux" paramdescr="Type de forum">bloc-forum</bloc>
+<bloc statut="0" param="galerie simple,diaporama,thickbox" paramdefaut="galerie simple" paramdescr="Type de galerie">galerie-image</bloc>
+<bloc statut="0" param="liste,lecteur flash,popup" paramdefaut="popup" paramdescr="Type de galerie">galerie-videos</bloc>
+<bloc statut="0" param="liste,lecteur flash,popup,standalone" paramdefaut="lecteur flash" paramdescr="Type de galerie">galerie-audios</bloc>
+<bloc statut="3" param="champmp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv" paramdefaut="mp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv|kml" paramdescr="liste_extension_exclure">pieces_jointes</bloc><bloc statut="0">feed</bloc>
+<bloc statut="0">liste_articles_motscles</bloc>
+</gabarit>

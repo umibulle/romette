@@ -1,0 +1,46 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==avi|mpg|mov|flv|mp4|wmv}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==avi|mpg|mov|flv|mp4|wmv}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc><div id="galerie-video" class="listagebloc">
+<a name="video"></a>
+<h2><:galerie_video:></h2>
+<ul class="listageconteneur">
+<li id="video-viewer">
+<img src="#CHEMIN{dist/images/searching.gif}" style="display:none;" alt="<:chargement:>" title="<:chargement:>" id="chargement-video" />
+<BOUCLE_lecture_doc(DOCUMENTS){id_document=#ENV{document}}>
+<INCLURE{fond=embed_video}{id_document}>
+</BOUCLE_lecture_doc>
+</li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+<a class="liens_videos listagelogo video #EDIT{logo}" rel="video#ID_DOCUMENT" href="#SELF&document=#ID_DOCUMENT#video">[(#INCLURE{fond=formatage_logo_liste_doc}{id_document}{conteneur=#ENV{conteneur}})]</a>
+<p class="listagetitre #EDIT{titre}"><a class="liens_videos" rel="video#ID_DOCUMENT" href="#SELF&document=#ID_DOCUMENT#video">[(#TITRE|supprimer_numero|sinon{<:pas_de_titre:>})]</a></p>
+[<p class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF|ptobr)</p>]
+<div class="listageinfo">#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)]</div>
+</li>
+</BOUCLE_doc>
+</ul>
+</div>
+<script type="text/javascript" language="javascript">
+jQuery(document).ready(function(){
+  jQuery(".liens_videos").click(function(event){
+    var id = jQuery(this).attr("rel");
+    var id_document = id.replace("video", "");
+    jQuery('#chargement-video').css({display: "block"});
+    jQuery.get('#URL_SITE_SPIP', {page: "embed_video", mode:"ajax", id_document:id_document,largeur:[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]}, function(reponse){
+      jQuery('#chargement-video').css({display: "none"});
+      jQuery("#video-viewer").empty().html(reponse);
+    });
+    return false;
+  });
+});
+
+</script>
+</B_doc>

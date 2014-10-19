@@ -1,0 +1,12 @@
+<B_autresarts>
+<div id="autres-articles" class="listagebloc">
+<ul class="listageconteneur">
+<BOUCLE_autresarts(ARTICLES){id_rubrique}{exclus}{0,1}>
+[(#ENV{parametre}|=={liste}|?{' ',''})<INCLURE{fond=include-autresarticles-liste}{id_article=#ENV{id_article}}{id_rubrique}>]
+[(#ENV{parametre}|=={prec-suiv}|?{' ',''})<li>ici les autres articles precedent-suivant<a href="#URL_ARTICLE">#TITRE</a></li>]
+[(#ENV{parametre}|=={deroulant}|?{' ',''})<INCLURE{fond=include-autresarticles-dropdown}{id_article=#ENV{id_article}}{id_rubrique}>]
+[(#ENV{parametre}|=={logo}|?{' ',''})<INCLURE{fond=include-autresarticles-logo}{id_article=#ENV{id_article}}{id_rubrique}>]
+</BOUCLE_autresarts>
+</ul>
+</div>
+</B_autresarts>

@@ -1,0 +1,12 @@
+<B_listearticles>
+<BOUCLE_cachearts(ARTICLES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<div id="artinrub" class="listagebloc">
+<ul class="listageconteneur">
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par num titre}{par titre}{par num titre}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+</li>
+</BOUCLE_listearticles>
+</ul>
+</div>
+</B_listearticles>

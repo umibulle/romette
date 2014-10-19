@@ -1,0 +1,18 @@
+[(#ENV{parametre}|=={galerie simple}|?{' ',''})
+<INCLURE{fond=incgal-image-simple}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{document=#ENV{document}}>
+]
+[(#ENV{parametre}|=={thickbox}|?{' ',''})
+<INCLURE{fond=incgal-thickbox}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={fancybox}|?{' ',''})
+<INCLURE{fond=incgal-fancybox}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={diaporama popup}|?{' ',''})
+<INCLURE{fond=incgal-image-diaporama-popup}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={galerie liste}|?{' ',''})
+<INCLURE{fond=incgal-image-liste}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={galerie popup}|?{' ',''})
+<INCLURE{fond=incgal-image-popup}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

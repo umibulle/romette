@@ -1,0 +1,38 @@
+<B_listesitesr>
+<div id="sites0" class="sites listagebloc">
+<h2><BOUCLE_letitre(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero)]</BOUCLE_letitre> <span><BOUCLE_compte1(SITES){id_rubrique}></BOUCLE_compte1>(#TOTAL_BOUCLE <:liens:>)<//B_compte1></span></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesitesr(SITES){id_rubrique}{par num nom_site,nom_site}{par #ENV{parametre}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{nom_site}"><a href="#URL_SITE">[(#NOM_SITE|supprimer_numero)]</a></h4>
+[<div class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+<B_autresmots><div class="listageinfo"><BOUCLE_autresmots(MOTS){id_syndic}{" - "}><a href="#URL_MOT">#TITRE</a></BOUCLE_autresmots></div></B_autresmots>
+[<p class="listageinfo"><a href="(#URL_SYNDIC)"><:backend_site:></a></p>]
+</li>
+</BOUCLE_listesitesr>
+</ul>
+</div>
+</B_listesitesr>
+
+<BOUCLE_scannerub(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}{par titre}>
+<B_listesites>
+<div id="sites#COMPTEUR_BOUCLE" class="sites listagebloc">
+<a name="rub#ID_RUBRIQUE"></a>
+<h2>[(#TITRE|supprimer_numero)] <span><BOUCLE_compte(SITES){id_rubrique}></BOUCLE_compte>(#TOTAL_BOUCLE <:liens:>)<//B_compte></span></h2>
+<ul class="listageconteneur">
+[<li><div class="listageinfo titrerubrique">(#TEXTE)</div></li>]
+<BOUCLE_listesites(SITES){id_rubrique}{par num nom_site,nom_site}{par #ENV{parametre}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{nom_site}"><a href="#URL_SITE">[(#NOM_SITE|supprimer_numero)]</a></h4>
+[<div class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+<B_autresmots2><div class="listageinfo"><BOUCLE_autresmots2(MOTS){id_syndic}{" - "}><a href="#URL_MOT">#TITRE</a></BOUCLE_autresmots2></div></B_autresmots2>
+[<p class="listageinfo"><a href="(#URL_SYNDIC)"><:backend_site:></a></p>]
+</li>
+</BOUCLE_listesites>
+</ul>
+</div>
+</B_listesites>
+
+</BOUCLE_scannerub>

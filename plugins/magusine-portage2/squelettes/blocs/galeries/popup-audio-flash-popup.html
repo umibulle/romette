@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=#CHARSET"/>
+<title>#NOM_SITE_SPIP <:lecteur_standalone:> <BOUCLE_titre(ARTICLES){id_article}>[(#TITRE|supprimer_numero)]</BOUCLE_titre></title>
+<link href='#CHEMIN{themes/#THEME/addfiles/lecteur-standalone.css}' rel='stylesheet' type='text/css' />
+</head>
+<body id="lecteur-audio-standalone">
+<script src="#CHEMIN{javascript/ufo.js}" type="text/javascript"></script>
+<B_galerieaudio>
+<div id="audio standalone">
+<h2><:lecteur_standalone:> <BOUCLE_titre(ARTICLES){id_article}>[(#TITRE|supprimer_numero)]</BOUCLE_titre></h2>
+
+<script src="#CHEMIN{javascript/ufo.js}" type="text/javascript"></script>
+
+
+<!-- Construction du fichier xml contenant liste des mp3 associes a l'article -->
+<?php $chemin1 = "#CHEMIN{playlist.xml}";
+$fp = fopen ($chemin1, "w+");
+$fp2="<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n<trackList>\n"; ?>
+
+<BOUCLE_galerieaudio(DOCUMENTS){id_article}{mode=document}{extension==mp3}{par num titre}{par titre}{doublons}>
+<?php 
+$urlDocPlayer='[#URL_SITE_SPIP/(#URL_DOCUMENT|texte_script)]';
+$titreDocPlayer='[(#TITRE|supprimer_numero|no_accent|texte_script)]';
+$DescriptifDocPlayer='[(#DESCRIPTIF|no_accent|texte_script)]';
+$ImageDescriptif='[IMG/(#LOGO_DOCUMENT|fichier)]';
+
+$fp2.=" <track>\n";
+$fp2.=" <title>$titreDocPlayer</title>\n";
+$fp2.=" <creator>$DescriptifDocPlayer</creator>\n";
+$fp2.=" <image>$ImageDescriptif</image>\n";
+$fp2.=" <location>$urlDocPlayer</location> </track>\n";
+?>
+</BOUCLE_galerieaudio>
+<?php 
+$fp2.="</trackList>\n</playlist>";
+$fp3 = fwrite ($fp, $fp2);
+$p3 = fclose ($fp); 
+
+?>
+<!-- Fin construction xml liste mp3 -->
+<p id="player-standalone"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</p>
+
+<script type="text/javascript">
+var FU = { 	movie:"#CHEMIN{mp3player.swf}",width:"[(#LARGEUR_CORPS)]",height:"200",majorversion:"7",build:"0",bgcolor:"#333",flashvars:"file=#CHEMIN{playlist.xml}&#MP3_AUDIOVARS" };
+	UFO.create(	FU, "player-standalone");
+	
+	
+	
+</script>
+</li>
+
+<BOUCLE_parametres_telechargement_audio(SPIP_ARTY_PARAMETRES){parametre=liens_telecharger_audio}{valeur=true}>
+<li>
+<p><:avis_telechargement_audio:></p>
+<BOUCLE_liste_doc_audio(DOCUMENTS){id_article}{mode=document}{extension==mp3}{par num titre}{par titre}>
+<a href="#URL_SITE_SPIP/#URL_DOCUMENT">[(#FICHIER|nomfichier)]</a> ([(#TAILLE|taille_en_octets)]) <br />
+</BOUCLE_liste_doc_audio>
+</BOUCLE_parametres_telechargement_audio>
+
+</BOUCLE_galerieaudio>
+</div></B_galerieaudio></body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title><BOUCLE_letitre(ARTICLES){id_article}>[(#TITRE|supprimer_numero)]</BOUCLE_letitre></title>
+#INSERT_HEAD
+<link href='#CHEMIN{themes/#THEME/addfiles/diaporama.css}' rel='stylesheet' type='text/css' />
+<style type="text/css">
+#slideShow
+{
+	width: 600px;
+	height: 500px;
+}
+</style>
+<script type="text/javascript" src="#CHEMIN{javascript/interface.js}"></script>
+</head>
+<body>
+
+<B_premiere_image>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.slideshow(
+  	{
+  		container : 'slideShow',
+  		loader: '#CHEMIN{themes/#THEME/addfiles/images/slideshow_loader.gif}',
+  		linksPosition: 'bottom',
+  		linksClass: 'pagelinks',
+  		linksSeparator : ' &nbsp; ',
+  		fadeDuration : 400,
+  		activeLinkClass: 'activeSlide',
+  		nextslideClass: 'nextSlide',
+  		prevslideClass: 'prevSlide',
+  		captionPosition: 'bottom',
+  		captionClass: 'slideCaption',
+  		autoplay: 5,
+  		images : [
+  		<BOUCLE_premiere_image(DOCUMENTS){id_document=#ENV{id_document}}{extension==png|gif|jpg}{par num titre}{doublons premier_doc}>
+  			{
+  				src: '[(#FICHIER||image_reduire{600, 500}|extraire_attribut{src})]',
+  				caption: '[(#TITRE|texte_script)]'
+  			},
+  		</BOUCLE_premiere_image>
+  		<BOUCLE_lesimagesliste(DOCUMENTS){id_article=#ENV{id_article}}{extension==png|gif|jpg}{par num titre}{doublons premier_doc}>
+  			{
+  				src: '[(#FICHIER||image_reduire{600, 500}|extraire_attribut{src})]',
+  				caption: '[(#TITRE|texte_script)]'
+  			},
+  		</BOUCLE_lesimagesliste>
+  		]
+  	}
+  )
+});
+</script>
+<div id="cadre-slideshow">
+  <div id="slideShow">
+  </div>
+</div>
+</B_premiere_image>
+</body>
+</html>

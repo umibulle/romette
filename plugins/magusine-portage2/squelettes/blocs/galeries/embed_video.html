@@ -1,0 +1,16 @@
+#CACHE{0}#HTTP_HEADER{Content-Type: text/html; charset=utf-8}
+<BOUCLE_documentflv(DOCUMENTS){id_document}{extension==flv}>
+<?php
+$largeur=[(#ENV{largeur})];
+if ($largeur==0){ $largeur=320; }
+$hauteur=round(($largeur/4)*3) + 20;
+?>
+<object type='application/x-shockwave-flash' width='<?php echo $largeur; ?>' height='<?php echo $hauteur; ?>' wmode='transparent'
+ data='#URL_SITE_SPIP/#CHEMIN{swf/flvplayer.swf}?autoStart=true&amp;file=#URL_SITE_SPIP/#URL_DOCUMENT'>
+ <param name='movie' value='#URL_SITE_SPIP/#CHEMIN{swf/flvplayer.swf}?file=#URL_SITE_SPIP/#URL_DOCUMENT' />
+ <param name='wmode' value='transparent' />
+</object>
+</BOUCLE_documentflv>
+<BOUCLE_document(DOCUMENTS){id_document}{extension!==flv}>
+#EMBED_DOCUMENT
+</BOUCLE_document>

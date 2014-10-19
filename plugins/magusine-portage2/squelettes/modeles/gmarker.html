@@ -1,0 +1,15 @@
+<script language="javascript">
+jQuery(document).ready(function(){
+  /*for (var i = 0; i < 10; i++) {
+    var point = new GLatLng(50.805935 + 0.01*Math.random(),
+                            4.432983 + 0.01*Math.random());
+    map.addOverlay(new GMarker(point));
+  }
+  */
+  
+    var point = new GLatLng(#ENV{latitude}, #ENV{longitude});
+    map.addOverlay(new GMarker(point));
+    map.addOverlay(createMarker(point, '[(#ENV*{message}|texte_script)]'));
+  
+});
+</script>

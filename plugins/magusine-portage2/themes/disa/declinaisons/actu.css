@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+#contexte2 {
+  width: 280px;
+  font-weight: normal;
+  /*display:none;*/
+  background-image: url(logo_fracas.jpg);
+  background-position:bottom;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin-top:20px;
+}
+
+#contexte2 .listagetexte {
+  font-size: 10pt;
+  font-style: italic;
+  color: #444444;
+}
+
+#contexte2 p {
+  margin: 0 0 10px;
+}
+
+#contexte2 a {
+  font-size: 11pt;
+  color: #222222;
+}
+
+#contexte1 {
+  display: none;
+}
+
+.texte {
+  padding: 0;
+}
+
+#bandeau {
+  height: 140px;
+}
+
+#texteconteneur {
+  height:480px;
+}

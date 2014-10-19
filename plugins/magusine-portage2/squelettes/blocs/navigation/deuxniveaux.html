@@ -1,0 +1,65 @@
+<?php
+// récupération de la hiérarchie courante
+$hierarchie = array();
+<BOUCLE_principale(RUBRIQUES){id_rubrique}{tout}>
+	<BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = "rubrique#ID_RUBRIQUE";
+	</BOUCLE_hierarchie>
+	$hierarchie[] = "rubrique#ID_RUBRIQUE";
+</BOUCLE_principale>
+<BOUCLE_mot(MOTS){id_mot}>
+$hierarchie[] ="groupe#ID_GROUPE";
+$hierarchie[] ="mot#ID_MOT";
+</BOUCLE_mot>
+$hierarchie[]="article#ENV{id_article}";
+?><BOUCLE_cacher_edito(spip_arty_parametres){parametre=cacher_edito}>[(#VALEUR|=={true}|?{' ',''})]</BOUCLE_cacher_edito>
+<BOUCLE_param_rubrique_edito(spip_arty_paramassoc){param=edito}>
+<BOUCLE_edito_rub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{lang}{doublons cacher}>
+</BOUCLE_edito_rub></BOUCLE_param_rubrique_edito></B_cacher_edito>
+<BOUCLE_menu2niv(spip_arty_menu){par ordre}{id_parent=0}{langue==#LANG}>
+[(#TYPE|=={"lien"}|?{' ',''})<li class="niveau1 item#COMPTEUR_BOUCLE"><a class="menu-lien" href="#URL" accesskey="#COMPTEUR_BOUCLE">#NOM</a></li>]
+<BOUCLE_type_rubrique(ARTICLES){0,1}>[(#TYPE|=={rubrique}|?{' ',''})]</BOUCLE_type_rubrique>
+<BOUCLE_info_titre_rubrique(RUBRIQUES){id_rubrique=#ID}>
+[<li class="niveau1 item#_menu2niv:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo " courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menu2niv:COMPTEUR_BOUCLE">(#TITRE|supprimer_numero)</a>]
+		<?php $affiche="non"; ?><B_sous_menu>
+    	<ul class="ulniveau2"><?php $affiche="oui"; ?> 		
+    	<BOUCLE_sous_menu(RUBRIQUES){id_parent}{lang}{doublons cacher}{par num titre}{par titre}>
+    		<li class="niveau2<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo " courante"; } ?>"><a href="#URL_RUBRIQUE" class="menu-rubrique">[(#TITRE|supprimer_numero)]</a></li>
+    	</BOUCLE_sous_menu>
+ 		
+		<BOUCLE_parametre_niveaux_articles(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur2=#LANG}{valeur3=on}>
+			<B_navigation2>
+			<?php if ($affiche=="non") { echo "<ul class='ulniveau2'>"; $affiche="oui"; } ?>
+			<BOUCLE_navigation2(ARTICLES){id_rubrique=#ID_RUBRIQUE}{par num titre,id_article}>
+				<li class="niveau2<?php if(in_array("article#ID_ARTICLE",$hierarchie)) { echo " courante"; } ?>"><a href="#URL_ARTICLE" class="menu-article">[(#TITRE|supprimer_numero)]</a></li>
+			</BOUCLE_navigation2>
+		</BOUCLE_parametre_niveaux_articles>
+		<?php if ($affiche=="oui") { echo "</ul>"; } ?>		
+
+</li></BOUCLE_info_titre_rubrique>
+</B_type_rubrique>
+<BOUCLE_type_article(ARTICLES){0,1}>[(#TYPE|=={article}|?{' ',''})]</BOUCLE_type_article>
+<BOUCLE_info_titre_article(ARTICLES){id_article=#ID}>
+[<li class="niveau1 item#_menu2niv:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo " courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menu2niv:COMPTEUR_BOUCLE">(#TITRE|supprimer_numero)</a></li>]
+</BOUCLE_info_titre_article>
+</B_type_article>
+<BOUCLE_type_mot(ARTICLES){0,1}>[(#TYPE|=={mot}|?{' ',''})]</BOUCLE_type_mot>
+<BOUCLE_info_titre_mot(MOTS){id_mot=#ID}>
+[<li class="niveau1 item#_menu2niv:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo " courante"; } ?>"><a class="menu-#TYPE" href="spip.php?#TYPE#ID" accesskey="#_menu2niv:COMPTEUR_BOUCLE">(#TITRE|supprimer_numero)</a></li>]
+</BOUCLE_info_titre_mot>
+</B_type_mot>
+<BOUCLE_type_groupe(ARTICLES){0,1}>[(#TYPE|=={groupe}|?{' ',''})]</BOUCLE_type_groupe>
+<BOUCLE_info_titre_groupe(GROUPES_MOTS){id_groupe=#ID}{par num titre}{par titre}>
+[<li class="niveau1 item#_menu2niv:COMPTEUR_BOUCLE<?php if(in_array("#TYPE#ID",$hierarchie)) { echo " courante"; } ?>"><a class="menu-#TYPE" href="spip.php?page=#TYPE&id_groupe=#ID" accesskey="#_menu2niv:COMPTEUR_BOUCLE">(#TITRE|supprimer_numero)]</a>
+<BOUCLE_parametre_niveaux_menu_groupe(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur2=#LANG}{valeur3=on}>
+  <B_sous_menu_mot>
+    <ul class="ulniveau2"><BOUCLE_sous_menu_mot(MOTS){id_groupe}{par num titre}{par titre}>
+    <li class="niveau2<?php if(in_array("mot#ID_MOT",$hierarchie)) { echo " courante"; } ?>"><a href="#URL_MOT" class="menu-mot">[(#TITRE|supprimer_numero)</a>]</li>
+    </BOUCLE_sous_menu_mot></ul></li>
+  </B_sous_menu_mot>
+  </BOUCLE_parametre_niveaux_menu_groupe>
+
+</BOUCLE_info_titre_groupe></B_type_groupe>
+
+</BOUCLE_menu2niv>
+<INCLURE{fond=navigation/defaut}><//B_menu2niv>

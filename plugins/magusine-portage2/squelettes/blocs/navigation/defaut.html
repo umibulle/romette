@@ -1,0 +1,49 @@
+<?php
+// récupération de la hiérarchie courante
+$hierarchie = array();
+<BOUCLE_principale(RUBRIQUES){id_rubrique}{tout}>
+	<BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = "rubrique#ID_RUBRIQUE";
+	</BOUCLE_hierarchie>
+	$hierarchie[] = "rubrique#ID_RUBRIQUE";
+</BOUCLE_principale>
+<BOUCLE_mot(MOTS){id_mot}>
+$hierarchie[] ="groupe#ID_GROUPE";
+$hierarchie[] ="mot#ID_MOT";
+</BOUCLE_mot>
+$hierarchie[]="article#ENV{id_article}";
+?><BOUCLE_cacher_edito(spip_arty_parametres){parametre=cacher_edito}>[(#VALEUR|=={true}|?{' ',''})]</BOUCLE_cacher_edito>
+<BOUCLE_param_rubrique_edito(spip_arty_paramassoc){param=edito}>
+<BOUCLE_edito_rub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{lang}{doublons cacher}>
+</BOUCLE_edito_rub>
+</BOUCLE_param_rubrique_edito>
+</B_cacher_edito><!-- menu alternatif, deux niveaux -->
+<?php if(!is_array($hierarchie)){ $hierarchie=array(); } ?>
+<BOUCLE_menu_alternatif(RUBRIQUES){id_parent=0}{lang}{doublons cacher}{par num titre}>
+  <li class="niveau1 item#COMPTEUR_BOUCLE<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo" courante"; } ?>"><a href="#URL_RUBRIQUE" accesskey="[(#COMPTEUR_BOUCLE)]">[(#TITRE|supprimer_numero)]</a> 
+  #SET{ulaffiche,0} 
+  <BOUCLE_parametre_niveau(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur2=#LANG}{valeur!=1}>
+    <B_sous_menu_alternatif>
+    <ul class="ulniveau2">
+    <BOUCLE_sous_menu_alternatif(RUBRIQUES){id_parent}{lang}{doublons cacher}{par num titre}>
+    <li class="niveau2<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo" courante"; } ?>"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+    </BOUCLE_sous_menu_alternatif>
+    #SET{ulaffiche,1}
+  </B_sous_menu_alternatif>
+  </BOUCLE_parametre_niveau>
+  
+  		<BOUCLE_parametre_niveaux_articles(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur!=1}{valeur2=#LANG}{valeur3=on}>
+			<B_navigation2>
+			[(#GET{ulaffiche}|=={1}|?{'',' '})<ul class='ulniveau2'>]
+			<BOUCLE_navigation2(ARTICLES){id_rubrique=#ID_RUBRIQUE}{par num titre}>
+				<li class="niveau2<?php if(in_array("article#ID_ARTICLE",$hierarchie)) { echo" courante"; } ?>"><a href="#URL_ARTICLE" class="menu-article">[(#TITRE|supprimer_numero)]</a></li>
+			</BOUCLE_navigation2>
+			#SET{ulaffiche,1}
+			</B_navigation2>
+			
+		</BOUCLE_parametre_niveaux_articles>
+				
+  	[(#GET{ulaffiche}|=={1}|?{' ',''})</ul>]
+  
+  </li>
+</BOUCLE_menu_alternatif>

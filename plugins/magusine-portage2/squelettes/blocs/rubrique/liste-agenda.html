@@ -1,0 +1,9 @@
+[(#ENV{parametre}|=={par_mois}|?{' ',''})
+<INCLURE{fond=agenda-par-mois}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={par_semaine}|?{' ',''})
+<INCLURE{fond=agenda-par-semaine}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={par_jour}|?{' ',''})
+<INCLURE{fond=agenda-par-jour}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

@@ -1,0 +1,14 @@
+#CACHE{0}
+<B_listesousrub>
+<div id="recherche-rubriques" class="listagebloc">
+<h2><:resultat_recherche_rubriques:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesousrub(RUBRIQUES){recherche}{par points}{inverse}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_rubrique}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h4>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{#INTRODUCTION}|supprimer_tags)</p>]
+</li>
+</BOUCLE_listesousrub></ul>
+</div>
+</B_listesousrub>

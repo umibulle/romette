@@ -1,0 +1,19 @@
+<BOUCLE_cachearts(ARTICLES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<B_listearticles>
+<div id="artinrub" class="listagebloc">
+<table class="tableactu">
+<tr>
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par num titre}{par date}{doublons cacher}>
+<td>
+
+<div class="logoactu">[(#LOGO_ARTICLE|center||image_reduire{130})]</div>
+<div style="width: 130px;top: 0px;"><h4 class="titreactu">[(#TITRE|supprimer_numero)]</h4></div>
+
+[<div class="texteactu">(#DESCRIPTIF|sinon{[(#TEXTE|couper{1000})]})</div>]
+
+</td>
+</BOUCLE_listearticles>
+</tr>
+</table>
+</div>
+</B_listearticles>

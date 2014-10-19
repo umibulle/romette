@@ -1,0 +1,177 @@
+.listagebloc {
+  margin-bottom: 1em;
+  clear: left;
+}
+
+#contextes h2 {
+  height: 29px;
+  font-size: 13px;
+  line-height: 140%;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 6px 2px 0 8px;
+}
+
+#contextes #bloc-recherche h2 {
+  background: url(bande-small-bleu.gif) no-repeat;
+}
+
+#contextes .bloclibre h2 {
+  
+}
+
+#corps h2 {
+  font-size: 12px;
+  margin-bottom: 16px;
+  color: black;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid #635147;
+}
+
+.fancygal li {
+  list-style-type: none;
+  display: inline-table;
+  /*text-align: center;*/
+  padding: 0px;
+  margin: 0px;
+  /*width: 100px;
+  height: 95px;*/
+}
+
+.listageconteneur li {
+  margin-bottom: 10px;
+  clear: left;
+  color: black;
+}
+
+.listageconteneur li a:hover {
+  background-color: black;
+  color: #FFFFFF;
+}
+
+.listageconteneur .listagelogo {
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+.listageconteneur li em {
+  background: url('fond_slider.png') no-repeat;
+  /*background: url(images/hover.png) no-repeat;*/
+  width: 100px;
+  height: 25px;
+  position: absolute;
+  /*top: 0px;*/
+  left: -150px;
+  text-align: center;
+  padding: 2px;
+  font-style: normal;
+  z-index: 20;
+  display: none;
+}
+
+#piecesjointes .listageconteneur .listagelogo {
+  width: 40px;
+}
+
+#corps .listagetitre a {
+  color: black;
+  display: inline;
+  float: left;
+  /*font-family: "New York", "MS Serif", serif;
+   "Helvetica Neue",Helvetica,Arial,sans-serif; 
+ "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+  overflow: hidden;
+  padding: 5px 0px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+#corps .listagetitre a:hover {
+  
+}
+
+#edito h2 {
+  display: none;
+}
+
+#corps #edito.listagebloc {
+  margin: 2em 0 4em 0;
+}
+
+#contextes .forml {
+  padding: 2px;
+  color: black;
+  font-size: 10px;
+}
+
+#corps .listagetitre {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0 0 2px 0;
+  color: black;
+}
+
+#contextes .listagetitre {
+  font-size: 9px;
+}
+
+#contextes .listagetitre a {
+  text-decoration: none;
+  font-size: 9px;
+  text-transform: uppercase;
+  list-style: circle;
+  font-weight: 700;
+}
+
+.listagetexte {
+  font-size: 11px;
+  line-height: 140%;
+  margin-bottom: 4px;
+}
+
+#contextes .listagetexte {
+  font-size: 11px;
+  color: black;
+}
+
+.listageinfo {
+  color: black;
+  margin-bottom: 4px;
+}
+
+.listagesuite {
+  margin: 1em 0;
+}
+
+.listagesite {
+  margin: 1em 0;
+}
+
+#corps .listagesite {
+  font-size: 12px;
+}
+
+.image-galerie {
+  padding: 1px;
+  line-height: 18px;
+}
+
+#corps #rubinrub {
+  margin-left: 50px;
+  width: 900px;
+}
+
+#rub-slider { /*margin-top: -30px;*/
+  
+}
+
+#rub-slider .pager {
+  font-size: 10pt;
+}

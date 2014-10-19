@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=#CHARSET"/>
+<title>#NOM_SITE_SPIP</title>
+[(#INSERT_HEAD)]
+</head>
+<body id="page-login">#SET{parametres,#REM|sinon{"rien"}|parametres}
+
+<div id="general">
+
+[(#INCLURE{fond=bandeau}{id_rubrique=0})]
+
+[(#GET{parametres}|element{'navigation'}|=={'general'}|?{' ',''})<INCLURE{fond=navigation}{id_rubrique=0}>]
+
+[(#GET{parametres}|element{'chemin'}|=={general}|?{' ',''})[(#INCLURE{fond=chemin}{id_rubrique=0}{cettepage=login})]]
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+
+[(#GET{parametres}|element{'navigation'}|=={'contexte'}|?{' ',''})<INCLURE{fond=navigation}{id_rubrique=0}>]
+
+<div id="contexte1">
+[(#GET{parametres}|element{'navigation'}|=={'contexte1'}|?{' ',''})<INCLURE{fond=navigation}{id_rubrique=0}>]
+<BOUCLE_blocs_contexte0(spip_arty_gabarit_ordre){gabarit=login}{conteneur=1}{par ordre}>
+<INCLURE{fond=#NOM}{id_rubrique=0}{conteneur=1}{parametre=#PARAM}{lang}>
+</BOUCLE_blocs_contexte0>
+<div id="fin-contexte1"></div>
+</div>
+
+<div id="contexte2">
+<BOUCLE_blocs_contexte1(spip_arty_gabarit_ordre){gabarit=login}{conteneur=2}{par ordre}>
+<INCLURE{fond=#NOM}{id_rubrique=0}{conteneur=2}{parametre=#PARAM}{lang}>
+</BOUCLE_blocs_contexte1>
+<div id="fin-contexte2"></div>
+</div>
+
+</div><!-- fin des contextes -->
+
+
+<div id="corps">
+
+[(#GET{parametres}|element{'chemin'}|=={corpsl}|?{' ',''})[(#INCLURE{fond=chemin}{id_rubrique=0}{cettepage=login})]]
+
+<BOUCLE_blocs_corps(spip_arty_gabarit_ordre){gabarit=login}{conteneur=3}{par ordre}>
+<INCLURE{fond=#NOM}{id_rubrique=0}{conteneur=3}{parametre=#PARAM}{lang}>
+</BOUCLE_blocs_corps>
+
+<div id="fin-corps"></div>
+</div><!-- fin du corps -->
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+
+[(#GET{parametres}|element{'footer'}|=={general}|?{' ',''})[(#INCLURE{fond=footer}{id_rubrique=0})]]
+
+<div id="fin-page"></div>
+</div><!-- fin du general -->
+[(#GET{parametres}|element{'footer'}|=={hors_general}|?{' ',''})[(#INCLURE{fond=footer}{id_rubrique=0})]]
+
+</body>
+</html>

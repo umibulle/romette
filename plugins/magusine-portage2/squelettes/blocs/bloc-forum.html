@@ -1,0 +1,47 @@
+<BOUCLE_forumart(ARTICLES){id_article}>
+<!-- forum -->
+<B_forums><div id="forum" class="listagebloc">
+<a name="forums"></a>
+<h2><:Forum:></h2>
+<ul class="listageconteneur">
+<BOUCLE_forums(FORUMS){id_article}{par date}>
+<li>
+<h4 class="listagetitre">#TITRE</h4>
+<div class="listageinfo">[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]</div>
+<p class="listagetexte">[(#TEXTE|ptobr)]</p>
+[<div class="listagesite"><:voir_en_ligne:> : <a href="(#URL_SITE)" target="_blank"> [(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+[(#ENV{parametre}|!={1 niveau}|?{' ',''})[<div class="listagerepondre"><a id="lien_forum#ID_FORUM" href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]]
+
+<BOUCLE_siself(spip_arty_parametres){parametre=config_forum}{valeur=true}>
+[<!-- intervenir dans le forum -->
+<div id="intervention_forum#ID_FORUM">
+(#FORMULAIRE_FORUM)
+</div>]
+</BOUCLE_siself>
+
+<B_forums_fils>
+	<ul>
+	<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+	<li>
+	<h4 class="listagetitre">#TITRE</h4>
+	<div class="listageinfo">[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]</div>
+	<p class="listagetexte">[(#TEXTE|ptobr)]</p>
+	[<div class="listagesite"><:voir_en_ligne:> : <a href="(#URL_SITE)" target="_blank"> [(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+	
+	[(#ENV{parametre}|=={multithread}|?{' ',''})[<div class="listagerepondre"><a id="lien_forum#ID_FORUM" href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]]
+	
+	<BOUCLE_siself2(spip_arty_parametres){parametre=config_forum}{valeur=true}>
+
+[<!-- intervenir dans le forum -->
+<div id="intervention_forum#ID_FORUM">
+(#FORMULAIRE_FORUM)
+</div>]
+</BOUCLE_siself2>
+	<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+	</li>
+	</BOUCLE_forums_fils>
+	</ul>
+</B_forums_fils>
+</li>
+</BOUCLE_forums></ul></div></B_forums>
+</BOUCLE_forumart>

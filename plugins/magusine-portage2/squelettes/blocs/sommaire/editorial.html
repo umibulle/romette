@@ -1,0 +1,35 @@
+<!-- texte lui-meme -->
+[(#REM) Boucle qui va chercher dans la db les rubriques associees a l'edito ]
+<BOUCLE_param_rubrique_edito(spip_arty_paramassoc){param=edito}>
+<B_edito>
+<!-- edito -->
+<BOUCLE_edito(rubriques){id_rubrique=#ID_RUBRIQUE}{lang}{0,1}>
+	[(#INCLURE{fond=rubrique-head-logo}{id_rubrique})]
+	[(#INCLURE{fond=rubrique-texte}{id_rubrique})]
+</BOUCLE_edito>
+<!-- fin de l'edito --> 
+</B_edito>
+<BOUCLE_editoart(ARTICLES){id_article=#ID_ARTICLE}{lang}{0,1}>
+
+	<div id="edito" class="listagebloc">
+	
+[(#LOGO_ARTICLE|oui)<div class="logo">[(#INCLURE{fond=formatage_logo}{id_article}{conteneur=#ENV{conteneur}})]</div>]
+
+	<div class="texteheader">
+	[<div class="chapeau">(#CHAPO)</div>]
+	<div class="texte">
+		[(#ENV{conteneur}|=={1}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+		[(#ENV{conteneur}|=={2}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+		[(#ENV{conteneur}|=={3}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CORPS,0})]]
+	</div>
+	[<div class="ps">(#PS)</div>]
+	<BOUCLE_autres2(spip_arty_parametres){parametre=cacher_edito}{valeur2=true}><div class="listagesuite"><a href="#URL_RUBRIQUE"><:voir_autres_editos:></a></div></BOUCLE_autres2>
+<?php
+$doublons[] = "#ID_ARTICLE";
+?>
+
+	</div>
+	</div>
+</BOUCLE_editoart>
+<//B_edito>
+</BOUCLE_param_rubrique_edito>

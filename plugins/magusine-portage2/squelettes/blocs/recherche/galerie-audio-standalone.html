@@ -1,0 +1,20 @@
+<B_galerieaudio><div id="audio">
+<h2><:docsaudio:></h2>
+<ul class="listageconteneur">
+<BOUCLE_galerieaudio(DOCUMENTS){id_article}{mode=document}{extension==mp3}{0,1}{doublons}>
+<li>
+<:pour_ecouter_cliquez:>
+<a href="javascript:popup_page('spip.php?page=galerie-audio-flash-popup&amp;id_article=#ID_ARTICLE&amp;id_document=#ID_DOCUMENT&amp;id_compteur=[(#COMPTEUR_BOUCLE|moins{1})]',[(#LARGEUR_CORPS|plus{20})], 300);" class="lien_popup"><:lien_lecteur_standalone:></a>
+</li>
+
+<BOUCLE_parametres_telechargement_audio(spip_arty_parametres){parametre=liens_telecharger_audio}{valeur=true}>
+<li>
+<p><:avis_telechargement_audio:></p>
+<BOUCLE_liste_doc_audio(DOCUMENTS){id_article}{mode=document}{extension==mp3}{par num titre}{par titre}>
+<a href="#URL_SITE_SPIP/#URL_DOCUMENT">[(#FICHIER|nomfichier)]</a> ([(#TAILLE|taille_en_octets)]) <br />
+</BOUCLE_liste_doc_audio>
+</li>
+</BOUCLE_parametres_telechargement_audio>
+
+</BOUCLE_galerieaudio>
+</ul></div></B_galerieaudio>

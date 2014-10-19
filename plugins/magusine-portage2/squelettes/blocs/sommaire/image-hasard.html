@@ -1,0 +1,41 @@
+#SET{bonidrub,0}
+#SET{bonidrubart, 0}
+#SET{bonidart, 0}
+<BOUCLE_chequeparam(spip_arty_paramassoc){param=image-hasard}>
+<BOUCLE_selectrub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+<BOUCLE_listimage(DOCUMENTS){mode=document}{id_rubrique}{extension==jpg|gif|png}{par hasard}{0,1}>
+#SET{bonidrub, #ID_DOCUMENT}
+</BOUCLE_listimage>
+<BOUCLE_selectartrub(ARTICLES){branche}{par hasard}>
+<BOUCLE_listimage2(DOCUMENTS){id_article}{mode=document}{extension==jpg|gif|png}{par hasard}{0,1}>
+#SET{bonidrubart, #ID_DOCUMENT} 
+</BOUCLE_listimage2>
+</BOUCLE_selectartrub>
+</BOUCLE_selectrub>
+<BOUCLE_selectart(ARTICLES){id_article=#ID_ARTICLE}>
+<BOUCLE_listimage3(DOCUMENTS){id_article}{mode=document}{extension==jpg|gif|png}{par hasard}{0,1}>
+#SET{bonidart, #ID_DOCUMENT}
+</BOUCLE_listimage3>
+</BOUCLE_selectart>
+</BOUCLE_chequeparam>
+<B_listeca>
+<div id="image-hasard" class="listagebloc">
+<h2><:image_hasard:></h2>
+<ul class="listageconteneur">
+<li>
+<BOUCLE_listeca(DOCUMENTS){id_document IN #GET{bonidrub},#GET{bonidrubart},#GET{bonidart}}{par hasard}{0,1}>
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#FICHIER|image_reduire{#LARGEUR_CORPS,0})]]
+<h4>[(#TITRE|supprimer_numero|sinon{<:sans_titre:>})]</h4>
+[<p class="listageinfo">(#DESCRIPTIF)</p>]
+<BOUCLE_articlefrom(ARTICLES){id_document}>
+<p class="listageinfo"><:article_origine:> <a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></p>
+</BOUCLE_articlefrom>
+<BOUCLE_articlefromrub(RUBRIQUES){id_document}>
+<p class="listageinfo"><:rubrique_origine:> <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></p>
+</BOUCLE_articlefromrub>
+</BOUCLE_listeca>
+</li>
+</ul>
+</div></B_listeca>

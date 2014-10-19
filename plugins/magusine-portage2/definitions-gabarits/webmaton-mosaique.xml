@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+statut : reserve : 0, contexte1 : 1, contexte 2: 2, corps: 3
+param : ce qui apparait comme choix, soit séparé par des virgules (1,2,3 par ex)
+
+soit une requete sql 
+Dans ce cas d'autres arguments a entrer
+param="SELECT * FROM spip_groupes_mots" 
+paramvalue="id_groupe" : la colonne selectionnee
+paramdescr="Groupe de mots-cles" ce qui apparait dans le bloc
+paramtext="titre" la colonne affiche dans le selecteur
+paramdefaut="" le parametre par defaut eventuel
+-->
+<gabarit type="defaut" nom="gabarit_questions-webmaton">
+
+<!-- contexte 1 -->
+<bloc statut="1">webmaton_navigation</bloc>
+<!-- contexte 2 -->
+
+<bloc statut="2">feed</bloc>
+<bloc statut="2">rechercher</bloc>
+<bloc statut="2">mots-cles</bloc>
+<bloc statut="2" param="par date,par date inverse,par titre" paramdefaut="par date inverse" paramdescr="Type de listage">liste-articles</bloc>
+<bloc statut="2" param="1,2,3,4,5,6,news-sticker" paramdefaut="3" paramdescr="nombre_breves_affichees">liste-breves</bloc>
+
+<!-- corps -->
+<bloc statut="3">rubrique-head</bloc>
+<bloc statut="3">rubrique-texte</bloc>
+
+<bloc statut="3">webmaton_bloc_mosaique</bloc>
+
+
+<!-- reserve -->
+<bloc statut="0" param="3,5,6,7,8,9,10,15,20" paramdefaut="10" paramdescr="nombre_webmatons">webmaton_dernieres_videos</bloc>
+<bloc statut="0">forum</bloc>
+<bloc statut="0" param="par_titre,par_date,par_rubrique" paramdefaut="par_titre" paramdescr="Type de listage">liste-liens</bloc>
+<bloc statut="0" param="1,2,3,4,5,6,7,8,9,10" paramdefaut="3" paramdescr="nombre_articles_affiches">derniers_articles_rubrique</bloc>
+<!-- reserve avancee -->
+<bloc statut="4" param="galerie simple,thickbox,fancybox,diaporama" paramdefaut="galerie simple" paramdescr="Type de galerie">galerie-image</bloc>
+<bloc statut="4" param="liste,flv_320_240,flv_largeur_totale_4_3,flv_largeur_totale_16_9" paramdefaut="popup" paramdescr="Type de galerie">galerie_videos_rub</bloc>
+<bloc statut="4" param="liste,lecteur flash,popup,lecteur_flash_liste" paramdefaut="lecteur flash" paramdescr="Type de galerie">galerie-audios-rub</bloc>
+<bloc statut="4" param="champ" paramdefaut="mp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv|kml" paramdescr="liste_extension_exclure">pieces_jointes</bloc>
+<bloc statut="4">bloc_proposer_lien</bloc>
+<bloc statut="4" param="area" paramdefaut="" paramdescr="liste_groupe_inclure">thesaurus_mots</bloc>
+<bloc statut="4">abo-newsletter</bloc>
+<bloc statut="4" param="200,250,300,350,400,450,500,550,600" paramdefaut="300" paramdescr="Hauteur">diaporama-rubrique</bloc>
+<bloc statut="4" param="200,250,300,350,400,450,500,550,600" paramdefaut="300" paramdescr="Hauteur">google-maps-rubrique</bloc>
+<bloc statut="4" param="par date,par titre" paramdefaut="par titre" paramdescr="Type de listage">liste-rubriques</bloc>
+
+</gabarit>

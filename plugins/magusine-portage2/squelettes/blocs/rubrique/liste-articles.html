@@ -1,0 +1,15 @@
+[(#ENV{parametre}|=={par titre}|?{' ',''})
+<INCLURE{fond=liste-articles-partitre}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={par date}|?{' ',''})
+<INCLURE{fond=liste-articles-pardate}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={par date inverse}|?{' ',''})
+<INCLURE{fond=liste-articles-pardateinverse}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={slide}|?{' ',''})
+<INCLURE{fond=liste-articles-slide}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|=={par logo}|?{' ',''})
+<INCLURE{fond=liste-articles-logo}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

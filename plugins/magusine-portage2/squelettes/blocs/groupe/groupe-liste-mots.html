@@ -1,0 +1,32 @@
+<div id="liste-mots" class="listagebloc">
+<h2><:liste_mots:></h2>
+<ul class="listageconteneur">
+<BOUCLE_lastforums(MOTS){id_groupe}{par num titre}{par titre}>
+<li>
+[(#LOGO_MOT|oui)[(#INCLURE{fond=formatage_logo_liste}{id_mot}{conteneur=#ENV{conteneur}})]]
+<h4 class="listagetitre"><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listagetexte">[(#TEXTE)]</p>
+<p class="listageinfo">
+<BOUCLE_countrub(RUBRIQUES){id_mot}></BOUCLE_countrub>
+[(#TOTAL_BOUCLE|>{0}|?{" ",""})
+#TOTAL_BOUCLE 
+[(#TOTAL_BOUCLE|=={1}|?{" ",""})<:rubrique:>]
+[(#TOTAL_BOUCLE|>{1}|?{" ",""})<:rubriques:>]
+<br />]<//B_countrub>
+<BOUCLE_countart(ARTICLES){id_mot}></BOUCLE_countart>
+[(#TOTAL_BOUCLE|>{0}|?{" ",""})
+#TOTAL_BOUCLE 
+[(#TOTAL_BOUCLE|=={1}|?{" ",""})<:article:>]
+[(#TOTAL_BOUCLE|>{1}|?{" ",""})<:articles:>]
+<br />]<//B_countart>
+<BOUCLE_countlink(SITES){id_mot}></BOUCLE_countlink>
+[(#TOTAL_BOUCLE|>{0}|?{" ",""})
+#TOTAL_BOUCLE 
+[(#TOTAL_BOUCLE|=={1}|?{" ",""})<:site:>]
+[(#TOTAL_BOUCLE|>{1}|?{" ",""})<:sites:>]
+<br />]<//B_countlink>
+</p>
+</li>
+</BOUCLE_lastforums>
+</ul>
+</div>

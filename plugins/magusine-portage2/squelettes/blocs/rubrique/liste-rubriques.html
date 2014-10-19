@@ -1,0 +1,9 @@
+[(#ENV{parametre}|=={par titre}|?{' ',''})
+<INCLURE{fond=liste-rubriques-partitre}{id_rubrique}{conteneur=#ENV{conteneur}}>
+][(#ENV{parametre}|=={par date}|?{' ',''})
+<INCLURE{fond=liste-rubriques-partitre}{id_rubrique}{conteneur=#ENV{conteneur}}>
+][(#ENV{parametre}|=={titre-seul}|?{' ',''})
+<INCLURE{fond=liste-rubriques-titre-seul}{id_rubrique}{conteneur=#ENV{conteneur}}>
+][(#ENV{parametre}|=={slide}|?{' ',''})
+<INCLURE{fond=liste-rubriques-slide}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

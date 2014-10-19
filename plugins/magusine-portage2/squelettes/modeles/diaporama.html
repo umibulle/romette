@@ -1,0 +1,10 @@
+<!-- 
+exemple d'utilisation du diaporama
+<diaporama|images=34,35,36|hauteur=200|transition=fade|boutons=true|couleurfond=ffffff|duree=8|shuffle=true>
+images #ENV{images}
+-->
+<div class="slideshow">
+<embed src="#CHEMIN{swf/imagerotator.swf}" width="[(#ENV{largeur}|sinon{300})]"height="[(#ENV{hauteur}|sinon{200})]"allowscriptaccess="always" allowfullscreen="true" flashvars="height=[(#ENV{hauteur}|sinon{200})]&width=[(#ENV{largeur}|sinon{300})]&file=spip.php%3Fpage%3Dxml_diaporama[%26images%3D(#ENV{images})]&screencolor=0x[(#ENV{couleurecran}|sinon{ffffff})]&backcolor=0x[(#ENV{couleurfond}|sinon{ffffff})]&frontcolor=0x[(#ENV{couleuravant}|sinon{000000})]&transition=[(#ENV{transition}|sinon{flash})]&overstretch=[(#ENV{overstretch}|sinon{true})]&rotatetime=[(#ENV{duree}|sinon{8})]&shownavigation=[(#ENV{boutons}|sinon{true})]&shuffle=[(#ENV{shuffle}|sinon{false})]" />
+
+</div>
+

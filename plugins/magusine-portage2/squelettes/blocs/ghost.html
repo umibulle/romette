@@ -1,0 +1,84 @@
+<BOUCLE_ghost(ARTICLES){id_article}>
+<div id="header" class="header-forum">
+<div class="logo"><?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}}|abs_url)]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}}|abs_url)]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}}|abs_url)]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_ARTICLE||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?></div>
+<div class="texteheader">
+[<p class="sursoustitre surtitre">(#SURTITRE)</p>]
+[<h1>(#TITRE|supprimer_numero)</h1>]
+[<p class="sursoustitre soustitre">(#SOUSTITRE)</p>]
+
+</div>
+<p class="clearer_header"></p>
+</div>
+
+<div id="texteconteneur">
+[<div class="chapeau">(#CHAPO)</div>]
+<div class="texte">
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CORPS,0})]]
+</div>
+[<p class="listagesite"><strong><:voir_en_ligne:></strong> <a href="#URL_SITE" target="_blank">(#NOM_SITE)</a></p>]
+[<div class="ps"><strong><:ps:>:</strong> (#PS)</div>]
+[<div class="ps notes"><strong><:notes:>:</strong> (#NOTES)</div>]
+[<p class="listagerepondre"><a id="lien_forum" href="#URL_SITE_SPIP/spip.php?page=forum&amp;(#PARAMETRES_FORUM)"><:repondre_article:></a></p>]
+
+</div>
+
+<!-- forum -->
+<B_forums><div id="salons_forum" class="listagebloc">
+<h2>Le débat</h2>
+<ul class="listageconteneur">
+
+<li class="resume"><strong>Ouvert </strong>depuis le [(#DATE|affdate_jourcourt)], [modéré par (#LESAUTEURS|{", "}), ]
+<BOUCLE_nbrrep2(FORUMS){id_article}{plat}></BOUCLE_nbrrep2>
+[contient </strong>(#TOTAL_BOUCLE) intervention(s)]<//B_nbrrep2><br />
+<BOUCLE_lastinter(FORUMS){id_article}{plat}{par date}{inverse}{0,1}><strong>Derniere intervention :</strong> <a href="##ID_FORUM">le [(#DATE|affdate)] à [(#DATE|heures)]h[(#DATE|minutes)] [par (#AUTEUR)]</a></BOUCLE_lastinter>
+</li>
+<BOUCLE_forums(FORUMS){id_article}{par date}>
+<li><a name="#ID_FORUM"></a>
+<h4 class="listagetitre">[(#TITRE|supprimer_numero)]</h4>
+<div class="listageinfo">[Par <a href="mailto:#EMAIL">(#NOM)</a> ]le [(#DATE|affdate)] à [(#DATE|heures)]h[(#DATE|minutes)]</div>
+[<p class="listagetexte">(#TEXTE|ptobr)</p>]
+[<div class="listagesite"><:voir_en_ligne:> : <a href="(#URL_SITE)" target="_blank"> [(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+[<div class="listagerepondre"><a href="forum.php3?(#PARAMETRES_FORUM)">Ajouter <br />votre opinion</a></div>]
+
+<B_forums_fils>
+<ul>
+	<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+	<li><a name="#ID_FORUM"></a>
+	<h4 class="listagetitre">[(#TITRE|supprimer_numero)]</h4>
+	<div class="listageinfo">[Par <a href="mailto:#EMAIL">(#NOM)</a> ]le [(#DATE|affdate)] à [(#DATE|heures)]h[(#DATE|minutes)]</div>
+	[<p class="listagetexte">(#TEXTE|ptobr)</p>]
+	[<div class="listagesite"><:voir_en_ligne:> : <a href="#URL_SITE_SPIP/forum.php3?(#PARAMETRES_FORUM)" target="_blank"> [(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+	<BOUCLE_recurs(boucle_forums_fils)></BOUCLE_recurs>
+</li>
+	</BOUCLE_forums_fils>
+</ul>	
+</B_forums_fils>
+</li>
+</BOUCLE_forums></ul></div></B_forums>
+
+</div>
+<!-- fin du bloc corps -->
+</BOUCLE_ghost>

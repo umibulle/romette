@@ -1,0 +1,111 @@
+/* comportements par defaut */
+ul,li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a img {
+  border: 0px;
+}
+
+img {
+  behavior: url("win_png.htc");
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+/* redefinition de tgs de spip */
+spip_logos {
+  border: 1px solid #ccc;
+  margin: 0;
+  padding: 0;
+  background-color: #FFF;
+}
+
+.spip_documents_left img,.spip_documents_right img,.spip_documents_center img
+  {
+  background-color: #efefef;
+  padding: 0px;
+}
+
+.spip_documents_left {
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+.spip_documents_right {
+  float: right;
+  margin: 0 0 1em 1em;
+}
+
+.spip_documents_center {
+  display: block;
+  text-align: center;
+  /*margin: 1em 0;*/
+}
+
+.spip_doc_titre {
+  /*margin: 3px;*/
+  font-size: 10px;
+  text-align: center;
+}
+
+.spip_doc_descriptif {
+  font-size: 9px;
+  text-align: center;
+  line-height: 120%;
+}
+
+div.spip_code {
+  font-family: courier, sans-serif;
+  font-size: 100%;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 5px 10px 5px;
+  border: 1px solid #ccc;
+  background-color: #efefef;
+}
+
+span.spip_code {
+  font-family: courier, sans-serif;
+  font-size: 100%;
+}
+
+.spip_surligne { /* background-color: yellow;*/
+  
+}
+
+/* comportement des css generee par spip */
+p.spip {
+  margin: 1em 0 2em 0;
+}
+
+fieldset {
+  border: none;
+  text-align: left;
+  margin: 5px;
+}
+
+legend {
+  font-size: 9px;
+  margin-bottom: 10px;
+}
+
+fieldset p {
+  margin: 6px 0 18px 0;
+}
+
+label {
+  font-weight: bold;
+  font-size: 10px;
+}
+
+#proposer-site legend {
+  display: none;
+}

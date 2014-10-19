@@ -1,0 +1,25 @@
+<BOUCLE_selectrub(RUBRIQUES){id_rubrique}>
+<B_edito>
+<!-- edito -->
+<BOUCLE_edito(RUBRIQUES){id_parent}{titre=#ENV{parametre}}{0,1}>
+	<BOUCLE_lastedito(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
+	<div id="rubrique-une" class="listagebloc">
+    <h2>[(#_edito:TITRE|supprimer_numero)]</h2>	
+	[(#LOGO_ARTICLE|oui)<div class="logo"><INCLURE{fond=formatage_logo}{id_article}{conteneur=#ENV{conteneur}}></div>]
+	<div class="texteheader">
+	[<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+	[<div class="chapeau">(#CHAPO)</div>]
+	<div class="texte #EDIT{texte}">
+	[(#ENV{conteneur}|=={1}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+	[(#ENV{conteneur}|=={2}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+	[(#ENV{conteneur}|=={3}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CORPS,0})]]
+	</div>
+	[<div class="ps">(#PS)</div>]
+	<div class="listagesuite"><a href="#URL_RUBRIQUE"><:voir_les_autres_unes:></a></div>
+	</div>
+	</div>
+     </BOUCLE_lastedito>
+</BOUCLE_edito>
+<!-- fin de l'edito --> 
+</B_edito>
+</BOUCLE_selectrub>

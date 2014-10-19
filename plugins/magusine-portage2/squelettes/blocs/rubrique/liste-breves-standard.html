@@ -1,0 +1,11 @@
+<ul class="listageconteneur">
+<BOUCLE_lesnews(BREVES){!par date}{id_rubrique}{0,#ENV{parametre}}{lang}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_breve}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listageinfo">[(#DATE|affdate)]</p>
+<p class="listagetexte #EDIT{texte}">[(#TEXTE|couper{200})]</p>
+[<p class="listagelien"><a href="#URL_SITE #EDIT{nom_site}">(#NOM_SITE)</a></p>]
+</li>
+</BOUCLE_lesnews>
+</ul>

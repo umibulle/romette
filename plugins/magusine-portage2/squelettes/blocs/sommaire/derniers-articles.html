@@ -1,0 +1,30 @@
+<BOUCLE_cacher_edito(spip_arty_parametres){parametre=cacher_edito}>[(#VALEUR|=={true}|?{' ',''})]</BOUCLE_cacher_edito>
+<BOUCLE_param_rubrique_edito(spip_arty_paramassoc){param=edito}>
+<BOUCLE_edito_rub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{lang}{doublons cacher}>
+<BOUCLE_articles_edito_rub(ARTICLES){id_rubrique}{doublons cacher}> </BOUCLE_articles_edito_rub>
+</BOUCLE_edito_rub>
+<BOUCLE_edito_art(ARTICLES){id_article=#ID_ARTICLE}{lang}{doublons cacher}> </BOUCLE_edito_art>
+</BOUCLE_param_rubrique_edito>
+</B_cacher_edito>
+
+<B_lastarts>
+<div id="dernarticles" class="listagebloc">
+<h2><:derniers_articles:></h2>    
+<ul class="listageconteneur">
+<BOUCLE_lastarts(ARTICLES){par date}{inverse}{0,#ENV{parametre}}{doublons cacher}{lang}>
+
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+[<h4 class="listagetitre"><a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a></h4>]
+<p class="listageinfo"><strong><:rubrique:> <BOUCLE_laruborig(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_laruborig></strong>
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+<strong>[<:le_date:> (#DATE|affdate)]</strong> 
+</BOUCLE_date>
+</p>
+[<p class="listagetexte">(#INTRODUCTION|couper{220})</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite>
+</li>
+
+</BOUCLE_lastarts></ul>
+</div>
+</B_lastarts>

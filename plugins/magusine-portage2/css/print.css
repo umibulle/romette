@@ -1,0 +1,94 @@
+/* feuille de style print */
+
+body {
+font-family: arial, helvetica, sans-serif;
+font-size: 10pt;
+}
+
+a {
+color: #333;	
+}
+
+#general {
+margin:0;
+width:94%;
+padding:0;	
+}
+
+#navigation, #contextes, #chemin, #magusine-footer {
+display:none;	
+}
+
+.spip-admin-float {
+display:none;	
+}
+
+#corps {
+width:100%
+margin-right:0;
+margin-top:0;
+margin-bottom:0;
+margin-left:0;
+padding:0;	
+}
+
+.sursoustitre {
+font-size:7pt;
+letter-spacing:0.1em;	
+}
+
+.chapeau {
+font-weight:bold;	
+}
+
+.dateauteurs {
+font-size:10pt;	
+}
+
+.texte {
+line-height: 120%;
+text-align:justify;	
+}
+
+#footer {
+	border-top: 1px solid #ccc;
+	margin-top:2em;
+	}
+
+/* liste sans interet à montrer */
+#galerie-video, #galerie-audio, #piecesjointes {
+display:none;	
+}
+
+
+/* cas particuliers */
+.listageconteneur li {
+list-style-type: none;	
+}
+
+.listagerepondre {
+display:none;	
+}
+
+.listagelogo {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+.listageconteneur li, .listagebloc {
+clear: left;	
+}
+
+.spip_documents_left {
+margin:0 1em 1em 0;	
+}
+
+.spip_documents_right {
+margin:0 0 1em 1em;	
+}
+
+.spip_documents_center {
+margin:1em auto 1em auto;
+text-align:center;
+display:block;	
+}

@@ -1,0 +1,37 @@
+<!--
+Exemple d'utilisation:
+<gmap
+|apikey=ABQIAAAANa0Lb49sP2IatQ_6ejDWvxT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQHBQNGrNz3kU10-BfeEGcigjzhhg
+|hauteur=300|largeur=500>
+-->
+
+
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#ENV{apikey}" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var map;
+jQuery(document).ready(function(){
+  if (GBrowserIsCompatible()) {
+  map = new GMap2(document.getElementById("googlemap"));
+  map.setCenter(new GLatLng( #ENV{centre_latitude} , #ENV{centre_longitude} ), 13);
+}
+window.onunload = GUnload;
+});
+
+function createMarker(point, html) {
+  var marker = new GMarker(point);
+  GEvent.addListener(marker, "click", function() {
+    marker.openInfoWindowHtml(html);
+  });
+  return marker;
+}
+
+//]]>
+</script>
+<style type="text/css">
+#googlemap {
+width: #ENV{largeur}px;
+height: #ENV{hauteur}px;
+}
+</style>
+<div id="googlemap"></div>

@@ -1,0 +1,24 @@
+<B_listearticles>
+<BOUCLE_cachearts(ARTICLES){titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<div id="mot-articles" class="listagebloc">
+<h2><:mot_articles:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listearticles(ARTICLES){id_mot}{!par date}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+<BOUCLE_montrediv(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" or "#VALEUR2") { echo '<div class="listageinfo">'; } ?></BOUCLE_montrediv>
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+<strong>[<:le_date:> (#DATE|affdate)]</strong> 
+</BOUCLE_date>
+<BOUCLE_auteur(spip_arty_parametres){parametre=date_auteur}{valeur2=true}>
+<B_aut><:par:> <BOUCLE_aut(AUTEURS){id_article}{par nom}{", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_aut>
+</BOUCLE_auteur>
+<BOUCLE_montrediv2(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" or "#VALEUR2") { echo '</div>'; } ?></BOUCLE_montrediv2>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite>
+</li>
+</BOUCLE_listearticles>
+</ul>
+</div>
+</B_listearticles>

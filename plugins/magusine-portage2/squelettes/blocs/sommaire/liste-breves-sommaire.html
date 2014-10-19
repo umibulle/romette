@@ -1,0 +1,6 @@
+[(#ENV{parametre}|=={news-sticker}|?{' ',''})
+<INCLURE{fond=inc-breves-newsticker}{parametre=#ENV{parametre}}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|!={news-sticker}|?{' ',''})
+<INCLURE{fond=inc-breves-standard}{parametre=#ENV{parametre}}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

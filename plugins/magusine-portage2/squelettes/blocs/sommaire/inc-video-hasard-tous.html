@@ -1,0 +1,37 @@
+<BOUCLE_chequeparam(spip_arty_paramassoc){param=video-hasard}>
+<BOUCLE_selectrub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+<BOUCLE_listimage(DOCUMENTS){id_rubrique}{extension==avi|mpg|mov|flv|mp4}{par hasard}{0,1}>
+#SET{bonidrub, #ID_DOCUMENT}
+</BOUCLE_listimage>
+<BOUCLE_selectartrub(ARTICLES){id_rubrique}{par hasard}>
+<BOUCLE_listimage2(DOCUMENTS){id_article}{extension==avi|mpg|mov|flv|mp4}{par hasard}{0,1}>
+#SET{bonidrubart, #ID_DOCUMENT}
+</BOUCLE_listimage2>
+</BOUCLE_selectartrub>
+</BOUCLE_selectrub>
+<BOUCLE_selectart(ARTICLES){id_article=#ID_ARTICLE}>
+<BOUCLE_listimage3(DOCUMENTS){id_article}{extension==avi|mpg|mov|flv|mp4}{par hasard}{0,1}>
+#SET{bonidart, #ID_DOCUMENT}
+</BOUCLE_listimage3>
+</BOUCLE_selectart>
+</BOUCLE_chequeparam>
+<B_listeca>
+<div id="video-hasard" class="listagebloc">
+<h2><:video_hasard:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listeca(DOCUMENTS){id_document IN #GET{bonidrub},#GET{bonidrubart},#GET{bonidart}}{par hasard}{0,1}>
+<li><a href="javascript:void(0);" onclick="popup_page('spip.php?page=popup-galerie-video&amp;id_article=#ID_ARTICLE&amp;id_document=#ID_DOCUMENT&amp;id_compteur=[(#COMPTEUR_BOUCLE|moins{1})]',740, 600);" class="listagelogo">
+[(#INCLURE{fond=formatage_logo_doc}{id_document}{conteneur=#ENV{conteneur}})]</a>
+[<h4><a href="javascript:void(0);" onclick="popup_page('spip.php?page=popup-galerie-video&amp;id_article=#ID_ARTICLE&amp;id_document=#ID_DOCUMENT&amp;id_compteur=(#COMPTEUR_BOUCLE|moins{1})]',740, 600);">[(#TITRE|supprimer_numero)</a></h4>]
+[<p class="listageinfo">(#DESCRIPTIF)</p>]
+<BOUCLE_articlefrom(ARTICLES){id_document}>
+<p class="listageinfo"><:article_origine:> <a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></p>
+</BOUCLE_articlefrom>
+<BOUCLE_articlefromrub(RUBRIQUES){id_document}>
+<p class="listageinfo"><:rubrique_origine:> <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></p>
+</BOUCLE_articlefromrub>
+</li>
+</BOUCLE_listeca>
+</ul>
+</div>
+</B_listeca>

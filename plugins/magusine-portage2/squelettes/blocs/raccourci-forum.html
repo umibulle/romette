@@ -1,0 +1,16 @@
+[(#ENV{parametre}|=={vers page forum}|?{' ',''})
+[<p class="listagerepondre"><a href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)"><:repondre_article:></a></p>]
+]
+
+[(#ENV{parametre}|=={self}|?{' ',''})
+[<!-- intervenir dans le forum -->
+<div id="intervention-forum" class="listagebloc">
+<h2><:forum:></h2>
+<ul class="listageconteneur">
+<li>
+(#FORMULAIRE_FORUM)
+</li>
+</ul></div>]
+]
+
+

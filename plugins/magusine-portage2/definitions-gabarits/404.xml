@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gabarit type="defaut" nom="gabarit_404">
+
+<bloc statut="1">liste-mots-cles</bloc>
+
+<bloc statut="2">rechercher</bloc>
+<bloc statut="2">feed</bloc>
+<!-- corps -->
+<bloc statut="3">404-head</bloc>
+<bloc statut="3">404-texte</bloc>
+<!-- reserve -->
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_articles_affiches">derniers-articles</bloc>
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_forums_affiches">derniers-forums</bloc>
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_liens_affiches">derniers-liens</bloc>
+<bloc statut="0" param="1,2,3,4,5,6,news-sticker" paramdefaut="3" paramdescr="nombre_news_affichees">news</bloc>
+<bloc statut="0" param="flv_lecteur_flash,tous_popup" paramdefaut="tous_popup" paramdescr="type_de_video">video-hasard</bloc>
+<bloc statut="0">image-hasard</bloc>
+<bloc statut="0">menu-langues</bloc>
+
+<!-- blocs avance -->
+<bloc statut="4">identification-visiteur</bloc>
+<bloc statut="4">abo-newsletter</bloc>
+</gabarit>

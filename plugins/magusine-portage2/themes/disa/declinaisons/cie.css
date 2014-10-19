@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+#contexte2 {
+  display:none;
+}
+
+#contexte1 {
+  width:180px;
+  margin:0px 0px 0px 100px;
+
+
+}
+
+.texte {
+  background-image:url(traits.png);
+background-repeat:no-repeat;
+}
+

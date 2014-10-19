@@ -1,0 +1,20 @@
+#SET{laliste,#ENV{parametre}|tableau2array{"|"}}
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension !IN #GET{laliste}}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension !IN #GET{laliste}}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+
+<B_piecesjointes><div id="piecesjointes" class="listagebloc">
+<ul class="listageconteneur">
+<BOUCLE_piecesjointes(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre}>
+<li>
+[<a href="#URL_DOCUMENT" target="_blank" class="listagelogo #EDIT{logo}" title="[(#TITRE|supprimer_numero|sinon{<:sans_titre:>})]">(#INCLURE{fond=formatage_logo_doc}{id_document}{conteneur=#ENV{conteneur}})</a>]
+</li>
+</BOUCLE_piecesjointes>
+</ul></div></B_piecesjointes>

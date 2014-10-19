@@ -1,0 +1,64 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+
+<B_doc>
+<div id="galerieimg" class="listagebloc">
+<h2><:galerie_image:></h2>
+<a name="galerie_image"></a>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#image-grand-format").hide();
+   $(".image-galerie").each(function(){
+   	
+   	$(this).attr("href", "javascript:void(0);");
+   	$(this).click( function(){
+   		lien=$(this).attr("rel");
+   		titre=$(this).attr("title");
+   		descriptif=$(this).attr("longdesc");
+   		
+   		$("#image-grand-format > .listagetitre").empty().html(titre);
+   		$("#image-grand-format > .listagetexte").empty().html(descriptif);
+   		$("#image-grand-format > img").attr("src", lien);
+   		location.href = "#image-grand-format";
+   		if ($("#image-grand-format").css("display")=="none"){
+   			$("#image-grand-format").slideDown();
+   			}
+   		})
+   	});
+ });	
+	
+// function afficher_image(url) {
+//  location.href = "#image-grand-format";
+//}
+</script>
+<ul class="listageconteneur">
+<li id="image-grand-format">
+<BOUCLE_grand_format(DOCUMENTS){id_document=#ENV{document}}{extension==gif|png|jpg}{mode=document}>
+<img src="[(#FICHIER||image_reduire{[(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})],0}|extraire_attribut{src})]" target="_blank" alt="[(#TITRE|texte_script)]" title="[(#TITRE|texte_script)][ - (#DESCRIPTIF|texte_script)]" />
+<p class="listagetitre">[(#TITRE|supprimer_numero)]</p>
+<p class="listagetexte">(#DESCRIPTIF|ptobr)</p>
+</BOUCLE_grand_format>
+<BOUCLE_premiere_image(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}{0,1}>
+<img src="[(#FICHIER||image_reduire{[(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})],0}|extraire_attribut{src})]" target="_blank"  alt="[(#TITRE|texte_script)]"  title="[(#TITRE|texte_script)][ - (#DESCRIPTIF|texte_script)]" />
+<p class="listagetitre">[(#TITRE|supprimer_numero)]</p>
+<p class="listagetexte">(#DESCRIPTIF|ptobr)</p>
+</BOUCLE_premiere_image>
+<//B_grand_format>
+</li>
+<li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<a href="#SELF&document=#ID_DOCUMENT#galerie_image" 
+rel="[(#FICHIER||image_reduire{[(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})],0}|extraire_attribut{src})]" id="image-galerie-#ID_DOCUMENT" alt="[(#TITRE|texte_script)]" title="[(#TITRE|texte_script)]" longdesc="[(#DESCRIPTIF|texte_script)]" class="image-galerie">[(#INCLURE{fond=formatage_vignette}{id_document}{conteneur=#ENV{conteneur}})]</a>
+</BOUCLE_doc>
+</li></ul>
+</div>
+</B_doc>

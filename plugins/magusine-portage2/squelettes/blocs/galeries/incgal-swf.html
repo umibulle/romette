@@ -1,0 +1,32 @@
+<B_lesfiles><div id="galerie-swf" class="listagebloc">
+<a name="Lecteur"></a>
+<h2><:galerie_swf:></h2>
+<ul class="listageconteneur">
+<?php
+$parametre="[(#REM|sinon{videovars}|trouveintheme{''})]";
+<BOUCLE_voissiplus(DOCUMENTS){id_article}{extension==swf}{1,1}>$listheight=(int) "[(#REM|sinon{videolistheight}|trouveintheme{'80'})]";</BOUCLE_voissiplus>
+
+if ( "#ENV{largeur}" == "320") {
+$largeur="320";
+$hauteur=240;
+} else if("#ENV{largeur}" == "totale_16"){
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$hauteur=round(($largeur/16)*9);
+} else {
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$hauteur=round(($largeur/4)*3);
+}
+
+?>
+<BOUCLE_lesfiles(DOCUMENTS){id_article}{mode=document}{extension==swf}{0,1}>
+<li id="video-viewer flv">
+<embed 
+type="application/x-shockwave-flash" allowfullscreen="true"
+src="#CHEMIN{swf/mediaplayer.swf}" style="" id="rotator" name="rotator" quality="high" flashvars="file=spip.php%3Fpage%3Dxml_swf%26id_article%3D#ID_ARTICLE&displayheight=<?php echo $hauteur; ?>&width=<?php echo $largeur; ?>&height=<?php echo $hauteur + $listheight + 20; if ($parametre) { echo "&". $parametre; } ?>" 
+height="<?php echo $hauteur + $listheight + 20; ?>" 
+width="<?php echo $largeur; ?>">
+</li>
+</BOUCLE_lesfiles>
+</ul>
+</div>
+</B_lesfiles>

@@ -1,0 +1,15 @@
+<B_sign><div id="liste-petition" class="listagebloc">
+<h2>[(#ENV*{parametre}|propre|sinon{<:signatures_petition:>})]</h2>
+<ul class="listageconteneur">
+<BOUCLE_sign(SIGNATURES){id_article}{!par date}>
+<li>
+<div class="listagetexte">
+<h4 class="listagetitre">#NOM</h4>
+<div class="listageinfo">[(#DATE|affdate)]</div>
+[<div class="listagetexte">(#MESSAGE)</div>]
+[<div class="listagesite"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
+</li>
+</BOUCLE_sign>
+</ul>
+</div>
+</B_sign>

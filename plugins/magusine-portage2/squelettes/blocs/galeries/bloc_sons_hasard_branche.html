@@ -1,0 +1,38 @@
+<div id="galerie-audio-branche" class="listagebloc">
+<a name="audio"></a>
+<h2><:son_hasard_branche:></h2>
+<ul class="listageconteneur">
+<?php
+$parametre="[(#REM|sinon{audiovars}|trouveintheme{''})]";
+// hauteur : parametre height displayheight=120&
+if ($parametre !="") {
+	if(eregi("displayheight=([0-9]{1,3})&",$parametre,$elem)) {
+		$visualisateur=(int) $elem[1];
+		$parametre=ereg_replace("displayheight=([0-9]{1,3})&","",$parametre);
+	} else { $visualisateur=0; }
+	
+	if(eregi("height=([0-9]{1,3})&",$parametre,$elem)) {
+		$hauteur= (int) $elem[1];
+		$parametre=ereg_replace("height=([0-9]{1,3})&","",$parametre);
+	} else { $hauteur=92; }
+	
+} 
+
+
+
+//$listheight=(int) "[(#ENV{parametre}|moins{1}|mult{23})]";
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+if($largeur>300){ $largeur=300; }
+?>
+
+<li id="audio-viewer">
+<embed 
+type="application/x-shockwave-flash" allowfullscreen="true"
+src="#CHEMIN{swf/mediaplayer.swf}" style="" id="mp3player" name="rmp3player" quality="high" 
+flashvars="file=spip.php%3Fpage%3Dxml_audioflash_hasard_branche%26id_rubrique%3D[(#ID_RUBRIQUE|sinon{0})]%26parametre%3D[(#ENV{parametre}|moins{1})]&displayheight=<?php echo $hauteur; ?>&width=<?php echo $largeur; ?>&height=<?php echo $hauteur + $visualisateur + 20; if ($parametre) { echo "&". $parametre; } ?>"
+height="<?php echo $hauteur + $visualisateur + 20; ?>" 
+width="<?php echo $largeur; ?>">
+</li>
+</ul>
+</div>
+</B_lesfiles>

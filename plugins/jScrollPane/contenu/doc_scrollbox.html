@@ -1,0 +1,43 @@
+<style type="text/css">
+#pre_scrollbox{margin:1em 0;border:1px solid #000;padding:0.2em;}
+#scrollbox{padding:0.6em;height:360px;}
+</style>
+<div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:scrollbox:info_doc{link=#info_doc}|propre:></div>
+
+[(#REM) Fil d'Ariane ]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:scrollbox:doc_titre_court:></strong></div>
+
+<div class="cartouche">
+	<h1 class="entry-title"><:scrollbox:doc_titre_page:></h1>
+</div>
+		
+<div class="chapo"><:scrollbox:doc_chapo|propre:></div>
+
+<div class="texte entry-content">
+	<:scrollbox:exemple|propre:>
+	<div id="pre_scrollbox">
+		#SCROLLBOX{#scrollbox,18,20}
+		<div id="scrollbox"><:scrollbox:lorem_ipsum|propre:></div>
+	</div>
+	<:scrollbox:documentation|propre:>
+</div>
+
+<:scrollbox:docskel_sep|propre:>
+
+[<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+<div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
+	<img class='spip_logos' alt="" src="#CHEMIN{img_pack/scrollbox_logo.png}" width='28' height='60' style='height:60px;width:28px;' />
+	<p class="soustitre"><:scrollbox:titre_original:></p>
+	<p><small><:scrollbox:licence_originale|propre:></small></p>
+	<p><small><:scrollbox:licence_actuelle|propre:></small></p>
+</div>
+
+<div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
+[(#SET{urldocbrut,[(#URL_PAGE{scrollbox_documentation}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{scrollbox_documentation}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{scrollbox_documentation}|parametre_url{docmode,spip})]})]
+<h3><:scrollbox:info_doc_titre:></h3>
+<:scrollbox:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
+<:scrollbox:info_skel_contrib|propre:>
+</div>

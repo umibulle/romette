@@ -1,0 +1,57 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<script type="text/javascript" src="#CHEMIN{javascript/infinitecarousel2/jquery.infinitecarousel2.js}"></script>
+<script type="text/javascript">
+$(function(){
+	$('#carousel').infiniteCarousel({
+		imagePath: '#CHEMIN{javascript/infinitecarousel2/images/}',
+		prevNextInternal:true,
+		inView:5,
+		autoHideCaptions:true,
+		padding:3,
+		displayTime:2000,
+		displayProgressBar:false
+	});
+});
+</script>
+<style type="text/css">
+#carousel {
+	border: 2px solid #aaa;
+	padding: 0 10px;
+}
+
+.textholder {
+	font: 11px Arial, Helvetica, sans-serif;
+	padding: 2px 4px 0 4px;
+	-moz-border-radius: 4px 4px 0 0;
+}
+</style>
+<B_doc>
+<div id="galerieimg" class="listagebloc">
+<div id="carousel">
+	<ul>
+		<BOUCLE_premiere_image(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+			<li><img src="[(#FICHIER)]" width="[(#LARGEUR)]" height="[(#HAUTEUR)]"/><p>[(#TITRE||PtoBR)]<br/>[(#DESCRIPTIF||PtoBR)]</p></li>
+		</BOUCLE_premiere_image>
+	</ul>
+</div>
+<!-- 
+<ul class="listageconteneur">
+<li id="image-grand-format">
+<BOUCLE_premiere_image2(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}{0,1}>
+</BOUCLE_premiere_image2>
+</li>
+<li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>	
+</BOUCLE_doc>
+</li></ul>-->
+</div>
+</B_doc>

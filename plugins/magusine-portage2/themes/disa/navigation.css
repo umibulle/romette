@@ -1,0 +1,95 @@
+#navigation {
+  height: 26px;
+  width: 100%;
+  font-family: jura;
+  letter-spacing: 1pt;
+  float: left;
+  /*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; 
+  letter-spacing: 1px;
+  "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
+  /*left:20px;*/
+  right: 0px;
+  position: absolute;
+  top: 0px;
+  /*list-style-image:url(dd.png);*/
+}
+
+#navigation li {
+  position: relative;
+  padding-right: 10px;
+  float: left;
+}
+
+.niveau1 {
+  font-size: 9pt;
+}
+
+.niveau1 a {
+  padding: 5px 15px;
+  text-decoration: none;
+  color: #666666;
+  display: block;
+  border-left: solid;
+  border-width: 5px;
+  border-color: white;
+}
+
+.niveau1 a:hover {
+  color: black;
+  border-left: solid;
+  border-width: 5px;
+  border-color: #333333;
+}
+
+.ulniveau2 {
+  list-style-image: none;
+  font-family: jura;
+  margin-top: 20px;
+  display: none;
+  width: 270px;
+  position: absolute;
+  top: 0px;
+  color: #330033;
+  border-left: solid;
+  border-width: 5px;
+  border-color: #333333;
+  z-index: 1000;
+  font-size: 8pt;
+}
+
+#navigation li .niveau2 {
+  width: 270px;
+}
+
+.ulniveau2 li:nth-child(even) a {
+  background-color: #EEE;
+}
+
+.niveau2 a {
+  text-decoration: none;
+  padding: 6px 5px 1px;
+  margin: 0;
+  display: block;
+  color: black;
+  background-color: white;
+}
+
+.niveau2 a:hover {
+  color: black;
+  /*background-color: #e7e7e7;*/
+  /*border-top: 3px double white;
+  border-bottom-color: white;
+  /*border-bottom: dotted 1px;*/
+}
+
+/*#navigation li>ul { 
+ to override top and left in browsers other than IE, 
+which will position to the top right of the containing li, 
+rather than bottom left 
+top: auto;
+left: auto;
+}*/
+#navigation li:hover ul,li.over ul {
+  /* lists nested under hovered list items */
+  display: block;
+}

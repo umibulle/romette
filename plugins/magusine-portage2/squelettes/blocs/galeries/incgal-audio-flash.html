@@ -1,0 +1,47 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==mp3}{0,2}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article%3D#ID_ARTICLE}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==mp3}{0,2}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique%3D#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_lesfiles><div id="galerie-audio" class="listagebloc">
+<a name="audio"></a>
+<h2><:galerie_audio:></h2>
+<ul class="listageconteneur">
+<?php
+$parametre="[(#REM|sinon{audiovars}|trouveintheme{''})]";
+<BOUCLE_voissiplus(DOCUMENTS){id_document IN #GET{critere_in}}{1,1}>$listheight=(int) "[(#REM|sinon{audiolistheight}|trouveintheme{'100'})]";</BOUCLE_voissiplus>
+
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$hauteur=100;
+
+?>
+<BOUCLE_lesfiles(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}{0,1}>
+<li id="audio-viewer">
+<embed 
+type="application/x-shockwave-flash" allowfullscreen="true"
+src="#CHEMIN{swf/mediaplayer.swf}" style="" id="mp3player" name="rmp3player" quality="high" 
+flashvars="file=spip.php%3Fpage%3Dxml_audioflash%26#GET{vers}&displayheight=<?php echo $hauteur; ?>&width=<?php echo $largeur; ?>&height=<?php echo $hauteur + $listheight + 20; if ($parametre) { echo "&". $parametre; } ?>"
+height="<?php echo $hauteur + $listheight + 20; ?>" 
+width="<?php echo $largeur; ?>">
+</li>
+<BOUCLE_parametres_telechargement_audio(spip_arty_parametres){parametre=liens_telecharger_audio}{valeur=true}>
+<li>
+<p><:avis_telechargement_audio:></p>
+<BOUCLE_liste_doc_audio(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<a href="#URL_SITE_SPIP/#URL_DOCUMENT">[(#FICHIER|nomfichier)]</a> ([(#TAILLE|taille_en_octets)]) <br />
+</BOUCLE_liste_doc_audio>
+</li>
+</BOUCLE_parametres_telechargement_audio>
+
+</BOUCLE_lesfiles>
+ 
+</ul>
+</div>
+</B_lesfiles>

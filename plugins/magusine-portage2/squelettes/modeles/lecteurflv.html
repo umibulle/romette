@@ -1,0 +1,23 @@
+<!-- 
+exemple d'utilisation du lecteur son seul
+<lecteurflv12|largeur=320|hauteur=240>
+-->
+#SET{lalargeur, #ENV{largeur}|sinon{320}}
+#SET{lahauteur, #ENV{hauteur}|sinon{240}}
+
+<BOUCLE_ledoc(DOCUMENTS){id_document=#ENV{id_lecteurflv}}>
+<div class="lecteurflv spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]">
+<object type="application/x-shockwave-flash" data="#CHEMIN{swf/mediaplayer.swf}" id="playerflv#ID_DOCUMENT" height="#GET{lahauteur}" width="#GET{lalargeur}">
+<param name="wmode" value="opaque">
+<param name="movie" value="#CHEMIN{swf/mediaplayer.swf}">
+<param name="FlashVars" value="file=#URL_SITE_SPIP/#URL_DOCUMENT&image=#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{"src"})]&width=#GET{lalargeur}&height=#GET{lahauteur}">
+<param name="quality" value="high">
+<param name="menu" value="false">
+<param name="allowfullscreen" value="true">
+<param name="bgcolor" value="#FFFFFF">
+</object>
+<div class="listagetitre">[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|ptobr)] (#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)])</div>
+</div>
+</BOUCLE_ledoc>
+
+

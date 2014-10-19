@@ -1,0 +1,39 @@
+<BOUCLE_cachearts(ARTICLES){id_rubrique}></BOUCLE_cachearts>
+<B_listearticles>
+<div id="artinrub" class="listagebloc faq">
+<ul class="listageconteneur">
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par num titre}{par titre}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+#SURTITRE
+<h4 class="listagetitre">[(#TITRE|supprimer_numero)]</h4>
+<div class="listagetexte">
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CORPS,0})]]
+</div>
+</li>
+</BOUCLE_listearticles>
+</ul>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(".faq .listagetexte").hide();
+	$(".faq .listagetitre").each(function(){
+	$(this).css("cursor","pointer");
+		$(this).click(function(){
+			if ($(this).next(".listagetexte").css("display")=="block") {
+			$(this).next(".listagetexte").slideUp("slow");
+			} else {
+				$(".faq .listagetexte:visible").slideUp("slow");
+				$(this).next(".listagetexte").slideDown("slow");
+			}
+		
+			
+		});
+	});
+});
+</script>
+</div>
+</B_listearticles>

@@ -1,0 +1,24 @@
+<BOUCLE_formatbloclibre(spip_arty_bloclibre){id_bloc_libre}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|!={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte1.png}|=={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|!={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_masque{#CHEMIN{themes/#THEME/masque-logos-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-contexte2.png}|=={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|!={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_masque{#CHEMIN{themes/#THEME/masque-logos-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-corps.png}|=={''}|?{' ',''})
+	[(#ID_BLOC_LIBRE|logo_bloc||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formatbloclibre>

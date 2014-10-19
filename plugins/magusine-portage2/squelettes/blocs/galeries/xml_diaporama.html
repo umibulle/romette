@@ -1,0 +1,10 @@
+#HTTP_HEADER{content-type:text/xml;charset=utf-8}
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+#SET{laliste,#ENV{images}|tableau2array{","}}	<trackList>
+	<BOUCLE_galerieima(DOCUMENTS){id_document IN #GET{laliste}}>		<track>
+			<title>[(#TITRE|supprimer_numero)]</title>
+		<BOUCLE_infos(ARTICLES){id_document}>			<creator><BOUCLE_aut(AUTEURS){id_article}{","}>#NOM</BOUCLE_aut></creator>			<info>#URL_ARTICLE</info>
+		</BOUCLE_infos>			<location>#URL_SITE_SPIP/#URL_DOCUMENT</location>		</track>
+	</BOUCLE_galerieima>
+	</trackList>
+</playlist>

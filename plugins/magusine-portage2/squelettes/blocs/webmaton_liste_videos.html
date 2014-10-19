@@ -1,0 +1,11 @@
+<B_galerievideo><div id="video">
+<h4><:docsvideo:></h4>
+<ul class="listageconteneur">
+<BOUCLE_galerievideo(DOCUMENTS){id_rubrique}{extension==avi|mov|qt|mpg|rm|mp4}{doublons}>
+
+<li class="vignette"><a href="javascript:void(0);" onclick="popup('id_rubrique=#ID_RUBRIQUE', #ID_DOCUMENT, [(#LARGEUR|controlelargeur)], [(#HAUTEUR|controlehauteur)]);">
+[(#FICHIER|vignettewebmaton||reduire_image{120,280}|inserer_attribut{'alt','vignette'}|sinon{[(#LOGO_DOCUMENT||reduire_image{120,280}|inserer_attribut{'alt','vignette'})]})]
+</BOUCLE_galerievideo>
+<li class="clearer"></li>
+</ul></div>
+</B_galerievideo>

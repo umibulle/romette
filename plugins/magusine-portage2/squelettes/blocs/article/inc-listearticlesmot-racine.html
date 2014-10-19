@@ -1,0 +1,8 @@
+<B_rubrac>
+<div id="listearticles" class="listagebloc">
+<h2><:articles_associes:></h2>
+<ul class="listageconteneur">
+<BOUCLE_rubrac(RUBRIQUES){racine}{par num titre}{par titre}><li><h4 class="listagetitre"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h4><p class="listagetexte"><BOUCLE_lesarts(ARTICLES){id_rubrique}{branche}{!par date}{par titre}>[<a href="#URL_SITE" [title="(#DESCRIPTIF|entites_html)"]>(#TITRE|supprimer_numero)</a><br />]</BOUCLE_lesarts></p></li></B_lesarts></BOUCLE_rubrac>
+</ul>
+</div>
+</B_rubrac>

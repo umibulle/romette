@@ -1,0 +1,13 @@
+<B_listesousrub>
+<div id="rubinrub" class="listagebloc">
+<h2><:rubriques_rubrique:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesousrub(RUBRIQUES){id_parent}{!par date}{doublons cacher}>
+<li><a name="rub#ID_RUBRIQUE"></a>
+[(#INCLURE{fond=formatage_logo_liste}{id_rubrique}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h4>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{#INTRODUCTION}|supprimer_tags)</p>]
+</li>
+</BOUCLE_listesousrub></ul>
+</div>
+</B_listesousrub>

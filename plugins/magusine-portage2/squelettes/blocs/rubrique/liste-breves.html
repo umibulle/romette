@@ -1,0 +1,12 @@
+<BOUCLE_isnews(BREVES){id_rubrique}{0,1}>
+<div id="liste-news" class="listagebloc">
+<h2><:breves:></h2>
+[(#ENV{parametre}|=={news-sticker}|?{' ',''})
+<INCLURE{fond=liste-breves-newstickers}{parametre=#ENV{parametre}}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+[(#ENV{parametre}|!={news-sticker}|?{' ',''})
+<INCLURE{fond=liste-breves-standard}{parametre=#ENV{parametre}}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]
+</div>
+</B_lesnews>
+</BOUCLE_isnews>

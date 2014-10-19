@@ -1,0 +1,23 @@
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_ok}|table_valeur{message})</p>]
+<div id="bandeau_icone" style='text-align:center[(#ENV*{message_ok}|table_valeur{fichier_upload}|?{';displayblock',';display:none'})]'>
+
+<img src="[(#ENV*{message_ok}|table_valeur{fichier_upload})]" alt='' width="[(#ENV{message_ok}|table_valeur{largeur})]" height="[(#ENV{message_ok}|table_valeur{hauteur})]" />
+<p style="text-align:center">
+	&#91;<a href="javascript:void(0)" onclick="return AjaxSqueeze('#ENV{action}&amp;id_rubrique=#ENV{id_rubrique}&amp;action=supprimer_bandeau&amp;id_check=#ENV{id_check}','bandeau_icone','',event);"><:lien_supprimer:></a>&#93;
+</p>
+
+</div>
+<div style='[(#ENV*{message_ok}|table_valeur{fichier_upload}|?{'display:none','display:block'})]'>
+	<form action='[(#ENV{action})]' method='post' enctype='multipart/form-data'>
+	[(#ACTION_FORMULAIRE{"#ENV{action}"})]
+		<input id="bandeau" class="forml spip_xx-small" type="file" size="15" name="bandeau" style="width: 186px;" />
+		<input type="hidden" name="largeurMax" id="largeurMax" value="#ENV{largeurMax}" />
+		<input type="hidden" name="hauteurMax" id="hauteurMax" value="#ENV{hauteurMax}" />
+		<div style='text-align:right'>
+			<input class="fondo spip_xx-small" type="submit" value="<:bouton_telecharger:>" name="filesubmit" />
+		</div>
+	</form>
+</div> 
+
+

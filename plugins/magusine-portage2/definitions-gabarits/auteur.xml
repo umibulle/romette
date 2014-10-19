@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gabarit type="defaut" nom="auteur">
+
+<bloc statut="1">liste-mots-cles</bloc>
+<bloc statut="1">auteur-ecrire</bloc>
+<bloc statut="1">auteur_autres_auteurs</bloc>
+
+
+<bloc statut="2">rechercher</bloc>
+<bloc statut="2">feed</bloc>
+
+<bloc statut="3">auteur-head</bloc>
+<bloc statut="3">auteur-info</bloc>
+<bloc statut="3" param="3,5,10,20" paramdefaut="5" paramdescr="nombre_articles">liste-articles-auteur</bloc>
+
+<!-- reserve -->
+<bloc statut="0">identification-visiteur</bloc>
+<bloc statut="0">menu-langues</bloc>
+<bloc statut="0" param="flv_lecteur_flash,tous_popup" paramdefaut="tous_popup" paramdescr="type_de_video">video-hasard</bloc>
+<bloc statut="0">image-hasard</bloc>
+<bloc statut="0" param="1,2,3,4,5,6,news-sticker" paramdefaut="3" paramdescr="nombre_news_affichees">news</bloc>
+<!-- blocs avance -->
+<bloc statut="4">abo-newsletter</bloc>
+
+</gabarit>

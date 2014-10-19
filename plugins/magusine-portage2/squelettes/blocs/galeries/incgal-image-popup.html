@@ -1,0 +1,33 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article=#ID_ARTICLE}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique=#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc>
+<div id="galerieimg" class="listagebloc">
+<h2><:galerie_image:></h2>
+<script type="text/javascript">
+
+function ouvrirlepopup(id_doc, titre) 
+{
+
+  var left = (screen.width) ? (screen.width-700)/2 : 0;
+  var top = (screen.height) ? (screen.height-600)/2 : 0;
+  params = 'height='+600+',width='+700+',top='+top+',left='+left+',scrollbars=no,resizable=yes,menubar=no,toolbar=no,status=no';
+  window.open('#URL_SITE_SPIP/spip.php?page=popup-galerie-image&#GET{vers}&id_document='+id_doc, titre, params);
+}
+</script>
+<ul class="listageconteneur"><li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<a href="#URL_SITE_SPIP/#URL_DOCUMENT" onclick="ouvrirlepopup('#ID_DOCUMENT','[(#TITRE|texte_script)]'); return false;" target="_blank" alt="[(#TITRE|texte_script)]" title="[(#TITRE|texte_script)][ - (#DESCRIPTIF|texte_script)]" class="popup">[(#INCLURE{fond=formatage_vignette}{id_document}{conteneur=#ENV{conteneur}})]</a>
+</BOUCLE_doc>
+</li></ul>
+</div>
+</B_doc>

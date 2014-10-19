@@ -1,0 +1,11 @@
+<BOUCLE_head_article(AUTEURS){id_auteur}>
+<div id="header">
+[(#LOGO_AUTEUR|oui)<div class="logo">[(#INCLURE{fond=formatage_logo_auteur}{id_auteur}{conteneur=#ENV{conteneur}})]</div>]
+
+<div class="texteheader">
+[<h1>(#NOM|supprimer_numero)</h1>]
+
+</div>
+<p class="clearer_header"></p>
+</div>
+</BOUCLE_head_article>

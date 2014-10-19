@@ -1,0 +1,70 @@
+<?php
+#SET{lalangue,#SELF|chercheid{prefix}};
+?>
+<!-- dernieres video -->
+<div id="galerie" class="listagecloc">
+
+<BOUCLE_articles_rubrique(ARTICLES){id_rubrique=#ENV{id_rubrique}}>
+<BOUCLE_galerievideo(DOCUMENTS){id_article}{par date}{inverse}{extension==avi|mov|qt|mpg|rm|mp4}>
+<?php
+$fichiers["#FICHIER"] = <<<END
+
+<a href="javascript:void(0);" onclick="popup_page('spip.php?page=popup-webmaton&id_rubrique=#ID_RUBRIQUE&id_document=#ID_DOCUMENT',500,400);">
+[(#INCLURE{fond=formatage_vignette_webmaton}{id_document}{conteneur=#ENV{conteneur}})]
+</a>
+
+END;
+
+?>
+</BOUCLE_galerievideo>
+</BOUCLE_articles_rubrique>
+
+<BOUCLE_questions_webmaton(DOCUMENTS){id_rubrique=#ENV{id_rubrique}}{fichier==^.*questions(-[0-9]*)?\.xml$}{0,1}>
+<?php
+
+//print_r($fichiers);
+
+if (file_exists('#FICHIER')) {
+
+include_spip('inc/xml-parser');
+
+ $p =& new xmlParser();
+ $p->parse('#FICHIER');
+ //echo "<!--";
+ //print_r($p->output);
+ //echo "-->";
+ foreach($p->output[0]['child'] as $groupe) {
+  if (strtolower($groupe["attrs"]["PREFIX"]) == '#GET{lalangue}') {
+    foreach($groupe["child"] as $prop){
+      if ($prop["name"] == "TITRE"){
+      } else if ($prop["name"] == "QUESTIONS") {
+        foreach($prop["child"] as $question) {
+        
+          $totalvideo="";
+          foreach($fichiers as $nom => $video) {
+            if (eregi($groupe["attrs"]["PREFIX"]."-q".$question["attrs"]["ID"],$nom)){
+              $totalvideo .= $video;
+            }
+          }
+          
+          if ($totalvideo) {
+          echo "<h2>".$question["content"]."</h2>\n";
+          echo "<ul class=\"listageconteneur\"><li>\n";
+          echo $totalvideo;
+          echo "</li>\n";
+          echo "<li class=\"clearer\"></li>\n";
+          echo "</ul>\n";
+          }
+          
+        }
+      }
+    }
+  }
+ }
+}
+
+?>
+</BOUCLE_questions_webmaton>
+
+
+</div>

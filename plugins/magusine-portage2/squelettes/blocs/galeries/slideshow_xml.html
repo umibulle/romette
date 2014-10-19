@@ -1,0 +1,20 @@
+#HTTP_HEADER{Content-Type: text/xml}<slideshow>
+#SET{laliste,#ARRAY{0,0}}
+[(#ENV{image1}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{1,#ENV{image1}}}},''})]
+[(#ENV{image2}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{2,#ENV{image2}}}},''})]
+[(#ENV{image3}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{3,#ENV{image3}}}},''})]
+[(#ENV{image4}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{4,#ENV{image4}}}},''})]
+[(#ENV{image5}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{5,#ENV{image5}}}},''})]
+[(#ENV{image6}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{6,#ENV{image6}}}},''})]
+[(#ENV{image7}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{7,#ENV{image7}}}},''})]
+[(#ENV{image8}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{8,#ENV{image8}}}},''})]
+[(#ENV{image9}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{9,#ENV{image9}}}},''})]
+[(#ENV{image10}|?{#SET{laliste,#GET{laliste}|array_merge{#ARRAY{10,#ENV{image10}}}},''})]
+<BOUCLE_galerieima(DOCUMENTS){id_document IN #GET{laliste}}>
+<slide>
+      <image url='#URL_SITE_SPIP/#URL_DOCUMENT' duration='[(#ENV{duree}|sinon{5})]' fill='trim' background_alpha="0" background='[(#ENV{couleurfond}|sinon{ffffff})]' />
+      <transition type="[(#ENV{transition}|sinon{dissolve})]" duration="1" />
+</slide>
+</BOUCLE_galerieima>
+<control bar_visible='[(#ENV{boutons}|sinon{auto})]' />
+</slideshow>

@@ -1,0 +1,31 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article=#ID_ARTICLE}
+</BOUCLE_docart>
+</BOUCLE_recup(ARTICLES)>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique=#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc>
+<div id="galerieimg">
+<h2><:galerie_image:></h2>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".diaporama-popup").click(function() {
+    url = jQuery(this).attr("href");
+    window.open(url, '<:diaporama:>', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=750,height=550,left=290,top=100');
+    return false;
+  });
+});
+</script>
+<ul><li>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<a href="#URL_SITE_SPIP?page=galerie-diaporama-popup&#GET{vers}&id_document=#ID_DOCUMENT" target="_blank" alt="[(#TITRE|texte_script)]" title="[(#TITRE|texte_script)][ - (#DESCRIPTIF|texte_script)]" class="diaporama-popup">[(#INCLURE{fond=formatage_vignette}{id_document}{conteneur=#ENV{conteneur}})]</a>
+</BOUCLE_doc>
+</li></ul>
+</div>
+</B_doc>

@@ -1,0 +1,21 @@
+.jScrollPaneContainer { position: relative; overflow: hidden; z-index: 1; }
+.jScrollPaneTrack { position: absolute; cursor: pointer; right: 0; top: 0; height: 100%; background: #aaa; }
+.jScrollPaneDrag { position: absolute; background: #666; cursor: pointer; overflow: hidden; }
+.jScrollPaneDragTop { position: absolute; top: 0; left: 0; overflow: hidden; }
+.jScrollPaneDragBottom { position: absolute; bottom: 0; left: 0; overflow: hidden; }
+a.jScrollArrowUp { display: block; position: absolute; z-index: 1; top: 0; right: 0; text-indent: -2000px; overflow: hidden; height: 9px; }
+a.jScrollArrowDown { display: block; position: absolute; z-index: 1; bottom: 0; right: 0; text-indent: -2000px; overflow: hidden; height: 9px; }
+
+.jScrollPaneTrack { background: transparent; }
+.jScrollPaneDrag { background: transparent url(../img_pack/dragger_white.png) repeat-y; }
+.jScrollPaneDragTop { height: 7px; background: transparent url(../img_pack/dragger_top_white.png) no-repeat; }
+.jScrollPaneDragBottom { height: 7px; background: transparent url(../img_pack/dragger_bottom_white.png) no-repeat; }
+a.jScrollArrowUp { height: 20px; background: url(../img_pack/arrows_up_white.png) no-repeat 2px -18px; }
+a.jScrollArrowUp:hover { background-position: 2px 1px; }
+a.jScrollArrowDown { height: 20px; background: url(../img_pack/arrows_down_white.png) no-repeat 2px 1px; }
+a.jScrollArrowDown:hover { background-position: 2px -18px; }
+
+/* IE SPECIFIC HACKED STYLES */
+* html .jScrollPaneDragBottom { bottom: -1px; }
+/* /IE SPECIFIC HACKED STYLES */
+

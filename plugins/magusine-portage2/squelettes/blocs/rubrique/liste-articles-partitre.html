@@ -1,0 +1,17 @@
+<B_listearticles>
+<BOUCLE_cachearts(ARTICLES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<div id="artinrub" class="listagebloc">
+<ul class="listageconteneur">
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par num titre}{par titre}{par num titre}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+#SURTITRE
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+<BOUCLE_montrediv(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '<div class="listageinfo">'; } ?></BOUCLE_montrediv>
+<BOUCLE_montrediv2(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '</div>'; } ?></BOUCLE_montrediv2>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{0})]}|supprimer_tags)</p>]
+</li>
+</BOUCLE_listearticles>
+</ul>
+</div>
+</B_listearticles>

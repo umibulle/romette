@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gabarit type="defaut" nom="gabarit_groupe">
+
+<bloc statut="1">groupe-autres-groupes</bloc>
+<bloc statut="1">liste-mots-cles</bloc>
+
+<bloc statut="2">rechercher</bloc>
+
+<bloc statut="3">groupe-head</bloc>
+<bloc statut="3">groupe-texte</bloc>
+<bloc statut="3">groupe-liste-mots</bloc>
+
+
+<bloc statut="0">groupe-dernieres-entrees</bloc>
+<bloc statut="0">feed</bloc>
+
+</gabarit>

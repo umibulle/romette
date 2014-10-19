@@ -1,0 +1,27 @@
+<!-- 
+exemple d'utilisation du diaporama
+<diaporama|image1=34|image2=35|image3=36|hauteur=200|transition=fade|shownavigation=true|boutons=true|couleurfond=ffffff|duree=8>
+-->
+<div class="slideshow">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+	codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" 
+	width="[(#ENV{largeur}|sinon{300})]" 
+	height="[(#ENV{hauteur}|sinon{200})]" 
+	align="">
+<param name="movie" value="#CHEMIN{swf/slideshow.swf}?xml_source=spip.php%3Fpage%3Dslideshow_xml[%26image1%3D(#ENV{image1})][%26image2%3D(#ENV{image2})][%26image3%3D(#ENV{image3})][%26image4%3D(#ENV{image4})][%26image5%3D(#ENV{image5})][%26image6%3D(#ENV{image6})][%26image7%3D(#ENV{image7})][%26image8%3D(#ENV{image8})][%26image9%3D(#ENV{image9})][%26image10%3D(#ENV{image10})][%26transition%3D(#ENV{transition})][%26boutons%3D(#ENV{boutons})][%26couleurfond%3D(#ENV{couleurfond})][%26duree%3D(#ENV{duree}|sinon{5})"]>
+<param name="quality" value="high">
+<param name="bgcolor" VALUE="#ffffff">
+<param name="wmode" VALUE="transparent"> 
+<embed src="#CHEMIN{swf/slideshow.swf}?xml_source=spip.php%3Fpage%3Dslideshow_xml[%26image1%3D(#ENV{image1})][%26image2%3D(#ENV{image2})][%26image3%3D(#ENV{image3})][%26image4%3D(#ENV{image4})][%26image5%3D(#ENV{image5})][%26image6%3D(#ENV{image6})][%26image7%3D(#ENV{image7})][%26image8%3D(#ENV{image8})][%26image9%3D(#ENV{image9})][%26image10%3D(#ENV{image10})][%26transition%3D(#ENV{transition})][%26boutons%3D(#ENV{boutons})][%26couleurfond%3D(#ENV{couleurfond})][%26duree%3D(#ENV{duree}|sinon{5})"] 
+	quality="high" 
+	bgcolor="#ffffff"  
+	width=["(#ENV{largeur}|sinon{300})"] 
+	height=["(#ENV{hauteur}|sinon{200})"]
+	wmode="transparent" 
+	name="slideshow" 
+	align="" 
+	type="application/x-shockwave-flash" 
+	pluginspage="http://www.macromedia.com/go/getflashplayer">
+</embed>
+</object>
+</div>

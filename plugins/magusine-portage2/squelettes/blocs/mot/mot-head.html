@@ -1,0 +1,9 @@
+<BOUCLE_head_mot(MOTS){id_mot}>
+<div id="header">
+[(#LOGO_MOT|oui)<div class="logo">[(#INCLURE{fond=formatage_logo}{id_mot}{conteneur=#ENV{conteneur}})]</div>]
+<div class="texteheader">
+[<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+</div>
+<p class="clearer_header"></p>
+</div>
+</BOUCLE_head_mot>

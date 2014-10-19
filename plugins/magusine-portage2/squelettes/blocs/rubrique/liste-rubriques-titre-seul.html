@@ -1,0 +1,12 @@
+<BOUCLE_rubacacher(RUBRIQUES){titre_mot=cacher}{doublons cacher}></BOUCLE_rubacacher>
+<B_listesousrub>
+<div id="rubinrub" class="listagebloc">
+<ul class="listageconteneur">
+<BOUCLE_listesousrub(RUBRIQUES){id_parent}{par num titre}{par titre}{doublons cacher}>
+<li><a name="rub#ID_RUBRIQUE"></a>
+[(#INCLURE{fond=formatage_logo_liste}{id_rubrique}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h4><br/>
+</li>
+</BOUCLE_listesousrub></ul>
+</div>
+</B_listesousrub>

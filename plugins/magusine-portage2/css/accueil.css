@@ -1,0 +1,30 @@
+/* feuille de style accueil */
+#accueil_image {
+	margin:0;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	padding:0;
+	/*background-color:#888888;*/
+	position:absolute;
+	background-image: url(../images/accueil/anim.png);
+	background-repeat: no-repeat;
+	background-position: top center;
+	z-index:50;
+}
+
+#accueil_cache{
+	margin:0;
+	top:0;
+	left:-1500;
+	width:100%;
+	height:100%;
+	padding:0;
+	/*background-color:#888888;*/
+	position:absolute;
+	background-image: url(../images/accueil/animation2.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index:60;
+}

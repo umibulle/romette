@@ -1,0 +1,53 @@
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+<trackList>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06665-2-3.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06665-2-3-cca9d.jpg</location>
+ <identifier>124</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06666-2.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06666-2-b0d71.jpg</location>
+ <identifier>126</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06666.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06666-cf52f.jpg</location>
+ <identifier>127</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06667-2.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06667-2-153cb.jpg</location>
+ <identifier>128</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06669-2.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06669-2-960f4.jpg</location>
+ <identifier>130</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06670-2.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06670-2-224b7.jpg</location>
+ <identifier>132</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>sans titre</creator>
+ <info>http://localhost:8888/-arty/IMG/jpg/DSC06671-2.jpg</info>
+ <location>http://localhost:8888/-arty/local/cache-vignettes/L155xH117/DSC06671-2-13644.jpg</location>
+ <identifier>134</identifier>
+</track>
+</trackList>
+</playlist>

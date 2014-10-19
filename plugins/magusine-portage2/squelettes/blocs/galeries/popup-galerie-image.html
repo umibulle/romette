@@ -1,0 +1,134 @@
+#CACHE{24*3600}
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=#CHARSET"/>
+<title>#NOM_SITE_SPIP</title>
+#INSERT_HEAD
+<INCLURE{fond=metas}{id_article?}{id_rubrique?}>
+<link href='[(#CHEMIN{themes/#THEME/addfiles/popup-images.css}|sinon{#CHEMIN{css/popup-images.css}})]' rel='stylesheet' type='text/css' media='screen' />
+#SET{actuelle,#ENV{id_document}}
+<!-- document actuel = #GET{actuelle} -->
+<script type="text/javascript">
+
+jQuery(document).ready(function(){
+	$("#vignettes li a").not("#start").not("#end").removeAttr("href")
+	$("#vignettes li").not("#start").not("#end").click(function(){
+		
+		$("#vignettes li").not("#start").not("#end").removeClass("actuelle");
+		$(this).addClass("actuelle");
+		updatevignette();
+	});
+		updatevignette();
+	
+	$("#start").click(function(){
+		$("#vignettes .actuelle").prev("li").not("#start").each(function(){
+		$("#vignettes .actuelle").removeClass("actuelle");
+		$(this).addClass("actuelle");
+		updatevignette();
+		});
+	});
+	
+	$("#end").click(function(){
+		$("#vignettes .actuelle").next("li").not("#end").each(function(){
+		$("#vignettes .actuelle").removeClass("actuelle");
+		$(this).addClass("actuelle");
+		updatevignette();
+		});
+	});
+	
+});
+
+function updatevignette() {
+	$("#vignettes li").not("#start").not("#end").css("display","none");
+	$("#vignettes .actuelle").css("display","inline");
+	var actuelle=parseInt($("#vignettes .actuelle").attr("rel"));
+	var total=$("#vignettes li").length - 2;
+	var first=actuelle-2;
+	var last=actuelle+2;
+	if (first <=0) { 
+		last=last +1 +Math.abs(first);
+	}
+	
+	if(last > total) {
+		first=first -Math.abs(last-total);
+	}
+	
+	if (first<=1) { first=1; }
+	if (last > total) { last=total; } 
+	
+	for (i=first; i<=last; i++) {
+	$("#vignettes li").eq(i).css("display","inline");
+	}
+	
+	var neosrc=$("#vignettes .actuelle").find("a").attr("rel");
+		var titre=$("#vignettes .actuelle").find("a").attr("alt");
+		var descriptif=$("#vignettes .actuelle").find("a").attr("longdesc");
+		
+		$("#grand-format #image").html("").html(neosrc);
+		$("#grand-format #titre").html("").html(titre);
+		$("#grand-format #descriptif").html("").html(descriptif);
+		var hauteurimage=$("#grand-format").height();
+		var hauteurvignettes=$("#vignettes").height();
+		var hauteurpage=$("html").height();
+		
+		myHeight = 0;
+  		if( typeof( window.innerWidth ) == 'number' ) {
+    		//Non-IE
+    		myHeight = window.innerHeight;
+  		} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+    		//IE 6+ in 'standards compliant mode'
+    		myHeight = document.documentElement.clientHeight;
+  		} else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+   		 //IE 4 compatible
+    		myHeight = document.body.clientHeight;
+  		}
+		
+		var espace=(myHeight-(hauteurimage + hauteurvignettes))/2;
+		$("#grand-format #image").css("margin-top",Math.abs(espace)+"px");
+	}
+
+function changerImage(id) 
+{
+  
+  
+}
+</script>
+</head>
+<body id="popup-image">
+<div id="general-popup">
+<BOUCLE_document(DOCUMENTS){id_document}>
+<ul id="grand-format">
+<li id="image">
+[(#FICHIER|image_reduire{600, 450})]
+</li>
+<li id="titre" class="listagetitre">[(#TITRE|supprimer_numero)]</li>
+<li id="descriptif" class="listagetexte">[(#DESCRIPTIF|ptobr)]</li>
+</ul>
+</BOUCLE_document>
+
+<B_documents>
+<ul id="vignettes">
+<li id="start">[<img src="(#CHEMIN{themes/#THEME/addfiles/prevslide.jpg}|sinon{#CHEMIN{images/prevslide.jpg}})" />]</li>
+<BOUCLE_documents(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li rel="#COMPTEUR_BOUCLE" style="display:none;" [(#ENV{id_document}|=={#ID_DOCUMENT}|?{' ',''})class="actuelle"]>
+  <a href="#URL_SITE_SPIP/#URL_DOCUMENT" rel="[(#FICHIER|image_reduire{600, 450})]" alt="[(#TITRE|texte_script)]" longdesc="[(#DESCRIPTIF|texte_script)]">[(#INCLURE{fond=formatage_vignette}{id_document}{conteneur=2})]</a>
+</li>
+</BOUCLE_documents>
+<li id="end">[<img src="(#CHEMIN{themes/#THEME/addfiles/nextslide.jpg}|sinon{#CHEMIN{images/nextslide.jpg}})" />]</li>
+</ul>
+</B_documents>
+
+</div>
+</body>
+</html>

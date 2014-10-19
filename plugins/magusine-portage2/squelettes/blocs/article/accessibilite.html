@@ -1,0 +1,31 @@
+<div id="accessibilite" class="listagebloc">
+<h2><:accessibilite:></h2>
+<script type="text/javascript">
+h1=$(".titre").css("font-size");
+chapeau=$(".chapeau").css("font-size");
+texte=$(".texte").css("font-size");
+h3=$(".texte h3").css("font-size");
+ps=$(".psnotes").css("font-size");
+
+function accessibilite(facteur) {
+neoh1=$("h1").css("font-size");
+neochapeau=$(".chapeau").css("font-size");
+neotexte=$(".texte").css("font-size") * (facteur/100);
+neoh3=$(".texte h3").css("font-size") * (facteur/100);
+neops=$(".psnotes").css("font-size") * (facteur/100);
+
+$(".titre").css("font-size", neoh1 + "%");
+$(".texte").css("font-size", neotexte + "%");
+$(".chapeau").css("font-size", neochapeau + "%");
+
+alert(neoh1);
+}
+</script>
+<ul class="listageconteneur">
+<li>
+<a href="javascript:accessibilite(-10);">plus petit</a>
+<a href="javascript:accessibilite(0);">standard</a>
+<a href="javascript:accessibilite(+10);">plus grand</a>
+</li>
+</ul>
+</div>

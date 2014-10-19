@@ -1,0 +1,20 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_quellerub(spip_arty_paramassoc){param=rubrique-news}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}}}
+</BOUCLE_quellerub>
+<B_lesnews><div id="liste-news" class="listagebloc">
+<h2><:news:></h2>
+<ul class="listageconteneur">
+
+<BOUCLE_lesnews(BREVES){!par date}{id_rubrique IN #GET{critere_in}}{0,#ENV{parametre}}{lang}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_breve}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{titre}"><a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listageinfo">[(#DATE|affdate)]</p>
+<div class="listagetexte #EDIT{texte}">[(#TEXTE|couper{200})]</div>
+[<p class="listagelien"><a href="#URL_SITE">(#NOM_SITE)</a></p>]
+</li>
+</BOUCLE_lesnews>
+</ul>
+</div>
+</B_lesnews>

@@ -1,0 +1,14 @@
+<B_listesites>
+<div id="listearticles" class="listagebloc">
+<h2><:articles_associes:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesites(MOTS){id_article}{par titre}><B_lesarts><li>
+<h4 class="listagetitre"><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listagetexte"><BOUCLE_lesarts(ARTICLES){id_mot}{par titre}{!par date}>
+[<a href="#URL_SITE" [title="(#DESCRIPTIF|entites_html)"]>(#TITRE|supprimer_numero)</a><br />]
+</BOUCLE_lesarts>
+</p>
+</li></B_lesarts></BOUCLE_listesites>
+</ul>
+</div>
+</B_listesites>

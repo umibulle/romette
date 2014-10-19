@@ -1,0 +1,6 @@
+[(#ENV{parametre}|=={liste}|?{' ',''})<INCLURE{fond=incgal-video-liste}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{document=#ENV{document}}>]
+[(#ENV{parametre}|=={flv_liste}|?{' ',''})<INCLURE{fond=incgal_flv_liste}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{document=#ENV{document}}>]
+[(#ENV{parametre}|=={popup}|?{' ',''})<INCLURE{fond=incgal-video-popup}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}>]
+[(#ENV{parametre}|=={flv_320_240}|?{' ',''})<INCLURE{fond=incgal-video-flash}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{largeur=320}>]
+[(#ENV{parametre}|=={flv_largeur_totale_4_3}|?{' ',''})<INCLURE{fond=incgal-video-flash}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{largeur=totale_4}>]
+[(#ENV{parametre}|=={flv_largeur_totale_16_9}|?{' ',''})<INCLURE{fond=incgal-video-flash}{id_article}{id_rubrique}{conteneur=#ENV{conteneur}}{largeur=totale_16}>]

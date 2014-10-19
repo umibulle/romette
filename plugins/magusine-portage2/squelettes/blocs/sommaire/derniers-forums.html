@@ -1,0 +1,12 @@
+<B_lastforums><div id="derniers-forums" class="listagebloc">
+<h2><:derniers_forums:></h2>
+<ul class="listageconteneur">
+<BOUCLE_lastforums(FORUMS){!par date}{0,#ENV{parametre}}{plat}>
+<li>
+<h4 class="listagetitre"><a href="#URL_ARTICLE#forums">#TITRE</a></h4>
+<div class="listageinfo">[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]</div>
+<p class="listagetexte">[(#TEXTE|couper{220})]</p>
+</li>
+</BOUCLE_lastforums>
+</ul>
+</div></B_lastforums>

@@ -1,0 +1,92 @@
+#CACHE{24*3600}<BOUCLE_generale(AUTEURS){id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=#CHARSET"/>
+<title>#NOM_SITE_SPIP</title>
+[(#INSERT_HEAD)]
+[(#INCLURE{fond=metas}{id_auteur})]
+</head>
+<body id="page-auteur">#SET{parametres,#REM|sinon{"rien"}|parametres}
+
+<div id="general">
+
+[(#INCLURE{fond=bandeau}{id_rubrique=0})]
+
+[(#GET{parametres}|element{'navigation'}|=={'general'}|?{' ',''})<INCLURE{fond=navigation}{id_auteur}{id_rubrique=0}>]
+
+[(#GET{parametres}|element{'chemin'}|=={general}|?{' ',''})[(#INCLURE{id_rubrique=0}{cettepage=<:pageauteur:>})]]
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+
+[(#GET{parametres}|element{'navigation'}|=={'contexte'}|?{' ',''})<INCLURE{fond=navigation}{id_auteur}{id_rubrique=0}>]
+
+<div id="contexte1">
+[(#GET{parametres}|element{'navigation'}|=={'contexte1'}|?{' ',''})<INCLURE{fond=navigation}{id_auteur}{id_rubrique=0}>]
+<BOUCLE_archetype_article(spip_arty_gabaritassoc){type=auteur}{id=#ENV{id_auteur}}>
+
+<BOUCLE_blocs_contexte0(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=1}{par ordre}>
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=1}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte0>
+
+</BOUCLE_archetype_article>
+<!-- blocs contexte 1 par defaut -->
+<BOUCLE_blocs_contexte0_defaut(spip_arty_gabarit_ordre){gabarit=auteur}{conteneur=1}{par ordre}>
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=1}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte0_defaut>
+
+<//B_archetype_article>
+<div id="fin-contexte1"></div>
+</div>
+
+<div id="contexte2">
+<BOUCLE_archetype_article2(spip_arty_gabaritassoc){type=auteur}{id=#ENV{id_auteur}}>
+
+<BOUCLE_blocs_contexte1(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=2}{par ordre}>
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=2}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte1>
+
+</BOUCLE_archetype_article2>
+<!-- blocs contexte 2 par defaut -->
+<BOUCLE_blocs_contexte1_defaut(spip_arty_gabarit_ordre){gabarit=auteur}{conteneur=2}{par ordre}>
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=2}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte1_defaut>
+
+<//B_archetype_article2>
+<div id="fin-contexte2"></div>
+</div> 
+
+</div><!-- fin des contextes -->
+
+<div id="corps">
+
+[(#GET{parametres}|element{'chemin'}|=={corpsl}|?{' ',''})[(#INCLURE{id_rubrique=0}{cettepage=<:pageauteur:>})]]
+
+<BOUCLE_archetype_article3(spip_arty_gabaritassoc){type=auteur}{id=#ENV{id_auteur}}>
+
+<BOUCLE_blocs_corps(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=3}{par ordre}>
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=3}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_corps>
+
+</BOUCLE_archetype_article3>
+
+<BOUCLE_blocs_contexte2_defaut(spip_arty_gabarit_ordre){gabarit=auteur}{conteneur=3}{par ordre}>
+<!-- blocs corps par defaut -->
+<INCLURE{fond=#NOM}{id_auteur=#ENV{id_auteur}}{id_rubrique=0}{conteneur=3}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte2_defaut>
+
+<//B_archetype_article3>
+
+<div id="fin-corps"></div><!-- fin du corps -->
+</div>
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+[(#GET{parametres}|element{'footer'}|=={general}|?{' ',''})[(#INCLURE{fond=footer}{id_auteur})]]
+<div id="fin-page"></div>
+</div><!-- fin du general -->
+[(#GET{parametres}|element{'footer'}|=={hors_general}|?{' ',''})[(#INCLURE{fond=footer}{id_auteur})]]
+</body>
+</html>
+</BOUCLE_generale>

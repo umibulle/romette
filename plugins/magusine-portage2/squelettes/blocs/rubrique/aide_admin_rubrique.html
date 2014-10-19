@@ -1,0 +1,14 @@
+<?php if ($auteur_session) { ?><div id="bloc-aide-redaction" class="listagebloc">
+<h2><:aide_redaction:></h2>
+<ul class="listageconteneur">
+<li><h4 class="listagetitre"><:ecrire:acces_admin:></h4>
+<div class="listagetexte"><a href="ecrire/?exec=rubriques_edit&id_rubrique=#ID_RUBRIQUE"><:spip:admin_modifier_rubrique:></a></div>
+<div class="listagetexte"><a href="ecrire/?exec=articles_edit&id_rubrique=#ID_RUBRIQUE&new=oui"><:spip:icone_ecrire_article:></a></div>
+<div class="listagetexte"><a href="ecrire/?exec=breves_edit&id_rubrique=#ID_RUBRIQUE&new=oui"><:spip:icone_ecrire_breve:></a></div>
+<div class="listagetexte"><a href="?exec=sites_edit&id_rubrique=#ID_RUBRIQUE"><:sites_web:></a></div>
+</li>
+<li><h4 class="listagetitre"><:spip:info_documents:></h4>
+<div class="listagetexte">[(#ID_RUBRIQUE|afficher_documents_colonne)]</div>
+</li>
+</ul>
+</div><?php } ?>

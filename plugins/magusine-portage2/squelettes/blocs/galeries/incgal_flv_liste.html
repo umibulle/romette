@@ -1,0 +1,36 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==flv|mp4}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==flv|mp4}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc><div id="galerie-video" class="listagebloc">
+<a name="video"></a>
+<h2><:galerie_video:></h2>
+<ul class="listageconteneur">
+<?php
+$parametre="[(#REM|sinon{videovars}|trouveintheme{''})]";
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$largeur=$largeur/2.5;
+$hauteur=round(($largeur/4)*3);
+$listheight=0;
+?>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+<embed class="listagelogo video"
+type="application/x-shockwave-flash" allowfullscreen="true"
+src="#CHEMIN{swf/flvplayer.swf}" name="flv#ID_DOCUMENT" quality="high" flashvars="file=#URL_SITE_SPIP/#URL_DOCUMENT&image=#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{"src"})]&displayheight=<?php echo $hauteur; ?>&width=<?php echo $largeur; ?>&height=<?php echo $hauteur + $listheight + 20; if ($parametre) { echo "&". $parametre; } ?>" 
+height="<?php echo $hauteur + $listheight + 20; ?>" 
+width="<?php echo $largeur; ?>">
+<p class="listagetitre">[(#TITRE|supprimer_numero|sinon{<:pas_de_titre:>})]</p>
+[<p class="listagetexte">(#DESCRIPTIF|ptobr)</p>]
+<div class="listageinfo">#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)]</div>
+</li>
+</BOUCLE_doc>
+</ul>
+</div>
+</B_doc>

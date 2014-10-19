@@ -1,0 +1,36 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==mp3}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==mp3}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc><div id="galerie-audio" class="listagebloc">
+<a name="audio"></a>
+<h2><:galerie_audio:></h2>
+<?php 
+$largeur=[(#ENV{conteneur}|=={1}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={2}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={3}|?{' ',''})#LARGEUR_CORPS];
+if ($largeur > 290) { $largeur=290; }
+?>
+<ul class="listageconteneur">
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+<h4 class="listagetitre">[(#TITRE|supprimer_numero|sinon{<:pas_de_titre:>})]</h4>
+<object type="application/x-shockwave-flash" data="#CHEMIN{swf/pixplayer.swf}" id="audioplayer#ID_DOCUMENT" height="24" width="<?php echo $largeur; ?>">
+<param name="wmode" value="opaque">
+<param name="movie" value="#CHEMIN{swf/pixplayer.swf}">
+<param name="FlashVars" value="playerID=#ID_DOCUMENT&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile=[(#URL_DOCUMENT)]">
+<param name="quality" value="high">
+<param name="menu" value="false">
+<param name="bgcolor" value="#FFFFFF">
+</object>
+[<p class="listagetexte">(#DESCRIPTIF|ptobr)</p>]
+<p class="listageinfo"><a href="#URL_SITE_SPIP/[(#URL_DOCUMENT)]"><:telecharger_le_son:></a></p>
+</li>
+</BOUCLE_doc>
+</ul>
+</div>
+</B_doc>

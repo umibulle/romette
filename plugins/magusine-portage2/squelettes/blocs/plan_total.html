@@ -1,0 +1,31 @@
+
+
+
+
+
+
+<BOUCLE_cachearts(ARTICLES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+
+
+
+
+
+<div id="artinrub" class="listagebloc">
+<h2><:plan_site:></h2>
+<ul class="listageconteneur">
+<BOUCLE_niv1(RUBRIQUES){racine}{par num titre, titre}{doublons cacher}>
+<li>
+<h4 class="listagetitre"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h4>
+
+
+
+<ul class="listageconteneur">
+<li>
+</ul>
+</li>
+</BOUCLE_niv1>
+</ul>
+</div>
+
+
+

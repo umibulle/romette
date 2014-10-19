@@ -1,0 +1,12 @@
+<BOUCLE_texte_article(AUTEURS){id_auteur}>
+<div id="texteconteneur">
+<div class="texte">
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#BIO|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#BIO|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#BIO|image_reduire{#LARGEUR_CORPS,0})]]
+</div>
+[<p class="listagesite"><strong><:voir_en_ligne:></strong> <a href="#URL_SITE" target="_blank">(#NOM_SITE)</a></p>]
+[<div class="ps"><strong><:ps:>:</strong> (#PS)</div>]
+[<div class="ps notes"><strong><:notes:>:</strong> (#NOTES)</div>]
+</div>
+</BOUCLE_texte_article>

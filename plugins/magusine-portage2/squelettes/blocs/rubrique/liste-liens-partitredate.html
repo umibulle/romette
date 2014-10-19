@@ -1,0 +1,16 @@
+<B_listesites>
+<BOUCLE_cachearts(SITES){id_rubrique}{titre_mot=cacher}{doublons cacher}></BOUCLE_cachearts>
+<div id="sites0" class="sites listagebloc">
+<h2><:liste_sites:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listesites(SITES){id_rubrique}{par num nom_site}{par #ENV{parametre}}{doublons cacher}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{nom_site}"><a href="#URL_SITE">[(#NOM_SITE|supprimer_numero)]</a></h4>
+[<div class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+[<p class="listageinfo"><a href="(#URL_SYNDIC)"><:backend_site:></a></p>]
+</li>
+</BOUCLE_listesites>
+</ul>
+</div>
+</B_listesites>

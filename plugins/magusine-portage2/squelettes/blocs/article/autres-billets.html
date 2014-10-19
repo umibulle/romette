@@ -1,0 +1,10 @@
+<B_autresarts>
+<div id="autres-articles" class="listagebloc">
+<h2>Autres billets</h2>
+<ul class="listageconteneur">
+<BOUCLE_autresarts(ARTICLES){id_rubrique}{exclus}{0,1}>
+<INCLURE{fond=include-autresarticles-liste}{id_article=#ENV{id_article}}{id_rubrique}>
+</BOUCLE_autresarts>
+</ul>
+</div>
+</B_autresarts>

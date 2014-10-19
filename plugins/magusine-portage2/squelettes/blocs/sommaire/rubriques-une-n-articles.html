@@ -1,0 +1,9 @@
+<!-- une simple : titre + liste du dernier article -->
+<BOUCLE_param_rubrique_une(spip_arty_paramassoc){param=rubart_une}>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{lang}{0,1}>
+<div class="rubrique-une listagebloc">
+<h2>[(#TITRE|supprimer_numero)]</h2>
+[<ul><li><div class="listagetexte">(#TEXTE)</div></li></ul>]
+</div>
+</BOUCLE_rubrique>
+</BOUCLE_param_rubrique_une>

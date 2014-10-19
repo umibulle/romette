@@ -1,0 +1,33 @@
+#HTTP_HEADER{Content-Type: text/xml}<BOUCLE_rotator(ARTICLES){id_article}><B_galerieaudio><playlist version="1" xmlns="http://xspf.org/ns/0/">
+	<trackList>
+<BOUCLE_galerieaudio(DOCUMENTS){id_article}{mode=document}{extension==swf}{par num titre}{par titre}{doublons}>
+	<track>
+	<title>[(#DESCRIPTIF|no_accent|texte_script|sinon{<:pas_de_descriptif:>})]</title>
+	<creator>[(#TITRE|supprimer_numero|texte_backend|sinon{<:sans_titre:>})]</creator>
+	<image>#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{src})]</image>
+	<location>[#URL_SITE_SPIP/(#URL_DOCUMENT)]</location>
+	<identifier>#ID_DOCUMENT</identifier>
+	</track>
+
+</BOUCLE_galerieaudio>
+	</trackList>
+</playlist>
+</B_galerieaudio>
+</BOUCLE_rotator>
+<BOUCLE_flvrub(RUBRIQUES){id_rubrique}><B_galerieaudiorub><playlist version="1" xmlns="http://xspf.org/ns/0/">
+	<trackList>
+<BOUCLE_galerieaudiorub(DOCUMENTS){id_rubrique}{mode=document}{extension==swf}{par num titre}{par titre}{doublons}>
+	<track>
+	<title>[(#DESCRIPTIF|no_accent|texte_script|sinon{<:pas_de_descriptif:>})]</title>
+	<creator>[(#TITRE|supprimer_numero|texte_backend|sinon{<:sans_titre:>})]</creator>
+	<image>#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{src})]</image>
+	<location>[#URL_SITE_SPIP/(#URL_DOCUMENT)]</location>
+	<identifier>#ID_DOCUMENT</identifier>
+	</track>
+
+</BOUCLE_galerieaudiorub>
+	</trackList>
+</playlist>
+
+</B_galerieaudiorub>
+</BOUCLE_flvrub>

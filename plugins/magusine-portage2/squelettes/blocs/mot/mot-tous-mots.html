@@ -1,0 +1,15 @@
+<BOUCLE_cemot(MOTS){id_mot}><B_groupe><div id="tous-mots" class="listagebloc">
+<h2><:tous_mots:></h2>
+<ul class="listageconteneur">
+<BOUCLE_groupe(GROUPES_MOTS){par num titre}{par titre}>
+<li>
+<h4 class="listagetitre"><a href="spip.php?page=groupe&id_groupe=#ID_GROUPE">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listagetexte">
+<BOUCLE_lesmots(MOTS){id_groupe}{par num titre}{par titre}{"<br />"}>
+[<a href="#URL_MOT">(#TITRE|supprimer_numero)</a>]
+</BOUCLE_lesmots>
+</p>
+</li>
+</BOUCLE_groupe>
+</ul>
+</div></B_groupe></BOUCLE_cemot>

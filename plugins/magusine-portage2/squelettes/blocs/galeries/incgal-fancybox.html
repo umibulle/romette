@@ -1,0 +1,24 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==gif|png|jpg}{mode=document}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc>
+<div id="galerieimg" >
+<!-- class="listagebloc" -->
+<ul class="fancygal">
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+	<li>
+		<a href="#URL_SITE_SPIP/#URL_DOCUMENT" target="_blank" alt="[(#TITRE|supprimer_numero|texte_script||PtoBR)]" title="[(#TITRE|supprimer_numero|texte_script||PtoBR)][ - (#DESCRIPTIF|supprimer_numero|texte_script||PtoBR)]" class="fancybox" rel="images-galerie">
+			[(#INCLURE{fond=formatage_vignette}{id_document}{conteneur=#ENV{conteneur}})]
+		</a>
+	</li>
+</BOUCLE_doc>
+</li></ul>
+</div>
+</B_doc>

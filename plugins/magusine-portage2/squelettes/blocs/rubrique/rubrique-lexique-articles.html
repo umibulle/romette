@@ -1,0 +1,27 @@
+<!-- liste des articles contenus -->
+<div id="artinrub" class="listagebloc">
+<BOUCLE_premier_article(ARTICLES){id_rubrique}{par titre}{0,1}{doublons lexique}>
+[<a name="[(#TITRE|premiere_lettre)]"></a>
+<h2>(#TITRE|premiere_lettre|unique)</h2>]
+<ul class="listageconteneur">
+<li>
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE)]</a></h4>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite>
+
+</li>
+</BOUCLE_premier_article>
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par titre}{doublons lexique}>
+[</ul>
+<a name="[(#TITRE|premiere_lettre)]"></a>
+<h2>(#TITRE|premiere_lettre|unique)</h2>
+<ul class="listageconteneur">]
+<li>
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE)]</a></h4>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite2(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite2>
+
+</li>
+</BOUCLE_listearticles>
+</ul>
+</div>

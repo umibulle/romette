@@ -1,0 +1,25 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_quellerub(spip_arty_paramassoc){param=rubrique-news}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}}}
+</BOUCLE_quellerub>
+<B_lesnews><div id="liste-news" class="listagebloc">
+<h2><:news:></h2>
+<script type="text/javascript" src="#CHEMIN{javascript/news-sticker.js}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#news").newsticker();
+});
+</script>
+<ul class="listageconteneur" id="news">
+<BOUCLE_lesnews(BREVES){!par date}{0,15}{lang}{id_rubrique IN #GET{critere_in}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_breve}{mise_en_page=#ENV{mise_en_page}})]
+<h4 class="listagetitre"><a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listageinfo">[(#DATE|affdate)]</p>
+<p class="listagetexte">[(#TEXTE|couper{200})]</p>
+[<p class="listagelien"><a href="#URL_SITE">(#NOM_SITE)</a></p>]
+</li>
+</BOUCLE_lesnews>
+</ul>
+</div>
+</B_lesnews>

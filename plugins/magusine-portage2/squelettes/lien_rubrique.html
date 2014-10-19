@@ -1,0 +1,10 @@
+<div id="artinrub" class="listagebloc">
+<ul class="listageconteneur">
+#SET{id_rubs,#ENV{parametre}|tableau2in}
+<BOUCLE_rub(RUBRIQUES){id_rubrique IN #GET{id_rubs}}{lang=#LANG}>
+	<li>
+		<h4 class="listagetitre rubpro"><a href="#URL_RUBRIQUE">>&nbsp;[(#TITRE|supprimer_numero)]</a></h4>
+	</li>
+</BOUCLE_rub>
+</div>
+</ul>

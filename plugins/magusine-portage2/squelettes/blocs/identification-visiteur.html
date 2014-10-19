@@ -1,0 +1,17 @@
+<div id="identification-visiteur" class="listagebloc">
+<h2><:identification_visiteur:></h2>
+<ul class="listageconteneur"><li>
+[(#SESSION{login}|?{
+<h4 class="listagetitre"><:vous_etes_connecte:></h4>
+<p class="listagetexte">
+<a href='spip.php?action=logout&logout=[(#SESSION{login})]&url=spip.php'><:logout:></a>
+</p>
+})]
+<!-- <h4 class="listagetitre"><:identifiez_vous:></h4> -->
+<p class="listagetexte">
+#LOGIN_PUBLIC
+</p>
+
+
+</li></ul>
+</div>

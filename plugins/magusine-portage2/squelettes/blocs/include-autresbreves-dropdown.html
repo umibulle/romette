@@ -1,0 +1,20 @@
+<BOUCLE_recup(BREVES){id_breve}>
+<B_autresarticles>
+<div id="autres-articles" class="listagebloc">
+<h2><:autres_breves:></h2>
+<ul class="listageconteneur">
+
+<form action="spip.php?" method="get" class="forml">
+<select name="article" onchange="document.location.href='spip.php?breve'+this.options[this.selectedIndex].value">
+<option value="#ID_BREVE"> --- </option>
+<BOUCLE_autresarticles(BREVES){id_rubrique}{exclus}>
+<option value="#ID_BREVE">[(#TITRE|supprimer_numero)] ([(#DATE|affdate)])</option>
+</BOUCLE_autresarticles>
+</select>
+<noscript>
+<div><input type='submit' class='fondo' value='Changer' /></div>
+</noscript>
+</form>
+</ul>
+</div>
+</B_autresarticles></BOUCLE_recup>

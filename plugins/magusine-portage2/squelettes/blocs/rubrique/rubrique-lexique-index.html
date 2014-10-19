@@ -1,0 +1,20 @@
+<div id="indexlexique" class="listagebloc">
+<h2><:lexique:></h2>
+<ul class="listageconteneur">
+<li>
+<?php
+$lettres = array();
+?>
+<BOUCLE_listearticles(ARTICLES){id_rubrique}{par titre}>
+<?php
+if (!in_array("[(#TITRE|premiere_lettre)]", $lettres)) {
+?>
+[<a style="font-size:140%; font-weight:bold;" href="#[(#TITRE|premiere_lettre)]">(#TITRE|premiere_lettre)</a>]
+<?php
+}
+$lettres[] = "[(#TITRE|premiere_lettre)]";
+?>
+</BOUCLE_listearticles>
+</li>
+</ul>
+</div>

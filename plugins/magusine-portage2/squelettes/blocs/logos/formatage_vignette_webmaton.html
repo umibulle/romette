@@ -1,0 +1,22 @@
+<BOUCLE_formadocument(DOCUMENTS){id_document}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}|!={''}|?{' ',''})
+[(#FICHIER|vignettewebmaton||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}}|sinon{[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}})]})]	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}|!={''}|?{' ',''})
+[(#FICHIER|vignettewebmaton||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}}|sinon{[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}})]})]	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-vignette-corps.png}|!={''}|?{' ',''})
+	[(#FICHIER|vignettewebmaton||image_masque{#CHEMIN{themes/#THEME/masque-vignette-corps.png}}|sinon{[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-corps.png}})]})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formadocument>

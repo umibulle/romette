@@ -1,0 +1,26 @@
+<!-- une simple : titre + liste du dernier article -->
+<BOUCLE_param_rubrique_une(spip_arty_paramassoc){param=rubart_une}>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{lang}{0,1}>
+<div class="rubrique-une listagebloc">
+<h2><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h2>
+<ul class="listageconteneur">
+<BOUCLE_lesarts(ARTICLES){branche}{!par date}{0,#ENV{parametre}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+<BOUCLE_montrediv(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '<div class="listageinfo">'; } ?></BOUCLE_montrediv>
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+[<span class='listagedate'><:le_date:> (#DATE|affdate)</span>]
+</BOUCLE_date>
+<BOUCLE_auteur(spip_arty_parametres){parametre=date_auteur}{valeur2=true}>
+<B_aut><:par:> <BOUCLE_aut(AUTEURS){id_article}{par nom}{", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_aut>
+</BOUCLE_auteur>
+<BOUCLE_montrediv2(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '</div>'; } ?></BOUCLE_montrediv2>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite>
+</li>
+</BOUCLE_lesarts>
+</ul>
+</div>
+</BOUCLE_rubrique>
+</BOUCLE_param_rubrique_une>

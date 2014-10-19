@@ -1,0 +1,8 @@
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_autresarticles(ARTICLES){id_rubrique}{exclus}{par num titre, id_article}>
+<li>
+[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})</a>]
+[<em>(#TITRE|supprimer_numero)</em>]
+</li>
+</BOUCLE_autresarticles>
+</BOUCLE_recup>

@@ -1,0 +1,92 @@
+#CACHE{24*3600}<BOUCLE_generale(MOTS){id_mot}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>#NOM_SITE_SPIP</title>
+#INSERT_HEAD
+[(#INCLURE{fond=metas}{id_mot})]
+</head>
+<body id="page-mot" class="mot#ID_MOT">#SET{parametres,#REM|sinon{"rien"}|parametres}
+
+<div id="general">
+
+[(#INCLURE{fond=bandeau}{id_rubrique=0})]
+
+[(#GET{parametres}|element{'navigation'}|=={'general'}|?{' ',''})<INCLURE{fond=navigation}{id_mot}>]
+
+[(#GET{parametres}|element{'chemin'}|=={general}|?{' ',''})[(#INCLURE{fond=chemin}{id_mot})]]
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+
+[(#GET{parametres}|element{'navigation'}|=={'contexte'}|?{' ',''})<INCLURE{fond=navigation}{id_mot}>]
+
+<div id="contexte1">
+[(#GET{parametres}|element{'navigation'}|=={'contexte1'}|?{' ',''})<INCLURE{fond=navigation}{id_mot}>]
+<BOUCLE_archetype_mot(spip_arty_gabaritassoc){type=mot}{id=#ENV{id_mot}}>
+
+<BOUCLE_blocs_contexte0(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=1}{par ordre}>
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=1}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte0>
+
+</BOUCLE_archetype_mot>
+<!-- blocs contexte 1 par defaut -->
+<BOUCLE_blocs_contexte0_defaut(spip_arty_gabarit_ordre){gabarit=mot}{conteneur=1}{par ordre}>
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=1}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte0_defaut>
+
+<//B_archetype_mot>
+<div id="fin-contexte1"></div>
+</div>
+
+<div id="contexte2">
+<BOUCLE_archetype_mot2(spip_arty_gabaritassoc){type=mot}{id=#ENV{id_mot}}>
+
+<BOUCLE_blocs_contexte1(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=2}{par ordre}>
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=2}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte1>
+
+</BOUCLE_archetype_mot2>
+<!-- blocs contexte 2 par defaut -->
+<BOUCLE_blocs_contexte1_defaut(spip_arty_gabarit_ordre){gabarit=mot}{conteneur=2}{par ordre}>
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=2}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte1_defaut>
+
+<//B_archetype_mot2>
+<div id="fin-contexte2"></div>
+</div>
+
+</div><!-- fin des contextes -->
+
+<div id="corps">
+
+[(#GET{parametres}|element{'chemin'}|=={corps}|?{' ',''})[(#INCLURE{fond=chemin}{id_mot})]]
+
+<BOUCLE_archetype_mot3(spip_arty_gabaritassoc){type=mot}{id=#ENV{id_mot}}>
+
+<BOUCLE_blocs_corps(spip_arty_gabarit_ordre){gabarit=#GABARIT}{conteneur=3}{par ordre}>
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=3}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_corps>
+
+</BOUCLE_archetype_mot3>
+
+<BOUCLE_blocs_contexte2_defaut(spip_arty_gabarit_ordre){gabarit=mot}{conteneur=3}{par ordre}>
+<!-- blocs corps par defaut -->
+<INCLURE{fond=#NOM}{id_mot=#ENV{id_mot}}{id_rubrique=0}{conteneur=3}{parametre=#PARAM}{lang}{document=#ENV{document}}>
+</BOUCLE_blocs_contexte2_defaut>
+
+<//B_archetype_mot3>
+
+<div id="fin-corps"></div>
+</div><!-- fin du corps -->
+
+[(#GET{parametres}|element{'contenus'}|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+
+[(#GET{parametres}|element{'footer'}|=={general}|?{' ',''})[(#INCLURE{fond=footer}{id_mot})]]
+<div id="fin-page"></div>
+</div><!-- fin du general -->
+[(#GET{parametres}|element{'footer'}|=={hors_general}|?{' ',''})[(#INCLURE{fond=footer}{id_mot})]]
+
+</body>
+</html></BOUCLE_generale>

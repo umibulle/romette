@@ -1,0 +1,16 @@
+<B_lastarts>
+<div id="dernliens" class="listagebloc">
+<h2><:derniers_liens:></h2>    
+<ul class="listageconteneur">
+<BOUCLE_lastarts(SITES){par date}{inverse}{0,#ENV{parametre}}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+[<h4 class="listagetitre #EDIT{nom_site}"><a href="#URL_SITE">(#NOM_SITE|supprimer_numero)</a></h4>]
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+<p class="listageinfo"><:Propose_le:> [(#DATE|affdate)] :</p>
+</BOUCLE_date>
+[<p class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF|couper{120})</p>]
+</li>
+</BOUCLE_lastarts></ul>
+</div>
+</B_lastarts>

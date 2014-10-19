@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="#CHEMIN{javascript/bx_styles/bx_styles.css}" />
+<script src="#CHEMIN{javascript/jquery.bxSlider.min.js}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#rub-slider').bxSlider();
+  });
+</script>
+
+<BOUCLE_rubacacher(RUBRIQUES){titre_mot=cacher}{doublons cacher}></BOUCLE_rubacacher>
+<B_listesousrub>
+<div id="rubinrub" class="listagebloc">
+<ul id="rub-slider">
+<BOUCLE_listesousrub(RUBRIQUES){id_parent}{par num titre}{par titre}{doublons cacher}>
+<li><a name="rub#ID_RUBRIQUE"></a>
+[(#INCLURE{fond=formatage_logo_liste}{id_rubrique}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre #EDIT{titre}">[(#TITRE|supprimer_numero)]</h4>
+[<p class="listagetexte">(#TEXTE)</p>]
+</li>
+</BOUCLE_listesousrub></ul>
+</div>
+</B_listesousrub>

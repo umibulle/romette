@@ -1,0 +1,9 @@
+[(#ENV{parametre}|=={par_titre}|?{' ',''})
+<INCLURE{fond=liste-liens-partitredate}{id_rubrique}{conteneur=#ENV{conteneur}}{parametre=nom_site}>
+]
+[(#ENV{parametre}|=={par_date}|?{' ',''})
+<INCLURE{fond=liste-liens-partitredate}{id_rubrique}{conteneur=#ENV{conteneur}}{parametre=date}>
+]
+[(#ENV{parametre}|=={par_rubrique}|?{' ',''})
+<INCLURE{fond=liste-liens-parrubrique}{id_rubrique}{conteneur=#ENV{conteneur}}>
+]

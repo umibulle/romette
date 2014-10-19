@@ -1,0 +1,44 @@
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article}{extension==mp4|flv}{0,2}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article%3D#ID_ARTICLE}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==mp4|flv}{0,2}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique%3D#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_lesfiles><div id="galerie-video" class="listagebloc">
+<a name="video"></a>
+<h2><:galerie_video:></h2>
+<ul class="listageconteneur">
+<?php
+$parametre="[(#REM|sinon{videovars}|trouveintheme{''})]";
+<BOUCLE_voissiplus(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}{1,1}>$listheight=(int) "[(#REM|sinon{videolistheight}|trouveintheme{'0'})]";</BOUCLE_voissiplus>
+
+if ( "#ENV{largeur}" == "320") {
+$largeur="320";
+$hauteur=240;
+} else if("#ENV{largeur}" == "totale_16"){
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$hauteur=round(($largeur/16)*9);
+} else {
+$largeur=trim("[(#ENV{conteneur}|=={'1'}|?{' ',''})#LARGEUR_CONTEXTE1][(#ENV{conteneur}|=={'2'}|?{' ',''})#LARGEUR_CONTEXTE2][(#ENV{conteneur}|=={'3'}|?{' ',''})#LARGEUR_CORPS]");
+$hauteur=round(($largeur/4)*3);
+}
+
+?>
+<BOUCLE_lesfiles(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}{0,1}>
+<li id="video-viewer flv">
+<embed 
+type="application/x-shockwave-flash" allowfullscreen="true"
+src="#CHEMIN{swf/flvplayer.swf}" style="" id="rotator" name="rotator" quality="high" flashvars="file=spip.php%3Fpage%3Dxml_videoflash%26#GET{vers}&displayheight=<?php echo $hauteur; ?>&width=<?php echo $largeur; ?>&height=<?php echo $hauteur + $listheight + 20; if ($parametre) { echo "&". $parametre; } ?>" 
+height="<?php echo $hauteur + $listheight + 20; ?>" 
+width="<?php echo $largeur; ?>">
+</li>
+</BOUCLE_lesfiles>
+</ul>
+</div>
+</B_lesfiles>

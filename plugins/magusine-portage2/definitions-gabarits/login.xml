@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+statut : reserve : 0, contexte1 : 1, contexte 2: 2, corps: 3
+param : ce qui apparait comme choix, soit séparé par des virgules (1,2,3 par ex)
+
+soit une requete sql 
+Dans ce cas d'autres arguments a entrer
+param="SELECT * FROM spip_groupes_mots" 
+paramvalue="id_groupe" : la colonne selectionnee
+paramdescr="Groupe de mots-cles" ce qui apparait dans le bloc
+paramtext="titre" la colonne affiche dans le selecteur
+paramdefaut="" le parametre par defaut eventuel
+-->
+<gabarit type="defaut">
+<!-- contexte 1 -->
+<bloc statut="1">menu-langues</bloc>
+<!-- contexte 2 -->
+<bloc statut="2">feed</bloc>
+<bloc statut="2">rechercher</bloc>
+<!-- corps -->
+<bloc statut="3">bloc-login</bloc>
+<!-- reserve -->
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_articles_affiches">derniers-articles</bloc>
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_forums_affiches">derniers-forums</bloc>
+<bloc statut="0" param="1,3,5,10" paramdefaut="3" paramdescr="nombre_liens_affiches">derniers-liens</bloc>
+<bloc statut="0" param="1,2,3,4,5,6,news-sticker" paramdefaut="3" paramdescr="nombre_news_affichees">news</bloc>
+</gabarit>

@@ -1,0 +1,17 @@
+<BOUCLE_catprimaire(GROUPES_MOTS){descriptif==primaire}>
+<div id="listecategorie">
+<B_motcats>
+<ul>
+<BOUCLE_motcats(MOTS){id_groupe}{par num titre}{par titre}>
+<li>
+[(#LOGO_MOT)]
+<h2><a href="#URL_MOT">#TITRE</a></h2>
+<p class="listagedescriptif">#DESCRIPTIF</p>
+<p class="listageinfo"><BOUCLE_nbarts(ARTICLES){id_mot}></BOUCLE_nbarts>[ #TOTAL_BOUCLE (#TOTAL_BOUCLE|>{0}|?{' ',''}) [(#TOTAL_BOUCLE|>{1}|?{'travaux','travail'})] ]<//B_nbarts></p>
+<p class="listageinfo">Dernier travail : <BOUCLE_lastrav(ARTICLES){id_mot}{!par date}{0,1}>[<a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a>] ([(#DATE|affdate)])</BOUCLE_lastrav></p>
+</li>
+</BOUCLE_motcats>
+</ul>
+</B_motcats>
+</div>
+</BOUCLE_catprimaire>

@@ -1,0 +1,37 @@
+<div id="menu-webmaton" class="listagebloc">
+	<h2><:voir_aussi:></h2>
+	<ul class="listageconteneur">
+	<li><a href="spip.php?page=webmaton-mosaique&id_rubrique=#ID_RUBRIQUE"><:mosaique:></a></li>
+	
+<BOUCLE_questions_webmaton(DOCUMENTS){id_rubrique=#ENV{id_rubrique}}{fichier==^.*questions(-[0-9]*)?\.xml$}{0,1}>
+<?php
+include_spip('inc/xml-parser');
+
+$questions = array();
+
+if (file_exists('#FICHIER')) {
+ $p =& new xmlParser();
+ $p->parse('#FICHIER');
+  /* décommenter ceci pour vérifier si le fichier est correctement lu */
+   //print_r($p->output);
+
+  foreach($p->output[0]['child'] as $groupe) {
+    foreach($groupe["child"] as $prop){
+      if ($prop["name"] == "QUESTIONS") {
+        foreach($prop["child"] as $question) {
+          $questions[strtolower($groupe["attrs"]["PREFIX"])][$question["attrs"]["ID"]] = $question["content"];
+        }
+      }
+    }
+  }
+}
+
+foreach($questions as $langue => $larray){
+	echo "<li><a href='spip.php?page=webmaton-questions&id_rubrique=#ID_RUBRIQUE&prefix=".$langue."'><:questions_en:>  ".traduire_nom_langue($langue)."</a></li>";
+}
+
+?>
+</BOUCLE_questions_webmaton>
+	
+	</ul>
+</div>

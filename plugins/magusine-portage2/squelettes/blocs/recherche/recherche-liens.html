@@ -1,0 +1,16 @@
+#CACHE{0}
+<B_listeliens>
+<div id="recherche-liens" class="listagebloc">
+<h2><:resultat_recherche_liens:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listeliens(SITES){recherche}{par points}{inverse}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_syndic}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_SITE">[(#NOM_SITE|supprimer_numero)]</a></h4>
+[<p class="listagetexte">(#DESCRIPTIF|couper{200}|supprimer_tags)</p>]
+<p class="listagesuite"><a href="#URL_MOT"><:suite:></a></p>
+</li>
+</BOUCLE_listeliens>
+</ul>
+</div>
+</B_listeliens>

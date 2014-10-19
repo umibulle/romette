@@ -1,0 +1,17 @@
+<BOUCLE_legroupe(GROUPES_MOTS){id_groupe=#ENV{parametre}}>
+<div id="menu-groupe" class="listagebloc">
+<h2>#TITRE</h2>
+<ul class="listageconteneur">
+<BOUCLE_lesmots(MOTS){id_groupe}{par num titre}{par titre}>
+<li>
+[(#LOGO_MOT|oui)[(#INCLURE{fond=formatage_logo_liste}{id_mot}{conteneur=#ENV{conteneur}})]]
+<h4 class="listagetitre"><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listagetexte">[(#TEXTE|couper{200})]</p>
+<p class="listageinfo">
+<BOUCLE_countart(ARTICLES){id_mot}></BOUCLE_countart>#TOTAL_BOUCLE <:items:><//B_countart>
+</p>
+</li>
+</BOUCLE_lesmots>
+</ul>
+</div>
+</BOUCLE_legroupe>

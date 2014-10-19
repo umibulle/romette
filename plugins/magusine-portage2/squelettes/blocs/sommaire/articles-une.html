@@ -1,0 +1,23 @@
+<BOUCLE_param_article_une(spip_arty_paramassoc){param=rubart_une}>
+<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}{lang}{0,1}>
+<div class="article-une listagebloc">
+<h2><BOUCLE_dou(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_dou></h2>
+<ul class="listageconteneur">
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_article}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+<BOUCLE_montrediv(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '<div class="listageinfo">'; } ?></BOUCLE_montrediv>
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+[<span class='listagedate'><:le_date:> (#DATE|affdate)</span>]
+</BOUCLE_date>
+<BOUCLE_auteur(spip_arty_parametres){parametre=date_auteur}{valeur2=true}>
+<B_aut><:par:> <BOUCLE_aut(AUTEURS){id_article}{par nom}{", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_aut>
+</BOUCLE_auteur>
+<BOUCLE_montrediv2(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '</div>'; } ?></BOUCLE_montrediv2>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_ARTICLE"><:suite:></a></p></BOUCLE_suite>
+</li>
+</ul>
+</div>
+</BOUCLE_article>
+</BOUCLE_param_article_une>

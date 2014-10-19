@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title><BOUCLE_letitre(ARTICLES){id_article}>[(#TITRE|supprimer_numero)]</BOUCLE_letitre></title>
+#INSERT_HEAD
+</head>
+<body style="text-align:center;">
+<BOUCLE_lecture_doc(DOCUMENTS){id_document}>
+<div id="centrer" style="margin: auto; padding-top: <?php echo abs(470-[(#HAUTEUR)])/2; ?>px;">
+[(#EMBED_DOCUMENT)]
+</div>
+</BOUCLE_lecture_doc>
+
+<script type="text/javascript">
+tx = $("embed").attr("width");
+ty = $("embed").attr("height");
+if (tx=="0") {
+$("embed").attr("width","320px")
+$("object").attr("width","320px");
+}
+if (ty=="0") {
+$("embed").attr("height","256px")
+$("object").attr("height","256px");
+$("#centrer").css("padding-top","95px");
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+

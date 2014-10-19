@@ -1,0 +1,25 @@
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+<trackList>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>Homeland</creator>
+ <image>http://localhost:8888/-arty/dist/vignettes/mp3.png</image>
+ <location>http://localhost:8888/-arty/IMG/mp3/homeland.mp3</location>
+ <identifier>119</identifier>
+</track>
+ <track>
+ <title>pas de descriptif </title>
+ <creator>Jazzalude</creator>
+ <image>http://localhost:8888/-arty/dist/vignettes/mp3.png</image>
+ <location>http://localhost:8888/-arty/IMG/mp3/jazzalude.mp3</location>
+ <identifier>79</identifier>
+</track>
+ <track>
+ <title>Un morceau de Bjork </title>
+ <creator>Vn©nus as a boy</creator>
+ <image>http://localhost:8888/-arty/dist/vignettes/mp3.png</image>
+ <location>http://localhost:8888/-arty/IMG/mp3/Venus_As_A_Boy.mp3.mp3</location>
+ <identifier>42</identifier>
+</track>
+</trackList>
+</playlist>

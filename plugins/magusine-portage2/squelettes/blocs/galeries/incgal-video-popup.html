@@ -1,0 +1,39 @@
+#CACHE{24*3600}
+#SET{critere_in,#ARRAY{0,0}}
+<BOUCLE_recup(ARTICLES){id_article}>
+<BOUCLE_docart(DOCUMENTS){id_article=#ENV{id_article}}{extension==avi|mpg|mov|flv|mp4|wmv}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_article%3D#ID_ARTICLE}
+</BOUCLE_docart>
+</BOUCLE_recup>
+<BOUCLE_docrub(DOCUMENTS){id_rubrique}{extension==avi|mpg|mov|flv|mp4|wmv}>
+#SET{critere_in,#GET{critere_in}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}}
+#SET{vers,id_rubrique%3D#ID_RUBRIQUE}
+</BOUCLE_docrub>
+<//B_recup>
+<B_doc><div id="galerie-video" class="listagebloc">
+<h2><:galerie_video:></h2>
+<ul class="listageconteneur">
+<script type="text/javascript">
+function ouvrirPopupvideo(vers, id_doc,titre) 
+{
+  left = (screen.width) ? (screen.width-400)/2 : 0;
+  top = (screen.height) ? (screen.height-300)/2 : 0;
+  params = 'height='+500+',width='+400+',top='+top+',left='+left+',scrollbars=no,resizable=yes,menubar=no,toolbar=no,status=no';
+  video=window.open('#URL_SITE_SPIP/spip.php?page=popup-galerie-video&' + vers + '&id_document='+id_doc, titre, params);
+}
+</script>
+<BOUCLE_doc(DOCUMENTS){id_document IN #GET{critere_in}}{par num titre,id_document}>
+<li>
+
+<div class="listagelogo #EDIT{logo}">
+<a href="javascript:ouvrirPopupvideo('#GET{vers}','#ID_DOCUMENT','popup video');" >[(#INCLURE{fond=formatage_logo_liste_doc}{id_document}{conteneur=#ENV{conteneur}})]</a></div>
+<div class="listagetitre #EDIT{titre}">
+<a class="liens_videos" href="javascript:ouvrirPopupvideo('#GET{vers}','#ID_DOCUMENT','popup video');">[(#TITRE|supprimer_numero|sinon{<:pas_de_titre:>})]</a></div>
+[<div class="listagetexte #EDIT{descriptif}">(#DESCRIPTIF|ptobr)</div>]
+<div class="listageinfo">#TYPE_DOCUMENT, [(#TAILLE|taille_en_octets)]</div>
+
+</li>
+</BOUCLE_doc>
+</ul>
+</div></B_doc>

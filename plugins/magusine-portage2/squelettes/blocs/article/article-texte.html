@@ -1,0 +1,50 @@
+<BOUCLE_texte_article(ARTICLES){id_article}>
+<div id="texteconteneur">
+[<div class="chapeau #EDIT{chapo}">(#CHAPO)</div>]
+<div class="#EDIT{texte} texte">
+[(#ENV{conteneur}|=={1}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE1,0})]]
+[(#ENV{conteneur}|=={2}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CONTEXTE2,0})]]
+[(#ENV{conteneur}|=={3}|?{' ',''})[(#TEXTE|image_reduire{#LARGEUR_CORPS,0})]]
+</div>
+[<p class="listagesite" #EDIT{nom_site}><strong><:voir_en_ligne:></strong> <a href="#URL_SITE" target="_blank">(#NOM_SITE)</a></p>]
+[<div class="ps #EDIT{ps}"><strong><:ps:>:</strong> (#PS)</div>]
+[<div class="ps notes #EDIT{notes}"><strong><:notes:>:</strong> (#NOTES)</div>]
+[<p class="listagerepondre"><a id="lien_forum" href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)"><:repondre_article:></a></p>]
+</div>
+<BOUCLE_siself(spip_arty_parametres){parametre=config_forum}{valeur=true}>
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#intervention_forum").hide();
+		$("#lien_forum").attr("href","javascript:montrele('#intervention_forum')");
+		
+		// cache tous les forums de la page
+		<BOUCLE_forumsliste(FORUMS){id_article}{plat}>
+		$("#intervention_forum#ID_FORUM").hide();
+		$("#lien_forum#ID_FORUM").attr("href","javascript:montrele('#intervention_forum#ID_FORUM')");
+		</BOUCLE_forumsliste>
+		
+		
+		$(".previsu").each(function(){
+		$("#intervention_forum<?php echo $_POST['id_forum']; ?>").show();
+		});
+		
+		$(".formulaire_forum .cachable").hide();
+		$(".formulaire_forum legend").css("cursor","pointer");
+
+		
+		$(".formulaire_forum legend").click( function() { 
+			$(this).siblings(".cachable").each(function(){
+				$(this).toggle();
+			});
+			});
+		
+});
+</script>
+
+<!-- intervenir dans le forum -->
+[<div id="intervention_forum">
+(#FORMULAIRE_FORUM)
+</div>]
+</BOUCLE_siself>
+</BOUCLE_texte_article>

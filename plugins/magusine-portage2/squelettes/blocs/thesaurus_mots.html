@@ -1,0 +1,17 @@
+<div id="menu-groupe" class="listagebloc">
+<h2><:thesaurus:></h2>
+#SET{thesaurus,#ENV{parametre}|tableau2in}
+<ul class="listageconteneur"><li>
+<BOUCLE_legroupe(GROUPES_MOTS){id_groupe IN #GET{thesaurus}}>
+[(#INCLURE{fond=formatage_groupemots}{id_groupe}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></h4>
+<p class="listagetexte">[(#TEXTE|couper{200})]</p>
+<p class="listageinfo">
+<BOUCLE_lesmots(MOTS){id_groupe}{par num titre}{par titre}>
+<a href="#URL_MOT">#TITRE</a><br />
+</BOUCLE_lesmots>
+</p>
+</li>
+</BOUCLE_legroupe>
+</ul>
+</div>

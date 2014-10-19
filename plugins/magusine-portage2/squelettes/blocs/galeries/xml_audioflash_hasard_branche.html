@@ -1,0 +1,57 @@
+#CACHE{0}#HTTP_HEADER{Content-Type: text/xml}
+
+#SET{laliste,#ARRAY{0,0}}
+<BOUCLE_rotatorrub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+<!-- liste de tous les mp3 de la rub #ID_RUBRIQUE : #TITRE -->
+	<BOUCLE_galerieaudiorub(DOCUMENTS){id_rubrique}{mode=document}{extension==mp3}{par num titre}{par titre}{doublons}>
+	#SET{laliste,#GET{laliste}|array_merge{#ARRAY{#ID_DOCUMENT,#ID_DOCUMENT}}}
+	</BOUCLE_galerieaudiorub>
+	<BOUCLE_listesousrubs(RUBRIQUES){branche}>
+	<BOUCLE_galerieaudiosousrub(DOCUMENTS){id_rubrique}{mode=document}{extension==mp3}{par num titre}{par titre}{doublons}>
+	#SET{laliste,#GET{laliste}|array_merge{#ARRAY{#ID_DOCUMENT,#ID_DOCUMENT}}}
+	</BOUCLE_galerieaudiosousrub>
+	</BOUCLE_listesousrubs>
+	
+	<BOUCLE_galerieart(ARTICLES){branche}>
+	<BOUCLE_galerieaudioart(DOCUMENTS){id_article}{mode=document}{extension==mp3}{par num titre}{par titre}{doublons}>
+	#SET{laliste,#GET{laliste}|array_merge{#ARRAY{#ID_DOCUMENT,#ID_DOCUMENT}}}
+	</BOUCLE_galerieaudioart>
+	</BOUCLE_galerieart>
+	
+</BOUCLE_rotatorrub>
+
+<playlist version="1" xmlns="http://xspf.org/ns/0/" param="#ENV{parametre}">
+	<trackList>
+	<BOUCLE_listemes(DOCUMENTS){mode=document}{id_document IN #GET{laliste}}{extension==mp3}{par hasard}{0,#ENV{parametre}|sinon{5}}>
+	<track>
+	<title>[(#DESCRIPTIF)]</title>
+	<creator>[(#TITRE|supprimer_numero)]</creator>
+	<image>#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{src})]</image>
+	<location>[(#URL_DOCUMENT)]</location>
+	<identifier>#ID_DOCUMENT</identifier>
+	</track>
+	</BOUCLE_listemes>
+
+<!-- rien dans la liste classique, cherche dans tous le site -->
+<BOUCLE_galerieaudioall(DOCUMENTS){mode=document}{extension==mp3}{par hasard}{0,#ENV{parametre}|sinon{5}}>
+	<track>
+	<title>[(#DESCRIPTIF)]</title>
+	<creator>[(#TITRE|supprimer_numero)]</creator>
+	<image>#URL_SITE_SPIP/[(#LOGO_DOCUMENT||extraire_attribut{src})]</image>
+	<location>[(#URL_DOCUMENT)]</location>
+	<identifier>#ID_DOCUMENT</identifier>
+	</track>
+</BOUCLE_galerieaudioall>
+<!-- rien n'y fait, trouve rien -->
+	<track>
+	<title><:liste_vide:></title>
+	<creator><:rien:></creator>
+	<image></image>
+	<location></location>
+	<identifier>0</identifier>
+	</track>
+	<//B_galerieaudioall>
+<//B_listemes>
+
+	</trackList>
+</playlist>

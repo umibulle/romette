@@ -1,0 +1,20 @@
+<B_listebreves>
+<div id="autres-articles" class="listagebloc">
+<h2><:autres_breves:></h2>
+<ul class="listageconteneur">
+<BOUCLE_listebreves(BREVES){id_rubrique}{par num titre}{par titre}{par num titre}{exclus}>
+<li>
+[(#INCLURE{fond=formatage_logo_liste}{id_breve}{conteneur=#ENV{conteneur}})]
+<h4 class="listagetitre"><a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></h4>
+<BOUCLE_montrediv(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '<div class="listageinfo">'; } ?></BOUCLE_montrediv>
+<BOUCLE_date(spip_arty_parametres){parametre=date_auteur}{valeur=true}>
+<strong>[<:le_date:> (#DATE|affdate)]</strong> 
+</BOUCLE_date>
+<BOUCLE_montrediv2(spip_arty_parametres){parametre=date_auteur}><?php if("#VALEUR" == "true" or "#VALEUR2" == "true") { echo '</div>'; } ?></BOUCLE_montrediv2>
+[<p class="listagetexte">(#DESCRIPTIF|sinon{[(#INTRODUCTION|couper{200})]}|supprimer_tags)</p>]
+<BOUCLE_suite(spip_arty_parametres){parametre=date_auteur}{valeur3=true}><p class="listagesuite"><a href="#URL_BREVE"><:suite:></a></p></BOUCLE_suite>
+</li>
+</BOUCLE_listebreves>
+</ul>
+</div>
+</B_listebreves>

@@ -1,0 +1,26 @@
+<plugin>
+	<nom>jScrollPane</nom>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<version>1.02</version>
+	<licence>&#169; 2009 [MIT->http://opensource.org/licenses/mit-license.php]/[GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<icon>img_pack/scrollbox_logo.png</icon>
+	<etat>stable</etat>
+	<lien>http://www.spip-contrib.net/?article3571</lien>
+	<description>
+{{jScrollPane :: scroller personnalis&#233; pour squelettes SPIP}}
+
+Ce plugin ajoute le plugin "{{jScrollPane}}" de la biblioth&#232;que jQuery &#224; SPIP. Il permet de d&#233;finir des blocs CSS avec un scroller personnalis&#233;.
+
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [scrollbox_documentation->../?page=scrollbox_documentation].
+
+{N&#233;cessite jQuery version 1.2 ou plus.}
+	</description>
+	<options>scrollbox_options.php</options>
+	<prefix>scrollbox</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>scrollbox_options.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<categorie>squelette</categorie>
+</plugin>

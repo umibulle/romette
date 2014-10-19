@@ -1,0 +1,207 @@
+body {
+  color: black;
+  font-family: 'Jura', sans-serif, "Arial", Helvetica, sans-serif;
+  font-size: 10px;
+  line-height: 1.4;
+  /*letter-spacing: 0.085em;*/
+  background-color: white;
+  font-weight: 550;
+
+  background-image:linear-gradient(#f7f7f7, white ); /* Norme W3C */
+background-image:-moz-linear-gradient(#f7f7f7, white); /* Firefox */
+background-image:-webkit-gradient(linear,#f7f7f7, white); /* Chrome, Safari */
+background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
+ background-image:-ms-linear-gradient(#f7f7f7, white); /* IE */
+
+
+
+  /*"New York"*/ /* "Helvetica Neue",Helvetica,Arial,sans-serif; 
+ "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
+
+}
+
+/*
+* Containeur général
+*/
+#general {
+  width: 996px;
+  height: 616px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 17px 0px;
+  
+}
+
+/*
+* Ici c'est l'emplacement du logo de la compagnie
+*/
+#bandeau-main {
+  top: 5px;
+  /*background: url('signature.jpg') top right no-repeat;*/
+  /*display:none;*/
+  position: absolute;
+  width: 996px;
+  height: 645px;
+  background-color: white;
+  right: 0px;
+  z-index: 50;
+}
+
+/*
+* Ici c'est l'emplacement du titre (image de l'écriture manuscrite) de chaque rubrique 
+*/
+#bandeau {
+  background: no-repeat scroll right transparent;
+  /*top: 65px;*/
+  height: 195px;
+  position: relative;
+  width: 996px;
+  /*margin-top: 30px;*/
+  background-color: white;
+  /*z-index: 100;*/
+}
+
+/*
+* Ici c'est l'emplacement de l'image d'accueil de chaque rubrique 
+*/
+#header_bandeau {
+  background: no-repeat scroll left center transparent;
+  top: 0px;
+  height: 650px;
+  /*
+  top: 0px;
+  height: 690px;
+  */
+  position: fixed;
+  width: 996px;
+  z-index: 100;
+}
+
+#contextes {
+  position: relative;
+  float: right;
+  height: 405px;
+  margin-top: 5px;
+  z-index: 5;
+}
+
+#contexte1 {
+  width: 210px;
+  float: left;
+  margin: 0px 20px;
+  background-color: #fff;
+  color: #888888;
+  text-decoration: none;
+  word-spacing: normal;
+  line-height: 1.2em;
+  font-size: 11px;
+  text-align: left;
+}
+
+#contexte2 {
+
+  float: right;
+  width: 100px;
+  margin-left: 15px;
+  font-weight: bold;
+  /*font-family: "New York", "MS Serif", serif;
+   "Helvetica Neue",Helvetica,Arial,sans-serif; 
+ "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
+  font-size: 10px;
+}
+
+#contexte2 a {
+  color: black;
+}
+
+#chemin {
+  font-size: 9px;
+}
+
+#chemin a {
+  color: #999;
+}
+
+#chemin a:hover {
+  color: #999;
+  background-color: #FFFFFF;
+  text-decoration: underline;
+}
+
+#corps {
+  position: relative;
+}
+
+#footer {
+  position: absolute;
+  top: 616px;
+  width: 996px;
+  clear: both;
+  padding-top: 2px;
+  padding-left: 10px;
+  color: #999;
+  font-size: 8px;
+  color: #999;
+}
+
+#footer a {
+  color: #bbb;
+}
+
+#footer a:hover {
+  color: #ddd;
+}
+
+#cs_blocs {
+  margin-bottom: 1em;
+  letter-space: 1pt;
+}
+
+.blocs_titre {
+  font-weight: lighter;
+  font-size: 12px;
+  text-transform: none;
+  border-bottom: 1px dotted #410032;
+  letter-space: 1pt;
+  font-family: "New York", "MS Serif", serif;
+  /* "Helvetica Neue",Helvetica,Arial,sans-serif; 
+ "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
+  font-size: 16px;
+  line-height: 1.2em;
+  margin-top: 3px;
+  padding: 0px;
+  margin-bottom: 0.5em;
+  clear: left;
+  cursor: pointer;
+}
+
+.blocs_titre a:hover {
+  letter-space: 1pt;
+  background-color: #FF0000;
+}
+
+.blocs_replie {
+  color: #FFFFFF;
+  margin-bottom: 1.5em;
+  letter-space: 1pt;
+}
+
+.blocs_title {
+  display: none;
+}
+
+#page-sommaire #contextes {
+  display: none;
+}
+
+#page-sommaire #bandeau {
+  height: 80px;
+}
+
+#page-sommaire #navigation
+{
+  display: none;
+}

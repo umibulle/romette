@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gabarit type="defaut">
+
+<bloc statut="1">mot-tous-mots</bloc>
+<bloc statut="1">rechercher</bloc>
+
+<bloc statut="3">mot-head</bloc>
+<bloc statut="3">mot-texte</bloc>
+<bloc statut="3">liste-articles-mot</bloc>
+<bloc statut="3">liste-rubriques-mot</bloc>
+<bloc statut="3">liste-sites-mot</bloc>
+
+<bloc statut="0">liste-breves-mot</bloc>
+</gabarit>

@@ -1,0 +1,175 @@
+<BOUCLE_formateart(ARTICLES){id_article}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE1,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})</a>]
+	[<em>(#TITRE|supprimer_numero)</em>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_reduire{#LARGEUR_CONTEXTE2,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_ARTICLE">(#LOGO_ARTICLE||image_reduire{#LARGEUR_CORPS,0})</a>]
+	]
+<?php } ?>
+</BOUCLE_formateart>
+
+<BOUCLE_formaterub(RUBRIQUES){id_rubrique}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CONTEXTE1,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CONTEXTE2,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#LARGEUR_CORPS,0})</a>]
+	]
+<?php } ?>
+</BOUCLE_formaterub>
+
+<BOUCLE_formatemot(MOTS){id_mot}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_reduire{#LARGEUR_CONTEXTE1,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_reduire{#LARGEUR_CONTEXTE2,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_MOT">(#LOGO_MOT||image_reduire{#LARGEUR_CORPS,0})</a>]
+	]
+<?php } ?>
+</BOUCLE_formatemot>
+
+<BOUCLE_formatebreve(BREVES){id_breve}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_BREVE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_BREVE||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formatebreve>
+
+<BOUCLE_formatesite(SITES){id_syndic}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_reduire{#LARGEUR_CONTEXTE1,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_reduire{#LARGEUR_CONTEXTE2,0})</a>]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})</a>]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[<a class="listagelogo" href="#URL_SITE">(#LOGO_SITE||image_reduire{#LARGEUR_CORPS,0})</a>]
+	]
+<?php } ?>
+</BOUCLE_formatesite>
+
+<BOUCLE_formateauteur(AUTEURS){id_auteur}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_masque{#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-logos-liste-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_AUTEUR||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formateauteur>
+
+<BOUCLE_formadocument(DOCUMENTS){id_document}>
+<?php if ('#ENV{conteneur}'=='1') { ?>
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}|!={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte1.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CONTEXTE1,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='2') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}|!={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-contexte2.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CONTEXTE2,0})]
+	]
+<?php } if ('#ENV{conteneur}'=='3') { ?>	
+	[(#CHEMIN{themes/#THEME/masque-vignette-corps.png}|!={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_masque{#CHEMIN{themes/#THEME/masque-vignette-corps.png}})]
+	]
+	[(#CHEMIN{themes/#THEME/masque-vignette-corps.png}|=={''}|?{' ',''})
+	[(#LOGO_DOCUMENT||image_reduire{#LARGEUR_CORPS,0})]
+	]
+<?php } ?>
+</BOUCLE_formadocument>

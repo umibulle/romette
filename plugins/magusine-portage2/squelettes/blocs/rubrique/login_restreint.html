@@ -1,0 +1,11 @@
+<div class="formulaire_spip formulaire_login">
+<p style="text-align: center;">
+<?php if ($auteur_session) { ?>
+&#91;<a href='#URL_LOGOUT'><:logout:></a>&#93;
+<?php } else { ?>
+<h2>Accéder à l'espace restreint</h2>
+#LOGIN_PUBLIC
+&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
+<?php } ?>
+</p>
+</div>

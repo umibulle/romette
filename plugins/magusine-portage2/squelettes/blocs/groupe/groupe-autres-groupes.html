@@ -1,0 +1,11 @@
+<BOUCLE_cegroupe(GROUPES_MOTS){id_groupe}><B_groupe><div id="derniers-forums" class="listagebloc">
+<h2><:autre_groupe_mots:></h2>
+<ul class="listageconteneur">
+<BOUCLE_groupe(GROUPES_MOTS){par num titre}{par titre}{exclus}>
+<li>
+<h4 class="listagetitre"><a href="spip.php?page=groupe&amp;id_groupe=#ID_GROUPE">#TITRE</a></h4>
+<p class="listagetexte">[(#TEXTE|couper{120})]</p>
+</li>
+</BOUCLE_groupe>
+</ul>
+</div></B_groupe></BOUCLE_cegroupe>

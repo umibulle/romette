@@ -1,0 +1,43 @@
+<B_lesimagesliste><link href='#CHEMIN{themes/#THEME/addfiles/diaporama.css}' rel='stylesheet' type='text/css' />
+<style type="text/css">
+#slideShow
+{
+	width:[(#ENV{conteneur}|=={1}|?{' ',''})[(#LARGEUR_CONTEXTE1)]][(#ENV{conteneur}|=={2}|?{' ',''})[(#LARGEUR_CONTEXTE2)]][(#ENV{conteneur}|=={3}|?{' ',''})[(#LARGEUR_CORPS)]]px;
+	height: #ENV{parametre}px;
+}
+</style>
+<script type="text/javascript" src="#CHEMIN{javascript/interface.js}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.slideshow(
+  	{
+  		container : 'slideShow',
+  		loader: '[(#CHEMIN{themes/#THEME/addfiles/images/slideshow_loader.gif}|sinon{#CHEMIN{images/slideshow_loader.gif}})]',
+  		linksPosition: 'bottom',
+  		linksClass: 'pagelinks',
+  		linksSeparator : ' &nbsp; ',
+  		fadeDuration : 400,
+  		activeLinkClass: 'activeSlide',
+  		nextslideClass: 'nextSlide',
+  		prevslideClass: 'prevSlide',
+  		captionPosition: 'bottom',
+  		captionClass: 'slideCaption',
+  		autoplay: 5,
+  		
+  		// largeur en cours : [(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})]
+  		images : [
+  		<BOUCLE_lesimagesliste(DOCUMENTS){id_article}{mode=document}{extension==png|gif|jpg}{par num titre}>
+  			{
+  				src: '[(#FICHIER||image_reduire{[(#ENV{conteneur}|=={1}|?{[(#LARGEUR_CONTEXTE1)],''})][(#ENV{conteneur}|=={2}|?{[(#LARGEUR_CONTEXTE2)],''})][(#ENV{conteneur}|=={3}|?{[(#LARGEUR_CORPS)],''})]|,#ENV{parametre}}|extraire_attribut{src})]',
+  				caption: '[(#TITRE|texte_script)]'
+  			},
+  		</BOUCLE_lesimagesliste>
+  		]
+  	}
+  )
+});
+</script>
+<div id="cadre-slideshow" class="listagebloc">
+<div id="slideShow">
+</div></div>
+</B_lesimagesliste>

@@ -28,7 +28,7 @@ paramfefaut: le parametre par defaut
 <bloc statut="3">article-head</bloc>
 <bloc statut="3">article-texte</bloc>
 <bloc statut="3" param="1 niveau,2 niveaux,multithread" paramdefaut="2 niveaux" paramdescr="Type de forum">bloc-forum</bloc>
-<bloc statut="3" param="galerie simple,thickbox,fancybox,galerie liste,galerie popup,diaporama popup,carousel,carouselbig" paramdefaut="galerie simple" paramdescr="Type de galerie">galerie-image</bloc>
+<bloc statut="3" param="galerie simple,thickbox,fancybox,galerie liste,galerie popup,diaporama popup,carousel,carouselbig,image-wall" paramdefaut="galerie simple" paramdescr="Type de galerie">galerie-image</bloc>
 <bloc statut="3" param="liste,flv_liste,flv_320_240,flv_largeur_totale_4_3,flv_largeur_totale_16_9,popup" paramdefaut="popup" paramdescr="Type de galerie">galerie-videos</bloc>
 <bloc statut="3" param="liste,lecteur_flash,lecteur_flash_liste,popup,standalone" paramdefaut="lecteur flash" paramdescr="Type de galerie">galerie-audios</bloc>
 <bloc statut="3" param="champ" paramdefaut="mp3|jpg|gif|png|avi|mov|qt|mpg|rm|mp4|flv|wmv|kml" paramdescr="liste_extension_exclure">pieces_jointes</bloc>

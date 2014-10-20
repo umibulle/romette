@@ -173,3 +173,59 @@ h3 a:hover {
   padding: 0;
   width: 48%;
 }
+
+.image-wall-li {
+  display: inline;
+  float: left;
+  padding: 0 20px 20px;
+}
+
+figcaption {
+    display: none;
+    position: absolute;
+    margin:-150px 25px 0px 25px;
+    width: 200px;
+    height: 125px;
+    /*padding: 25px;*/
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+    /*background-color: rgba(0,0,0,.15);*/
+    transition: opacity 0.4s ease-in-out 0s;
+}
+
+#image-wall h3 a {
+  color: #111;
+  font-weight: 500;
+}
+
+#image-wall h3 a:hover {
+  color: #444;
+}
+
+figcaption h3 {
+  margin-top: 25px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+}
+
+figcaption h4 {
+  margin-top: 15px;
+}
+
+figure:hover img {
+    opacity: .8;
+}
+
+figure:hover figcaption {
+    display: block;
+    padding-top: -250px;
+}
+
+
+.image-wall-img-inside {
+  position: absolute;
+  left: 20px;
+  text-align: center;
+  top: 20px;
+  font-size: 20px;
+}

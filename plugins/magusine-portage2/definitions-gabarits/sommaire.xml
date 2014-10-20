@@ -28,6 +28,8 @@ paramdefaut="" le parametre par defaut eventuel
 
 
 <!-- reserve -->
+<bloc statut="0">image-wall</bloc>
+
 <bloc statut="0">identification-visiteur</bloc>
 
 <bloc statut="0" param="SELECT * FROM spip_groupes_mots" paramvalue="id_groupe" paramdescr="groupe-mots-cles" paramtext="titre" paramdefaut="">menu-groupe</bloc>

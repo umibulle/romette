@@ -1,0 +1,25 @@
+<BOUCLE_rubacacher(RUBRIQUES){titre_mot=cacher}{doublons cacher}></BOUCLE_rubacacher>
+<B_listesousrub>
+<div id="image-wall" class="listagebloc">
+<!-- <h2><:rubriques_rubrique:></h2> -->
+<ul class="image-wall-ul">
+<BOUCLE_listesousrub(RUBRIQUES){id_parent=12}{par num titre}{par titre}{doublons cacher}>
+<li class="image-wall-li">
+	<figure>
+		[(#LOGO_RUBRIQUE||image_reduire{250,0})]
+		<figcaption>
+			<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+			<h4>#DESCRIPTIF</h4>
+		</figcaption>
+	</figure>
+	<!--
+	<span class="image-wall-img-inside">
+		<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+		<h4>#DESCRIPTIF</h4>
+	</span>
+	-->
+</li>
+</BOUCLE_listesousrub></ul>
+</div>
+</B_listesousrub>
+

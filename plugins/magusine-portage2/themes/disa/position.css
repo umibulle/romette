@@ -25,13 +25,13 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 */
 #general {
   width: 996px;
-  height: 616px;
+  /*height: 616px;*/
   margin: 0 auto;
   position: relative;
   background-color: white;
   border-color: black;
   border-style: solid;
-  border-width: 17px 0px;
+  border-width: 17px 0 0 0;
   
 }
 
@@ -40,7 +40,7 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 */
 #bandeau-main {
   top: 5px;
-  /*background: url('signature.jpg') top right no-repeat;*/
+  /*background: url('Johanny.png') top right no-repeat;*/
   /*display:none;*/
   position: absolute;
   width: 996px;
@@ -55,13 +55,10 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 */
 #bandeau {
   background: no-repeat scroll right transparent;
-  /*top: 65px;*/
-  height: 195px;
+  height: 55px;
   position: relative;
   width: 996px;
-  /*margin-top: 30px;*/
   background-color: white;
-  /*z-index: 100;*/
 }
 
 /*
@@ -71,21 +68,32 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
   background: no-repeat scroll left center transparent;
   top: 0px;
   height: 650px;
-  /*
-  top: 0px;
-  height: 690px;
-  */
   position: fixed;
   width: 996px;
   z-index: 100;
 }
 
+.texteheader {
+  border-bottom: 1px solid #666;
+  float: left;
+  height: 100px;
+  width: 525px;
+}
+
+#texteconteneur {
+  margin-top: 20px;
+}
+
 #contextes {
   position: relative;
   float: right;
-  height: 405px;
-  margin-top: 5px;
+  /*height: 405px;*/
+  margin-top: 100px;
+  padding-top: 20px;
   z-index: 5;
+  margin-left:45px;
+  border-top: 1px  solid #666;
+  width: 276px;
 }
 
 #contexte1 {
@@ -102,14 +110,10 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 }
 
 #contexte2 {
-
   float: right;
   width: 100px;
   margin-left: 15px;
   font-weight: bold;
-  /*font-family: "New York", "MS Serif", serif;
-   "Helvetica Neue",Helvetica,Arial,sans-serif; 
- "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
   font-size: 10px;
 }
 
@@ -136,15 +140,14 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 }
 
 #footer {
-  position: absolute;
-  top: 616px;
+  height: 17px;
   width: 996px;
   clear: both;
   padding-top: 2px;
   padding-left: 10px;
-  color: #999;
-  font-size: 8px;
-  color: #999;
+  color: #AAA;
+  font-size: 8pt;
+  background-color: #000;
 }
 
 #footer a {
@@ -193,15 +196,54 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
   display: none;
 }
 
+#edito {
+  display: none;
+}
+
+#page-sommaire #corps {
+  margin-top:50px;
+}
+
 #page-sommaire #contextes {
   display: none;
 }
 
 #page-sommaire #bandeau {
-  height: 80px;
-}
-
-#page-sommaire #navigation
-{
   display: none;
 }
+
+.subtitle {
+  margin: 0 0 20px 0;
+}
+.fancy {
+  font-family: 'Poiret One';
+  font-size: 11pt;
+  font-weight: 500;
+  letter-spacing: 1.25px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.fancy span {
+  position: relative;  
+}
+.fancy span:before,
+.fancy span:after {
+  $linesHeight: 7px;
+  content: "";
+  position: absolute;
+  /*border-bottom: 1px solid black;*/
+  border-top: 1px solid black;
+  width: 120%;
+  height: $linesHeight;
+  top: 50%;
+  margin-top: floor(-$linesHeight / 2);
+}
+.fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.fancy span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+

@@ -1,5 +1,8 @@
 #CACHE{24*3600}<ul id="navigation">
 [(#REM|sinon{titrenavigation}|trouveintheme{'non'}|=={'oui'}|?{' ',''})<li id="titre-navigation" class="niveau1" ><h2><:navigation:></h2></li>]
+<li class="niveau1 item0">
+	<a accesskey="0" href="spip.php">Accueil</a>
+</li>
 <BOUCLE_parametre_niveau(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur2=#LANG}>
 [(#VALEUR|=={manuel}|?{' ',''})<INCLURE{fond=navigation/manuelle}{id_rubrique}>]
 [(#VALEUR|=={1}|?{' ',''})<INCLURE{fond=navigation/unniveau}{id_rubrique}>]

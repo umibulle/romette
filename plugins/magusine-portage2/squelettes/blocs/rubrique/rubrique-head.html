@@ -1,8 +1,9 @@
 <BOUCLE_texte_rubrique(rubriques){id_rubrique}>
 <div id="header">
-[(#LOGO_RUBRIQUE|oui)<div class="logo #EDIT{logo}">[(#INCLURE{fond=formatage_logo}{id_rubrique}{conteneur=#ENV{conteneur}})]</div>]
+[(#LOGO_RUBRIQUE|oui)<div class="logo #EDIT{logo}">[(#LOGO_RUBRIQUE||image_reduire{120,0})]</div>]
 <div class="texteheader">
 [<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+#DESCRIPTIF
 </div>
 <div class="clearer_header"></div>
 </div>

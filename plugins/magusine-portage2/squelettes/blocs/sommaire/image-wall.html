@@ -1,12 +1,14 @@
 <BOUCLE_rubacacher(RUBRIQUES){titre_mot=cacher}{doublons cacher}></BOUCLE_rubacacher>
-<B_listesousrub>
-<div id="image-wall" class="listagebloc">
-<!-- <h2><:rubriques_rubrique:></h2> -->
+<B_listesousrub1>
+<script type="text/javascript" src="#CHEMIN{javascript/masonry.pkgd.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/image-wall.js}"></script>
+<div>
+<p class="subtitle fancy"><span>Créations à voir en ce moment</span></p>
 <ul class="image-wall-ul">
-<BOUCLE_listesousrub(RUBRIQUES){id_parent=12}{par num titre}{par titre}{doublons cacher}>
+<BOUCLE_listesousrub1(RUBRIQUES){id_parent=12}{par num titre}{par titre}{doublons cacher}{0,3}>
 <li class="image-wall-li">
 	<figure>
-		[(#LOGO_RUBRIQUE||image_reduire{250,0})]
+		[(#LOGO_RUBRIQUE||image_reduire{292,0})]
 		<figcaption>
 			<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
 			<h4>#DESCRIPTIF</h4>
@@ -19,7 +21,27 @@
 	</span>
 	-->
 </li>
-</BOUCLE_listesousrub></ul>
+</BOUCLE_listesousrub1></ul>
+<B_listesousrub2>
+<p class="subtitle fancy"><span>Créations antérieures</span></p>
+<ul class="image-wall-ul">
+<BOUCLE_listesousrub2(RUBRIQUES){id_parent=12}{par num titre}{par titre}{doublons cacher}{0,100}>
+<li class="image-wall-li">
+	<figure>
+		[(#LOGO_RUBRIQUE||image_reduire{292,0})]
+		<figcaption>
+			<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+			<h4>#DESCRIPTIF</h4>
+		</figcaption>
+	</figure>
+	<!--
+	<span class="image-wall-img-inside">
+		<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+		<h4>#DESCRIPTIF</h4>
+	</span>
+	-->
+</li>
+</BOUCLE_listesousrub2></ul>
 </div>
-</B_listesousrub>
-
+</B_listesousrub2>
+</B_listesousrub1>

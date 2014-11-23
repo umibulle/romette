@@ -17,9 +17,6 @@ img {
   behavior: url("win_png.htc");
 }
 
-h1,h2,h3,h4,h5,h6 {
-  margin: 0;
-}
 
 /* redefinition de tgs de spip */
 spip_logos {

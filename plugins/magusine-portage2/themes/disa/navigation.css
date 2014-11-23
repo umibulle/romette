@@ -1,17 +1,14 @@
 #navigation {
+  border-top: 17px solid black;
   height: 26px;
   width: 100%;
-  font-family: jura;
+  font-family: "Poiret One";
   letter-spacing: 1pt;
   float: left;
-  /*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; 
-  letter-spacing: 1px;
-  "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
-  /*left:20px;*/
+  margin-top:40px;
   right: 0px;
   position: absolute;
   top: 0px;
-  /*list-style-image:url(dd.png);*/
 }
 
 #navigation li {
@@ -43,7 +40,6 @@
 
 .ulniveau2 {
   list-style-image: none;
-  font-family: jura;
   margin-top: 20px;
   display: none;
   width: 270px;

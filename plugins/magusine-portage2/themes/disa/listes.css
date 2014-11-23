@@ -33,10 +33,14 @@
   list-style-type: none;
   display: inline-table;
   /*text-align: center;*/
-  padding: 0px;
+  padding: 10px;
   margin: 0px;
   /*width: 100px;
   height: 95px;*/
+}
+
+ul.fancygal {
+  margin-left: 15px;
 }
 
 .listageconteneur li {
@@ -80,9 +84,6 @@
   color: black;
   display: inline;
   float: left;
-  /*font-family: "New York", "MS Serif", serif;
-   "Helvetica Neue",Helvetica,Arial,sans-serif; 
- "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
   font-size: 16px;
   font-weight: normal;
   margin: 0;

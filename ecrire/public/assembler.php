@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -97,8 +97,7 @@ function assembler($fond, $connect='') {
 					AND $url !== $url_redirect) {
 						spip_log("Redirige $url vers $url_redirect");
 						include_spip('inc/headers');
-						http_status(301);
-						redirige_par_entete($url_redirect);
+						redirige_par_entete($url_redirect, '', 301);
 					}
 					if (isset($nfond))
 						$fond = $nfond;
@@ -128,9 +127,13 @@ function assembler($fond, $connect='') {
 			// produire la page : peut mettre a jour $lastmodified
 			$produire_page = charger_fonction('produire_page','public');
 			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
-			if ($page === '')
-				erreur_squelette(_T('info_erreur_squelette2',
-					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES)));
+			if ($page === '') {
+				$erreur = _T('info_erreur_squelette2',
+					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES));
+				erreur_squelette($erreur);
+				// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
+				$page = array('texte' => '', 'erreur' => $erreur);
+			}
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
@@ -217,6 +220,7 @@ function calculer_contexte_implicite(){
 	$contexte_implicite = array(
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
+		'https' => $_SERVER['HTTPS'],
 		'espace' => test_espace_prive(),
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
 		'notes' => $notes('','contexter_cache'),
@@ -431,6 +435,7 @@ function f_insert_head($texte) {
 // Inserer au besoin les boutons admins
 // http://doc.spip.org/@f_admin
 function f_admin ($texte) {
+	if (!$GLOBALS['html']) return $texte;
 	if ($GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
@@ -682,6 +687,19 @@ function page_base_href(&$texte){
 	}
 }
 
+function public_previsualisation_dist($page)
+{
+	if (preg_match(',^\s*text/html,',$page['entetes']['Content-Type'])) {
+		include_spip('inc/filtres'); // pour http_img_pack
+		$x = _T('previsualisation');
+		$x = http_img_pack('naviguer-site.png', $x) . '&nbsp;' . majuscules($x); 
+		$x = "<div class='spip-previsu'>$x</div>";
+		if (!$pos = strpos($page['texte'], '</body>'))
+			$pos = strlen($page['texte']);
+		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
+	}
+	return $page;
+}
 
 // Envoyer les entetes, en retenant ceux qui sont a usage interne
 // et demarrent par X-Spip-...
@@ -689,7 +707,7 @@ function page_base_href(&$texte){
 function envoyer_entetes($entetes) {
 	foreach ($entetes as $k => $v)
 	#	if (strncmp($k, 'X-Spip-', 7))
-			@header("$k: $v");
+			@header(strlen($v)?"$k: $v":$k);
 }
 
 ?>

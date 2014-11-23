@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -152,8 +152,34 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	return strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
-		!==false;
+
+	// Le visiteur a-t-il un statut prevu par la config ?
+	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
+	!==false)
+		return true;
+
+	// Sinon, on regarde s'il a un jeton (var_token) et on lui pose
+	// le cas echeant une session contenant l'autorisation
+	// de l'utilisateur ayant produit le jeton
+	if ($token = _request('var_previewtoken')) {
+		include_spip('inc/session');
+		session_set('previewtoken', $token);
+	}
+
+	// A-t-on un token valable ?
+	if (is_array($GLOBALS['visiteur_session'])
+	AND $token = session_get('previewtoken')
+	AND preg_match('/^(\d+)\*(.*)$/', $token, $r)
+	AND $action = 'previsualiser'
+	AND (include_spip('inc/securiser_action'))
+	AND (
+		$r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere')
+	 OR $r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere_ancien')
+	)) {
+		return true;
+	}
+
+	return false;
 }
 
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
@@ -351,6 +377,12 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a creer un groupe de mots
 // http://doc.spip.org/@autoriser_groupemots_creer_dist
 function autoriser_groupemots_creer_dist($faire, $type, $id, $qui, $opt) {
+	return
+		$qui['statut'] == '0minirezo'
+		AND !$qui['restreint'];
+}
+
+function autoriser_auteur_creer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		AND !$qui['restreint'];
@@ -573,8 +605,8 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// ou si les webmestres sont fixes par constante (securite)
 	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
-	// et toucher au statut d'un webmestre si il ne l'est pas lui meme
-	elseif ($opt['statut'] AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
+	// et modifier un webmestre si il ne l'est pas lui meme
+	elseif (intval($id) AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
 		return false;
 	else
 		return true;
@@ -679,17 +711,15 @@ function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_rubrique_editermots_dist
 function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	// on recupere les champs du groupe s'ils ne sont pas passes en opt
-	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	if (!isset($opts['groupe_champs'])){
 		if (!$id_groupe = $opts['id_groupe'])
 			return false;
 		include_spip('base/abstract_sql');
 		$opts['groupe_champs'] = sql_fetsel("*", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 	}
-	$droit = $opts['groupe_champs'][$droit];
 
 	return
-		($droit == 'oui')
+		($opts['groupe_champs'][substr($qui['statut'],1)] == 'oui')
 		AND
 		// on verifie que l'objet demande est bien dans les tables liees
 		in_array(
@@ -740,6 +770,25 @@ function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 	}
 
 	return $droit;
+}
+
+// Autorisation des inscriptions libres
+// a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+
+// http://doc.spip.org/@tester_config
+function autoriser_inscrireauteur($faire, $quoi, $id, $qui, $opt){
+
+	switch (array_search($quoi, $GLOBALS['liste_des_statuts'])) {
+
+	case 'info_redacteurs' :
+	  return ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
+
+	case 'info_visiteurs' :
+	  return ($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo');
+
+	default:
+	  return false;
+	}
 }
 
 // Deux fonctions sans surprise pour permettre les tests

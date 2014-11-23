@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -108,6 +108,16 @@ function validerAttribut($phraseur, $name, $val, $bal)
 			$this->$f($phraseur, $name, $val, $bal);
 #		else spip_log("$type type d'attribut inconnu");
 	}
+}
+
+function validerAttribut_NMTOKEN($phraseur, $name, $val, $bal)
+{
+	$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_NMTOKEN);
+}
+
+function validerAttribut_NMTOKENS($phraseur, $name, $val, $bal)
+{
+	$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_NMTOKENS);
 }
 
 // http://doc.spip.org/@validerAttribut_ID

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -219,13 +219,17 @@ function chargeur_charger_zip($quoi = array())
 	$list = $zip->listContent();
 
 	// on cherche la plus longue racine commune a tous les fichiers
+	$max_n = 999999;
 	foreach($list as $n) {
 		$p = array();
 		foreach(explode('/', $n['filename']) as $n => $x) {
+			if ($n>$max_n)
+				continue;
 			$sofar = join('/',$p);
 			$paths[$n][$sofar]++;
 			$p[] = $x;
 		}
+		$max_n = min($n,$max_n);
 	}
 
 	$total = $paths[0][''];
@@ -235,9 +239,11 @@ function chargeur_charger_zip($quoi = array())
 	AND array_values($paths[$i]) == array($total))
 		$i++;
 
-	$racine = $i
-		? array_pop(array_keys($paths[$i-1])).'/'
-		: '';
+	$racine = '';
+	if ($i){
+		$racine = array_keys($paths[$i-1]);
+		$racine = array_pop($racine).'/';
+	}
 
 	$quoi['remove'] = $racine;
 

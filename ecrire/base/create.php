@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -31,6 +31,12 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 				sql_alter("TABLE $table ADD $field $type".($last?" AFTER $last":""),$serveur);
 			$last = $field;
 		}
+		foreach($desc['key'] as $key=>$type){
+			if (!isset($sql_desc['key'][$key]))
+				sql_alter("TABLE $table ADD $key ($type)",$serveur);
+			$last = $field;
+		}
+
 	}
 }
 

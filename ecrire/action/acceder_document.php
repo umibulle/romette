@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,9 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/headers');
 
-// acces aux documents joints securise
-// verifie soit que le demandeur est authentifie
-// soit que le document est publie, c'est-a-dire
+// acces aux documents joints securises
+// verifie que le document est publie, c'est-a-dire
 // joint a au moins 1 article, breve ou rubrique publie
 
 // http://doc.spip.org/@action_acceder_document_dist
@@ -36,8 +35,11 @@ function action_acceder_document_dist() {
 	else if (!file_exists($file) OR !is_readable($file)) {
 		$status = 404;
 	} else {
-		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
-		. ($arg ? " AND documents.id_document=".intval($arg): '');
+		$path = set_spip_doc($file);
+		$path2 = generer_acceder_document($f, $arg);
+		$where = "(documents.fichier=".sql_quote($path)
+		  . ' OR documents.fichier=' . sql_quote($path2) . ')'
+		  . ($arg ? (" AND documents.id_document=".intval($arg)) : '');
 
 		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus, documents.extension", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
 		if (!$doc) {
@@ -84,25 +86,34 @@ function action_acceder_document_dist() {
 	default:
 		header("Content-Type: ". $doc['mime_type']);
 
-		// pour les images ne pas passer en attachment
-		// sinon, lorsqu'on pointe directement sur leur adresse,
-		// le navigateur les downloade au lieu de les afficher
+		// Si le fichier a un titre avec extension,
+		// ou si c'est un nom bien connu d'Unix, le prendre
+		// sinon l'ignorer car certains navigateurs pataugent
 
-		if ($doc['inclus']=='non') {
-
-		  // Si le fichier a un titre avec extension,
-		  // ou si c'est un nom bien connu d'Unix, le prendre
-		  // sinon l'ignorer car certains navigateurs pataugent
-
-			$f = basename($file);
-			if (isset($doc['titre'])
-				AND (preg_match('/^\w+[.]\w+$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
+		$f = basename($file);
+		if (isset($doc['titre'])
+		AND (preg_match('/^\w+[.]\w+$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
 				$f = $doc['titre'];
 
-			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
-			header('Content-Type: application/octet-stream');
+		$f = "filename=\"$f\"";
 
-			header("Content-Disposition: attachment; filename=\"$f\";");
+		// Pour les document affichables par les navigateurs,
+		// ne pas envoyer "Content-Disposition: attachment" sinon 
+		// le navigateur cree un fichier au lieu de l'afficher.
+		// Mais la propriete "affichable" n'est pas toujours devinable,
+		// il faut quand meme donner un nom au fichier eventuel. 
+		// Celui-ci est malheureusement souvent ignore, cf
+		// http://greenbytes.de/tech/tc2231/
+
+		if ($doc['inclus']!=='non') {
+			header("Content-Disposition: inline; $f");
+		} else {
+
+			header("Content-Disposition: attachment; $f;");
+
+			// ce content-type est necessaire
+			// pour eviter des corruptions de zip dans ie6
+			header('Content-Type: application/octet-stream');
 			header("Content-Transfer-Encoding: binary");
 
 			// fix for IE catching or PHP bug issue

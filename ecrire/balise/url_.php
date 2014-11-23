@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -131,39 +131,43 @@ function balise_URL_SITE_SPIP_dist($p) {
 // #URL_PAGE{backend} -> backend.php3 ou ?page=backend selon les cas
 // Pour les pages qui commencent par "spip_", il faut eventuellement
 // aller chercher spip_action.php?action=xxxx
-//
+// Sans argument, #URL_PAGE retourne l'URL courante.
+// #URL_PAGE* retourne l'URL sans convertir les & en &amp;
 // http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
-	$p->code = interprete_argument_balise(1,$p);
+	$code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 
 	$s = !$p->id_boucle ? '' :  $p->boucles[$p->id_boucle]->sql_serveur;
 
 	if ($s) {
-		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
-			$p->code = "404";
-		} else {
-			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
-			// elle devra aussi traiter le cas derogatoire type=page
-			if (function_exists($f = 'generer_generer_url_'.$s)){
-				if ($args) $p->code .= ", $args";
-				$p->code = $f('page', $p->code, $s);
+		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+		// elle devra aussi traiter le cas derogatoire type=page
+		if (function_exists($f = 'generer_generer_url_'.$s)){
+				if ($args) $code .= ", $args";
+				$code = $f('page', $code, $s);
 				return $p;
-			}
-			$s = 'connect=' .  addslashes($s);
-			$args = $args ? "$args . '&$s'" : "'$s'";
 		}
+		$s = 'connect=' .  addslashes($s);
+		$args = $args ? "$args . '&$s'" : "'$s'";
 	}
-	if (!$args) $args = "''";
-	$p->code = 'generer_url_public(' . $p->code . ", $args)";
+	if (!$code) {
+		$noentities = $p->etoile ? "'&'" : '';
+		$code = "url_de_base() . preg_replace(',^./,', '', self($noentities))";
+	} else{
+	  	if (!$args) $args = "''";
+		$noentities = $p->etoile ? ", true" : '';
+		$code = "generer_url_public($code, $args$noentities)";
+	}
+	$p->code = $code;
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
 //
 // #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
-//
+// #URL_ECRIRE*  meme chose, mais sans convertir les & en &amp;
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
@@ -175,8 +179,10 @@ function balise_URL_ECRIRE_dist($p) {
 			$fonc = $code;
 		else {$code = "(\$f = $code)"; $fonc = '$f';}
 		$args = interprete_argument_balise(2,$p);
-		if ($args != "''" && $args!==NULL)
-			$fonc .= ',' . $args;
+		if ($args === NULL) $args = "''";
+		$noentities = $p->etoile ? ", true" : '';
+		if (($args != "''")  OR $noentities)
+			$fonc .= ",$args$noentities";
 	}
 	$p->code = 'generer_url_ecrire(' . $fonc .')';
 	if ($code) 
@@ -192,20 +198,22 @@ function balise_URL_ECRIRE_dist($p) {
 function balise_URL_ACTION_AUTEUR_dist($p) {
 	$p->descr['session'] = true;
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
+	$script = interprete_argument_balise(1,$p);
+	if (!$script OR $script == "''") {
+		$msg = array('zbug_balise_sans_argument',
+			array('balise' => ' URL_ACTION_AUTEUR'));
+		erreur_squelette($msg, $p);
+	} else {
+		$args = interprete_argument_balise(2,$p);
+		if (!$args) $args = "''";
+		$redirect = interprete_argument_balise(3,$p);
+		// cas d'un appel (squelette) avec '' comme valeur de redirection
+		if ($redirect == "''")
+			$redirect = "";
+		if ($redirect)
+			$redirect = ",$redirect";
+		$p->code = "generer_action_auteur($script,$args$redirect)";
 	}
-
-	$p->code = interprete_argument_balise(1,$p);
-	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$p->code .= ",".$args;
-	$redirect = interprete_argument_balise(3,$p);
-	if ($redirect != "''" && $redirect!==NULL)
-		$p->code .= ",".$redirect;
-
-	$p->code = "generer_action_auteur(" . $p->code . ")";
 	$p->interdire_scripts = false;
 	return $p;
 }

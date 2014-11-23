@@ -3,13 +3,15 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@install_etape_ldap3_dist
 function install_etape_ldap3_dist()
@@ -23,7 +25,7 @@ function install_etape_ldap3_dist()
 		? _INSTALL_BASE_LDAP
 		: "ou=users, dc=mon-domaine, dc=com";
 
-	echo install_debut_html();
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_chemin_acces_1'),info_progression_etape(3,'etape_ldap','install/')),_T('info_chemin_acces_2');
 
@@ -35,7 +37,7 @@ function install_etape_ldap3_dist()
 		@ldap_close($ldap_link);
 	}
 	
-	$checked = false;
+	$checked = defined('_INSTALL_BASE_LDAP');
 	$res = '';
 	if (is_array($info) AND $info["count"] > 0) {
 		$res .= "<p>"._T('info_selection_chemin_acces')."</p>";
@@ -60,7 +62,7 @@ function install_etape_ldap3_dist()
 		$res .= _T('info_ou')." ";
 	}
 	$res .= "<br />\n<input name=\"base_ldap\" value=\"\" type='radio' id='manuel'";
-	if (!$checked) {
+	if (!$checked OR defined('_INSTALL_BASE_LDAP')) {
 		$res .= " checked=\"checked\"";
 		$checked = true;
 	}

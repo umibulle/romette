@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -473,8 +473,9 @@ function PtoBR($texte){
 }
 
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
+// en mettant des espaces (par defaut, soft hyphen &#173: = &shy;)
 // http://doc.spip.org/@lignes_longues
-function lignes_longues($texte, $l = 70) {
+function lignes_longues($texte, $l = 70, $espace='&#173;') {
 	if ($l<1) return $texte;
 	if (!preg_match("/[\w,\/.]{".$l."}/UmsS", $texte))
 		return $texte;
@@ -499,7 +500,7 @@ function lignes_longues($texte, $l = 70) {
 	// note : on pourrait preferer couper sur les / , etc.
 	if (preg_match_all("/[\w,\/.]{".$l."}/UmsS", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
-			$texte = str_replace($long[0], $long[0].' ', $texte);
+			$texte = str_replace($long[0], $long[0].$espace, $texte);
 		}
 	}
 
@@ -540,6 +541,7 @@ function majuscules($texte) {
 // "127.4 ko" ou "3.1 Mo"
 // http://doc.spip.org/@taille_en_octets
 function taille_en_octets ($taille) {
+	if ($taille < 1) return '';
 	if ($taille < 1024) {$taille = _T('taille_octets', array('taille' => $taille));}
 	else if ($taille < 1024*1024) {
 		$taille = _T('taille_ko', array('taille' => ((floor($taille / 102.4))/10)));
@@ -568,14 +570,9 @@ function attribut_html($texte,$textebrut = true) {
 function vider_url($url, $entites = true) {
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
-
 	$url = trim($url);
-	if (preg_match(",^(http:?/?/?|mailto:?)$,iS", $url))
-		return '';
-
-	if ($entites) $url = entites_html($url);
-
-	return $url;
+	$r = ",^(?:" . _PROTOCOLES_STD . '):?/?/?$,iS';
+	return preg_match($r, $url) ?'': ($entites ? entites_html($url) : $url);
 }
 
 // Extraire une date de n'importe quel champ (a completer...)
@@ -1141,7 +1138,7 @@ function date_fin_semaine($annee, $mois, $jour) {
 // http://doc.spip.org/@agenda_connu
 function agenda_connu($type)
 {
-  return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
+  return in_array($type, array('jour','mois','semaine','periode', 'trimestre')) ? ' ' : '';
 }
 
 
@@ -1218,7 +1215,9 @@ function agenda_periode($type, $nb, $avec, $sans='')
 		$evt = array($sans, $avec, $min, $max);
 		$type = 'mois';
 	}
-	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), self('&'), $evt);
+	$ancre = _request('ancre');
+	$s =  self('&') . (preg_match('/^[\w-]+$/', $ancre) ? "#$ancre" : '');
+	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), $s, $evt);
 }
 
 
@@ -1229,7 +1228,7 @@ function agenda_controle($date='date', $jour='jour', $mois='mois', $annee='annee
 	$jour = _request($jour);
 	$mois = _request($mois);
 	$annee = _request($annee);
-	
+
 	if (!($jour||$mois||$anne)) {
 		if ($date = recup_date(_request($date))) {
 			list($annee, $mois, $jour ) = $date;
@@ -1517,35 +1516,17 @@ function vider_attribut ($balise, $attribut) {
 	return inserer_attribut($balise, $attribut, '', false, true);
 }
 
-
-// Un filtre pour determiner le nom du mode des librement inscrits,
-// a l'aide de la liste globale des statuts (tableau mode => nom du mode)
-// Utile pour le formulaire d'inscription.
-// Si un mode est fourni, verifier que la configuration l'accepte.
-// Si mode inconnu laisser faire, c'est une extension non std
-// mais verifier que la syntaxe est compatible avec SQL
-
 // http://doc.spip.org/@tester_config
 function tester_config($id, $mode='') {
+	include_spip('inc/autoriser');
+	if ($mode)
+		return autoriser('inscrireauteur', $mode, $id) ? $mode : '';
+	elseif (
+	     autoriser('inscrireauteur', $mode = "1comite", $id)
+	  OR autoriser('inscrireauteur', $mode = "6forum", $id))
+		return $mode;
 
-	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
-	switch ($s) {
-
-	case 'info_redacteurs' :
-	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
-
-	case 'info_visiteurs' :
-	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
-
-	default:
-	  if ($mode AND $mode == addslashes($mode))
-	    return $mode;
-	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
-	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_visiteurs'];
-	  return '';
-	}
+	return '';
 }
 
 //
@@ -1595,11 +1576,42 @@ function modulo($nb, $mod, $add=0) {
 	return ($mod?$nb%$mod:0)+$add;
 }
 
+/**
+ * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ * et ceux volontairement spécifiés dans la constante
+ *
+ * @param string $nom
+ *      Nom (signature) proposé
+ * @return bool
+ *      - false si pas conforme,
+ *      - true sinon
+**/
+function nom_acceptable($nom) {
+	if (!is_string($nom)) {
+		return false;
+	}
+	if (!defined('_TAGS_NOM_AUTEUR')) define('_TAGS_NOM_AUTEUR','');
+	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_NOM_AUTEUR));
+	foreach($tags_acceptes as $tag) {
+		if (strlen($tag)) {
+			$remp1[] = '<'.trim($tag).'>';
+			$remp1[] = '</'.trim($tag).'>';
+			$remp2[] = '\x60'.trim($tag).'\x61';
+			$remp2[] = '\x60/'.trim($tag).'\x61';
+		}
+	}	
+	$v_nom = str_replace($remp2, $remp1, supprimer_tags(str_replace($remp1, $remp2, $nom)));
+	return str_replace('&lt;', '<', $v_nom) == $nom;
+}
 
 // Verifier la conformite d'une ou plusieurs adresses email
 //  retourne false ou la  normalisation de la derniere adresse donnee
 // http://doc.spip.org/@email_valide
 function email_valide($adresses) {
+	// eviter d'injecter n'importe quoi dans preg_match
+	if (!is_string($adresses))
+		return false;
+
 	// Si c'est un spammeur autant arreter tout de suite
 	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $adresses)) {
 		spip_log("Tentative d'injection de mail : $adresses");
@@ -2304,7 +2316,12 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 		return $plugins_actifs[$plugin][$type_info];
 	else {
 		$get_infos = charger_fonction('get_infos','plugins');
-		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir']))
+		// On prend en compte les extensions
+		if (!is_dir($plugins_actifs[$plugin]['dir_type']))
+			$dir_plugins = constant($plugins_actifs[$plugin]['dir_type']);
+		else
+			$dir_plugins = $plugins_actifs[$plugin]['dir_type'];
+		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], false, $dir_plugins))
 			return '';
 		if ($type_info == 'tout')
 			return $infos;

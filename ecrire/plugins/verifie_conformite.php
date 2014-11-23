@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -90,10 +90,10 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		$fonctions = array();
 		if (isset($arbre['fonctions']))
 			$fonctions = $arbre['fonctions'];
-	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
+	    $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
 
 		$extraire_pipelines = charger_fonction("extraire_pipelines","plugins");
-	  $arbre['pipeline'] = $extraire_pipelines($arbre);
+	    $arbre['pipeline'] = $extraire_pipelines($arbre);
 		foreach($arbre['pipeline'] as $pipe){
 			if (!isset($pipe['nom']))
 				if (!$silence)
@@ -153,6 +153,14 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $nut";
 			}
 		}
+		$traduire = array();
+		if (spip_xml_match_nodes(',^traduire,',$arbre,$trads)){
+			foreach(array_keys($trads) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$traduire[] = $att;
+			}
+		}
+		$arbre['traduire'] = $traduire;
 	}
 }
 

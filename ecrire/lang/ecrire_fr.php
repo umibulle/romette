@@ -489,8 +489,10 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>',
 'info_multi_secteurs' => '... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_nom' => 'Nom',
 'info_nom_destinataire' => 'Nom du destinataire',
+'info_nom_pas_conforme' => 'les tags html ne sont pas autoris&eacute;s',
 'info_nom_site' => 'Nom de votre site',
 'info_nom_site_2' => '<b>Nom du site</b> [Obligatoire]',
+'info_url_site_pas_conforme' => 'l\'URL du site n\'est pas valide.',
 'info_nombre_articles' => '@nb_articles@ articles,',
 'info_nombre_breves' => '@nb_breves@ br&egrave;ves,',
 'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION :',
@@ -557,12 +559,12 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
   partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  proposer leurs propres articles. <blockquote><div><i>Lors de la phase d\'inscription,
   les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
   leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
   h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
   serveurs&nbsp;: dans ce cas, l\'inscription automatique est
-  impossible.</i></blockquote>',
+  impossible.</i></div></blockquote>',
 'info_question_mots_cles' => 'Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?',
 'info_question_proposer_site' => 'Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP&nbsp;?
@@ -1010,7 +1012,7 @@ demande plus de puissance au serveur.',
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
  multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
  peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
- l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.</p>',
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.',
 'texte_documents_joints_2' => 'Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.',
 'texte_effacer_base' => 'Effacer la base de donn&eacute;es SPIP',
 'texte_effacer_donnees_indexation' => 'Effacer les donn&eacute;es d\'indexation',
@@ -1127,9 +1129,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_sur_titre' => 'Sur-titre',
 'texte_syndication' => 'Il est possible de r&eacute;cup&eacute;rer automatiquement, lorsqu\'un site Web le permet,
 		la liste de ses nouveaut&eacute;s. Pour cela, vous devez activer la syndication.
-		<blockquote><i>Certains h&eacute;bergeurs d&eacute;sactivent cette fonctionnalit&eacute;&nbsp;;
+		<blockquote><div><i>Certains h&eacute;bergeurs d&eacute;sactivent cette fonctionnalit&eacute;&nbsp;;
 		dans ce cas, vous ne pourrez pas utiliser la syndication de contenu
-		depuis votre site.</i></blockquote>',
+		depuis votre site.</i></div></blockquote>',
 'texte_table_ok' => ': cette table est OK.',
 'texte_tables_indexation_vides' => 'Les tables d\'indexation du moteur sont vides.',
 'texte_tentative_recuperation' => 'Tentative de r&eacute;paration',

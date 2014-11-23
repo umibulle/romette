@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -48,14 +48,15 @@ function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
-	if (!($s = tester_config('', $bio))) return $statut;
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $bio)) return $statut; //i.e. "nouveau"
 	include_spip('action/editer_auteur');
-	instituer_auteur($id_auteur,array('statut'=> $s));
+	instituer_auteur($id_auteur,array('statut'=> $bio));
 	include_spip('inc/modifier');
 	revision_auteur($id_auteur, array('bio'=>''));
 	include_spip('inc/session');
-	session_set('statut',$s);
-	return $s;
+	session_set('statut',$bio);
+	return $bio;
 }
 
 // Fonction d'authentification. Retourne:
@@ -220,6 +221,9 @@ function auth_init_droits($row)
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
+	// on force l'écriture de cette info dans le fichier de session
+	// pour pouvoir récupérer #SESSION{en_ligne} dans les squelettes
+	session_set('en_ligne', $row['en_ligne']);
 
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
@@ -657,10 +661,11 @@ function lire_php_auth($login, $pw, $serveur=''){
  * @param <type> $re
  * @param <type> $lien
  */
-function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
+function ask_php_auth($pb, $raison, $retour='', $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
 	$ici = generer_url_ecrire();
+	$retour = $retour?$retour:_T('icone_retour');
 	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
 	if ($url) {
 		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";

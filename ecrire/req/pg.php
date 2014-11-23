@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -525,6 +525,10 @@ function spip_pg_groupby($groupby, $from, $select)
 	if (!$groupby) return '';
 
 	$groupby = spip_pg_frommysql($groupby);
+	// Ne pas mettre dans le Group-By des valeurs numeriques
+	// issue de prepare_recherche
+	$groupby = preg_replace('/^\s*\d+\s+AS\s+\w+\s*,?\s*/i','', $groupby);
+	$groupby = preg_replace('/,\s*\d+\s+AS\s+\w+\s*/i','', $groupby);
 	$groupby = preg_replace('/\s+AS\s+\w+\s*/i','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
@@ -813,7 +817,9 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 	
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	// une premiere fois pour ajouter maj dans les cles
-	$les_cles = spip_pg_ajouter_champs_timestamp($table, $tab_couples[0], $desc, $serveur);
+	
+	$c = isset($tab_couples[0]) ? $tab_couples[0] : array();
+	$les_cles = spip_pg_ajouter_champs_timestamp($table, $c, $desc, $serveur);
 	
 	$cles = "(" . join(',',array_keys($les_cles)). ')';
 	$valeurs = array();
@@ -976,7 +982,7 @@ function spip_pg_sequence($table)
 function spip_pg_cite($v, $t)
 {
 	if (sql_test_date($t)) {
-		if (strpos("0123456789", $v[0]) === false)
+		if ($v AND (strpos("0123456789", $v[0]) === false))
 			return spip_pg_frommysql($v);
 		else {
 			if (strpos($v, "-00-00") <= 4) {
@@ -1007,7 +1013,10 @@ function spip_pg_hex($v)
 
 function spip_pg_quote($v, $type='')
 {
-	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+	return ($type === 'int' AND !$v) ? '0' :
+		(is_numeric($v) ? strval($v) :
+			(!is_array($v) ? ("'" . pg_escape_string($v) . "'")
+			 : join(",", array_map('_q', $v))));
 }
 
 function spip_pg_date_proche($champ, $interval, $unite)
@@ -1030,6 +1039,8 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 //
 // IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
 //
+	// s'il n'y a pas de valeur, eviter de produire un IN vide: PG rale.
+	if (!$valeurs) return $not ? '0=0' : '0=1';
 	if (strpos($valeurs, "CAST(x'") !== false)
 		return "($val=" . join("OR $val=", explode(',',$valeurs)).')';
 	$n = $i = 0;

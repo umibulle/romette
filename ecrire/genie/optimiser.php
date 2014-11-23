@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -306,7 +306,7 @@ function optimiser_base_disparus($attente = 86400) {
 			          ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
 				"O.$id_table_objet IS NULL");
 		// sur une cle primaire composee, pas d'autres solutions que de virer un a un
-		while ($row = sql_fetch($sel)){
+		while ($row = sql_fetch($res)){
 			sql_delete("spip_documents_liens", array("id_document=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
 			spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table spip_documents_liens");
 		}

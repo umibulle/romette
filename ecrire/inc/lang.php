@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -283,7 +283,7 @@ function utiliser_langue_visiteur() {
 			return $l;
 
 	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
-		if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#', trim($s), $r)) {
+		if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)) {
 			if (changer_langue($l=strtolower($r[1]))) return $l;
 		}
 	}
@@ -346,13 +346,16 @@ function init_langues() {
 }
 
 // http://doc.spip.org/@html_lang_attributes
-function html_lang_attributes()
+function html_lang_attributes($dir=true)
 {
+	if ($dir)
+		$dir = " dir='" . ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr') . "'";
+
 	return  "<html lang='"
 	. $GLOBALS['spip_lang']
-	. "' dir='"
-	. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-	  . "'>\n" ;
+	. "'"
+	. $dir
+	. ">\n" ;
 }
 init_langues();
 utiliser_langue_site();

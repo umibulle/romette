@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -88,6 +88,17 @@ function action_charger_plugin_dist() {
 
 		if (preg_match(",^Content-Type:\s*application/zip$,Uims",$head))
 			$extension = "zip";
+		elseif (preg_match(',^Content-Disposition:\s*attachment;\s*filename="?([^"]+)"?$,Uims',$head,$m)){
+			$f = $m[1];
+			if (pathinfo($f, PATHINFO_EXTENSION)=="zip"){
+				$fichier = (_request('fichier')?
+					_request('fichier')
+					:"h".substr(md5($zip),0,8)."-".basename($f)
+					);
+				$fichier = $tmp.basename($fichier);
+				$extension = "zip";
+			}
+		}
 		// au cas ou, si le content-type n'est pas la
 		// mais que l'extension est explicite
 		elseif(pathinfo($zip, PATHINFO_EXTENSION)=="zip")
@@ -103,11 +114,13 @@ function action_charger_plugin_dist() {
 		}
 	}
 	else {
-		$extension = pathinfo($zip, PATHINFO_EXTENSION);
+		$extension = pathinfo($fichier, PATHINFO_EXTENSION);
+		if (!$extension)
+			$extension = pathinfo($zip, PATHINFO_EXTENSION);
 	}
-
 	# format de fichier inconnu
 	if (!$extension) {
+		spip_log("Extension inconnue pour le paquet $fichier venant de $zip");
 		include_spip('inc/headers');
 		redirige_url_ecrire('charger_plugin');
 	}
@@ -233,7 +246,7 @@ function action_charger_plugin_dist() {
 	}
 
 
-	include_spip('exec/install'); // pour bouton_suivant()
+	include_spip('inc/install'); // pour bouton_suivant()
 
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 

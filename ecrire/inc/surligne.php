@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -48,6 +48,7 @@ function surligner_mots($page) {
       include_spip('inc/charsets');
       if(!is_utf8($surcharge_surligne)) $surcharge_surligne = utf8_encode($surcharge_surligne);
     }  
+    $surcharge_surligne = preg_replace(',\*$,', '', trim($surcharge_surligne)); # supprimer un * final
   }
   foreach($surlignejs_engines as $engine) 
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 

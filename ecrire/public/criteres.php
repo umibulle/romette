@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -60,20 +60,29 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
+	$type = $boucle->type_requete;
+	// Dans le cas NOT, la table du doublon peut etre indiquee
+	// si la table courante a un champ homonyme de sa cle primaire.
+	// Tres utile pour la table des forums.
+	if (isset($crit->param[1])) {
+	  $primary = '';
+	  $x = !$crit->not ? '' : calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
+	  # attention au commentaire "// x signes" qui precede
+	  if (preg_match(",^(?:\s*//[^\n]*\n)?'([^']+)'*$,ms", $x, $m))  {
+	    $x = id_table_objet($type = $m[1]);
+	    if (isset($boucle->show['field'][$x]))
+	      $primary = $x; // sinon erreur declenchee ci-dessous
+	  }
+	}
 
 	if (!$primary OR strpos($primary,',')) {
 		return (array('zbug_doublon_sur_table_sans_cle_primaire'));
 	}
-
 	$not = ($crit->not ? '' : 'NOT');
-
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 
-	$nom = "'" .
-	  $boucle->type_requete . 
-	  "'" .
-	  ($nom == "''" ? '' : " . $nom");
+	$nom = "'" . $type .  "'" .  ($nom == "''" ? '' : " . $nom");
 
 	$debutdoub = '$doublons['
 	.  (!$not ? '' : ($boucle->doublons . "[]= "));
@@ -92,9 +101,6 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 		}
 	}
 	$boucle->where[]= array($suitin . $findoub . ", '" . $not . "')");
-
-
-
 
 # la ligne suivante avait l'intention d'eviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
@@ -530,19 +536,38 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	$params = $crit->param;
 
 	if (count($params) < 1)
-		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
+		return array('zbug_critere_inconnu', array('critere' => $crit->op . " ?"));
 
-	$parent = $boucles[$idb]->id_parent;
-
-	// les valeurs $date et $type doivent etre connus a la compilation
-	// autrement dit ne pas etre des champs
+	$boucle = &$boucles[$idb];
+	$parent = $boucle->id_parent;
+	$fields = $boucle->show['field'];
 
 	$date = array_shift($params);
-	$date = $date[0]->texte;
-
 	$type = array_shift($params);
+
+	// la valeur $type doit etre connue a la compilation
+	// donc etre forcement reduite a un litteral unique dans le source
+
 	$type = $type[0]->texte;
 
+	// La valeur date doit designer un champ de la table SQL.
+	// Si c'est un litteral unique dans le source, verifier a la compil,
+	// sinon synthetiser le test de verif pour execution ulterieure
+	// On prendra arbitrairement le premier champ si test negatif.
+
+	if ((count($date) == 1)  AND ($date[0]->type == 'texte')) {
+		$date = $date[0]->texte;
+		if (!isset($fields[$date]))
+		  return array('zbug_critere_inconnu', array('critere' => $crit->op . " " . $date));
+	} else  {
+		$a = calculer_liste($date, array(), $boucles, $parent);
+		$noms = array_keys($fields);
+		$defaut = $noms[0];
+		$noms = join(" ", $noms);
+		# bien laisser 2 espaces avant $nom pour que strpos<>0
+		$cond = "(\$a=strval($a))AND\nstrpos(\"  $noms \",\" \$a \")";
+		$date = "'.(($cond)\n?\$a:\"$defaut\").'";
+	}
 	$annee = $params ? array_shift($params) : "";
 	$annee = "\n" . 'sprintf("%04d", ($x = ' .
 		calculer_liste($annee, array(), $boucles, $parent) .
@@ -573,7 +598,6 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 		calculer_liste($jour2, array(), $boucles, $parent) .
 		') ? $x : date("d"))';
 
-	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
 
 	if ($type == 'jour')
@@ -862,7 +886,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 		  $where = array("'?'", "(is_array($pred))", 
 				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
 				 $where);
-		$where = array("'?'", "!$pred","''", $where);
+		$where = array("'?'", "!(is_array($pred)?count($pred):strlen($pred))","''", $where);
 		if ($where_complement) // condition annexe du type "AND (objet='article')"
 			$where_complement = array("'?'", "!$pred","''", $where_complement);
 	}
@@ -991,6 +1015,7 @@ function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
 	if (is_array($exceptions_des_jointures[$table])) {
+
 		$t = $exceptions_des_jointures[$table];
 		$index = isset($t[$col])
 		?  $t[$col] : (isset($t['']) ? $t[''] : array());
@@ -999,11 +1024,14 @@ function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col
 			list($t, $col, $calculer_critere_externe) = $index;
 		elseif (count($index)==2)
 			list($t, $col) = $t[$col];
-		else 	{
+		elseif (count($index)==1){
 			list($calculer_critere_externe) = $index;
 			$t = $table;
 		}
-	} else if (isset($exceptions_des_jointures[$col]))
+		else
+			$t=''; // jointure non declaree. La trouver.
+	}
+	elseif (isset($exceptions_des_jointures[$col]))
 		list($t, $col) = $exceptions_des_jointures[$col];
 	else $t =''; // jointure non declaree. La trouver.
 

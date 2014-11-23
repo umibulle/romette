@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -76,21 +76,12 @@ function afficher_onglets_pages($ordre,$onglets){
 
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
-	global $spip_display, $spip_lang_left;
+	global $spip_display;
 	static $accesskey = 97; // a
 
 	//zoom:1 fixes all expanding blocks in IE, see authors block in articles.php
 	//being not standard, next step can be putting this kind of hacks in a different stylesheet
 	//visible to IE only using conditional comments.
-
-	$style_cadre = " style='";
-	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = "padding-$spip_lang_left: 38px;";
-		$style_cadre .= "'";
-	} else {
-		$style_cadre .= "'";
-		$style_gauche = '';
-	}
 
 	// accesskey pour accessibilite espace prive
 	if ($accesskey <= 122) // z
@@ -103,7 +94,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	. ($id?"id='$id' ":"")
 	."class='cadre cadre-$style"
 	. ($class?" $class":"")
-	."'$style_cadre>";
+	."'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		if ($fonction) {
@@ -438,14 +429,14 @@ function parametres_css_prive(){
 
 
 // http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip, $minipres=false) {
+function envoi_link($nom_site_spip, $minipres=false, $js='') {
 	global $spip_display, $spip_lang;
 
 	$paramcss = parametres_css_prive();
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('style_prive_defaut.css'))
+	  . url_absolue(find_in_path('prive/style_prive_defaut.css'))
 	. '" id="cssprivee" />'  . "\n"
 
 	// CSS calendrier
@@ -454,20 +445,20 @@ function envoi_link($nom_site_spip, $minipres=false) {
 		. url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
 		: '')
 
-	// CSS imprimante (masque des trucs, a completer)
+	// CSS des raccourcis
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style.css'))
+	  . url_absolue(find_in_path('prive/spip_style.css'))
 	. '" media="all" />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_print.css'))
+	  . url_absolue(find_in_path('prive/spip_style_print.css'))
 	. '" media="print" />' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
 
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_'
+	  . url_absolue(find_in_path('prive/spip_style_'
 				     . (_SPIP_AJAX ? 'invisible' : 'visible')
 				     . '.css'))
 	.'" />' . "\n"
@@ -482,7 +473,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
-	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"");
+	   . url_absolue(find_in_path('prive/minipres.css')).'" />' . "\n":"");
 
 	$favicon = find_in_path('spip.ico');
 
@@ -491,7 +482,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. url_absolue($favicon)
 	. "\" type='image/x-icon' />\n";
 	
-	$js = debut_javascript();
+	$js = debut_javascript($js);
 
 	if ($spip_display == 4) return $res . $js;
 
@@ -513,7 +504,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 }
 
 // http://doc.spip.org/@debut_javascript
-function debut_javascript()
+function debut_javascript($fin='')
 {
 	global $spip_lang_left, $browser_name, $browser_version;
 	include_spip('inc/charsets');
@@ -536,11 +527,8 @@ function debut_javascript()
 
 	if (!defined('_LARGEUR_ICONES_BANDEAU'))
 		include_spip('inc/bandeau');
-	return
-	// envoi le fichier JS de config si browser ok.
-		$GLOBALS['browser_layer'] .
-	 	http_script(
-			((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
+
+	$inline =  ((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
 			? ''
 			: "jQuery.ajax({'url':'$testeur'});") .
 			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
@@ -555,11 +543,15 @@ function debut_javascript()
 			   ($browser_version >= 6))) ? 1 : 0) .
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) .
-			"';\n") .
-		//plugin needed to fix the select showing through the submenus o IE6
-    (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('', 'bgiframe.js'):'' ) .
-    http_script('', 'presentation.js') . 
-    http_script('', 'gadgets.js');
+			"';\n";
+	return
+	  // envoi le fichier JS de config si browser ok.
+	  $GLOBALS['browser_layer'] .
+	  //plugin needed to fix the select showing through the submenus o IE6
+	  (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('', 'bgiframe.js'):'' ) .
+	  http_script('', 'presentation.js') . 
+	  http_script('', 'gadgets.js') .
+	  http_script($inline . $fin);
 }
 
 // Fonctions onglets
@@ -1159,11 +1151,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 }
 
 // http://doc.spip.org/@bouton_spip_rss
-function bouton_spip_rss($op, $args=array(), $lang='') {
+function bouton_spip_rss($op, $args=array(), $lang='', $title='RSS') {
 
 	global $spip_lang_right;
 	include_spip('inc/acces');
-	$clic = http_img_pack('feed.png', 'RSS', '', 'RSS');
+	$clic = http_img_pack('feed.png', 'RSS', '', $title);
 	$args = param_low_sec($op, $args, $lang, 'rss');
 	$url = generer_url_public('rss', $args);
 	return "<a style='float: $spip_lang_right;' href='$url'>$clic</a>";

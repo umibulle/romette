@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -73,8 +73,8 @@ function legender_entete($document)
 {
 	$titre = $document['titre'];
 	$entete = basename($document['fichier']);
-	if (($n=strlen($entete)) > 20)
-		$entete = substr($entete, 0, 7)."...".substr($entete, $n-7, $n);
+	if (strlen($entete) > 20)
+		$entete = substr($entete, 0, 20)."...";
 	if (strlen($titre))
 		$entete = "<strong>". lignes_longues(typo($titre),25) . "</strong>";
 	return sinon($entete,_T('info_sans_titre'));

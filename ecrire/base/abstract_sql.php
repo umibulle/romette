@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -313,7 +313,7 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
 	if ($spip == NULL){
-		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$spip = $connexion['prefixe'] . '\_%';
 	}
 	
@@ -334,7 +334,7 @@ function sql_alltable($spip=NULL, $serveur='', $option=true)
 function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 {
 	if ($table_spip){
-		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$prefixe = $connexion['prefixe'];
 		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
 	} else $vraie_table = $table;
@@ -393,7 +393,7 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 function sql_error($serveur='') {
 	$f = sql_serveur('error', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
-	return $f('query inconnue', $serveur, $option!==false);
+	return $f('query inconnue', $serveur);
 }
 
 // http://doc.spip.org/@sql_errno

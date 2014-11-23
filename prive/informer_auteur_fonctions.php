@@ -3,12 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Filtre ad hoc pour le formulaire de login:
 // le parametre var_login n'est pas dans le contexte pour optimiser le cache
@@ -23,16 +25,19 @@ function informer_auteur($bof)
 	if ($row AND is_array($row))
 		unset($row['id_auteur']);
 	else {
-		// piocher les infos sur un autre login
-		if ($n = sql_countsel('spip_auteurs',"login<>''")){
-			$n = (abs(crc32($login))%$n);
-			$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
-			if ($row AND is_array($row)){
-				unset($row['id_auteur']);
-				$row['login'] = $login;
-			}
-		}
-		else $row = array();
+		// generer de fausses infos, mais credibles, pour eviter une attaque
+		// http://core.spip.org/issues/1758
+
+		include_spip('inc/securiser_action');
+		$fauxalea1 = md5('fauxalea'.secret_du_site().$login.floor(date('U')/86400));
+		$fauxalea2 = md5('fauxalea'.secret_du_site().$login.ceil(date('U')/86400));
+
+		$row = array('login' => $login,
+		 'cnx' => 0,
+		 'logo' => "",
+		 'alea_actuel' => substr_replace($fauxalea1,'.',24,0),
+		 'alea_futur' => substr_replace($fauxalea2,'.',24,0)
+		);
 	}
 
 	return json_export($row);

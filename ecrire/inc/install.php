@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -56,8 +56,10 @@ function analyse_fichier_connection($file)
 		array_shift($regs);
 		return $regs;
 	} else {
-		$arg = '\s*\'([^\']*)\'\s*,';
-		if (preg_match("#spip_connect_db\($arg$arg$arg$arg\s*'([^']*)'\s*(?:,\s*'([^']*))?#", $s, $regs)) {
+		$ar = '\s*\'([^\']*)\'';
+		$r = '\s*,' . $ar;
+		$r = "#spip_connect_db[(]$ar$r$r$r$r(?:$r(?:$r(?:$r)?)?)?#";
+		if (preg_match($r, $s, $regs)) {
 			$regs[2] = $regs[1] . (!$regs[2] ? '' : ":$port_db;");
 			array_shift($regs);
 			array_shift($regs);
@@ -65,7 +67,7 @@ function analyse_fichier_connection($file)
 		}
 	}
 	spip_log("$file n'est pas un fichier de connexion");
-	return '';
+	return array();
 }
 
 // http://doc.spip.org/@bases_referencees

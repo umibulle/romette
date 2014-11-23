@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -71,18 +71,15 @@ function decompiler_polyglotte($struct, $fmt='', $prof=0)
 
 function decompiler_idiome($struct, $fmt='', $prof=0)
 {
-	$module = ($struct->module == MODULES_IDIOMES)? ''
-	  : $struct->module;
-
 	$args = array();
 	foreach ($struct->arg as $k => $v) {
-		if ($k) $args[$k]= public_decompiler($v, $fmt, $prof);
+		$args[$k]= public_decompiler($v, $fmt, $prof);
 	}
 
 	$filtres =  decompiler_liste($struct->param, $fmt, $prof);
 
 	$f = 'format_idiome_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($struct->nom_champ, $module, $args, $filtres, $prof);
+	return $f($struct->nom_champ, $struct->module, $args, $filtres, $prof);
 }
 
 function decompiler_champ($struct, $fmt='', $prof=0)

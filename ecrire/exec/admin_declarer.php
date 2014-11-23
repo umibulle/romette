@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -53,7 +53,7 @@ function exec_admin_declarer_dist()
 // http://doc.spip.org/@autres_bases
 function autres_bases()
 {
-	$tables =  bases_referencees(_FILE_CONNECT_TMP);
+	$tables =  bases_referencees(_FILE_CONNECT);
 
 	if ($tables)
 		$tables = "<br /><br /><fieldset style='margin-bottom: 10px;'>"

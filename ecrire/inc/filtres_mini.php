@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -23,17 +23,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // inspire (de loin) par PEAR:NetURL:resolvePath
 //
 // http://doc.spip.org/@resolve_path
-function resolve_path($url) {
-	list($url, $query) = explode('?', $url,2);
-	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
+function resolve_path($url_o) {
+	preg_match('@^([^?]*)(.*)$@', $url_o, $regs);
+	list(,$url, $query) = $regs;
+	while (preg_match(',/\.?/,', $url, $regs)	# supprime // et /./
 	OR preg_match(',/[^/]*/\.\./,S', $url, $regs)	# supprime /toto/../
-	OR preg_match(',^/\.\./,S', $url, $regs))		# supprime les /../ du haut
+	OR preg_match(',^/\.\./,S', $url, $regs))	# supprime les /../ du haut
 		$url = str_replace($regs[0], '/', $url);
 
-	if ($query)
-		$url .= '?'.$query;
-
-	return '/'.preg_replace(',^/,S', '', $url);
+	return '/'.preg_replace(',^/,S', '', $url . $query);
 }
 
 // 
@@ -91,7 +89,7 @@ function url_absolue($url, $base='') {
 // ne s'applique qu'aux textes contenant des liens
 // http://doc.spip.org/@liens_absolus
 function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
+	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$abs = url_absolue($lien[3], $base);

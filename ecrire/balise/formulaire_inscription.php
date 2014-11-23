@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -31,6 +31,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $focus, $id) = $args;
+
 	$mode = tester_config($id, $mode);
 	return $mode ? array($mode, $focus, $id) : '';
 }

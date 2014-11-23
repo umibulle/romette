@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -21,11 +21,12 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 }
 
 // http://doc.spip.org/@redirige_action_auteur
-function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='') {
+function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='', $public=false) {
 
-	$r = _DIR_RESTREINT . generer_url_ecrire($ret, $gra, true, true);
+	$r = ($public ? _DIR_RESTREINT_ABS : _DIR_RESTREINT) .
+	  generer_url_ecrire($ret, $gra, true, true);
 
-	return generer_action_auteur($action, $arg, $r, $mode, $atts);
+	return generer_action_auteur($action, $arg, $r, $mode, $atts, $public);
 }
 
 // http://doc.spip.org/@redirige_action_post
@@ -108,7 +109,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 // Comme ci-dessus, mais reduit au cas POST et on fournit le bouton Submit.
 // 
 // http://doc.spip.org/@ajax_action_post
-function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_i='', $atts_span = "", $args_ajax='')
+function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_i='', $atts_span = "", $args_ajax='', $fct_ajax='')
 {
 	global $spip_lang_right;
 
@@ -152,12 +153,13 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 		if (isset($GLOBALS['var_profile']))
 			$args_ajax .= '&var_profile=1';
 
+		$js = ajax_action_declencheur('this', $ancre, $fct_ajax);
 		return redirige_action_post($action,
 			$arg,
 			$action,
 			"script=$retour$args_ajax",
 			$corps,
-			" onsubmit=" . ajax_action_declencheur('this', $ancre));
+			" onsubmit=$js");
 	}
 }
 

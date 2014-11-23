@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -139,7 +139,17 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	} else $t = 0 ;
  
 	$connexion['last'] = $query;
-	$r = $link ? mysql_query($query, $link) : mysql_query($query);
+
+	// ajouter un debug utile dans log/mysql-slow.log ?
+	$debug = (!defined('_DEBUG_SLOW_QUERIES') || !_DEBUG_SLOW_QUERIES)
+		? ''
+		:	' /* '
+			.str_replace('*/','@/',
+				$_SERVER['REQUEST_URI'].' + '.$GLOBALS['ip']
+			)
+			.' */';
+
+	$r = $link ? mysql_query($query.$debug, $link) : mysql_query($query.$debug);
 
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
@@ -291,8 +301,14 @@ function traite_query($query, $db='', $prefixe='') {
 	} else {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
-		if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r)) {
-		  $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+		// propager le prefixe en cas de requete imbriquee
+		// il faut alors echapper les chaine avant de le faire, pour ne pas risquer de
+		// modifier une requete qui est en fait juste du texte dans un champ
+		if (strpos(strtoupper($suite),"SELECT")!==false) {
+			list($suite,$textes) = query_echappe_textes($suite);
+			if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r))
+		    $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+			$suite = query_reinjecte_textes($suite, $textes);
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
@@ -314,7 +330,8 @@ function spip_mysql_selectdb($db) {
 
 // http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysql_listdbs($serveur='',$requeter=true) {
-	return @mysql_list_dbs();
+	$res = spip_mysql_query("SHOW DATABASES");
+	return $res;
 }
 
 // Fonction de creation d'une table SQL nommee $nom
@@ -397,7 +414,8 @@ function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true)
 function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_mysql_query("DROP TABLE$exist `$table`", $serveur, $requeter);
+	if (!preg_match('@^\w+$@', $table)) $table = "`$table`";
+	return spip_mysql_query("DROP TABLE$exist $table", $serveur, $requeter);
 }
 
 // supprime une vue 
@@ -416,7 +434,8 @@ function spip_mysql_showbase($match, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_mysql_repair
 function spip_mysql_repair($table, $serveur='',$requeter=true)
 {
-	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
+	if (!preg_match('@^\w+$@', $table)) $table = "`$table`";
+	return spip_mysql_query("REPAIR TABLE $table", $serveur, $requeter);
 }
 
 // Recupere la definition d'une table ou d'une vue MySQL

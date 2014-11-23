@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -19,7 +19,8 @@ function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 	else 
 		$valeurs['_commentaire'] = _T('pass_forum_bla');
 
-	if (!tester_config($id, $mode))
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $mode, $id))
 		$valeurs['editable'] = false;
 
 	return $valeurs;
@@ -29,12 +30,15 @@ function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 
 	$erreurs = array();
-	include_spip('inc/filtres');	
-	if (!tester_config($id, $mode) OR (strlen(_request('nobot'))>0))
+	include_spip('inc/filtres');
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $mode, $id) OR (strlen(_request('nobot'))>0))
 		$erreurs['message_erreur'] = _T('rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))
 		$erreurs['nom_inscription'] = _T("info_obligatoire");
+	elseif (!nom_acceptable(_request('nom_inscription')))
+		$erreurs['nom_inscription'] = _T("ecrire:info_nom_pas_conforme");
 	if (!$mail = _request('mail_inscription'))
 		$erreurs['mail_inscription'] = _T("info_obligatoire");
 	
@@ -103,7 +107,7 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 		if (!$envoyer_mail($mail_complet, $sujet, $msg, $from, $head))
 			$desc = _T('form_forum_probleme_mail');
 		// Notifications
-		if ($notifications = charger_fonction('notifications', 'inc')) {
+		if (is_array($desc) and $notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('inscription', $desc['id_auteur'],
 				array('nom' => $desc['nom'], 'email' => $desc['email'])
 			);

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -35,7 +35,7 @@ function exec_valider_xml_dist()
 // http://doc.spip.org/@valider_xml_ok
 function valider_xml_ok($url, $req_ext, $limit, $rec)
 {
-	$url = urldecode($url);
+	$url = urldecode(trim($url));
 	$rec = !$rec ? false : array();
 	if (!$limit) $limit = 200;
 	$titre = _T('analyse_xml');
@@ -45,7 +45,6 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 		$texte = $bandeau = $err = '';
 	} else {
 		include_spip('inc/distant');
-
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
 			$ext = !preg_match('/^[.*\w]+$/', $req_ext) ? 'php' : $req_ext;
@@ -56,13 +55,15 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			}
 			if ($files) {
 				$res = valider_dir($files, $ext, $url);
-				list($err, $res) = valider_resultats($res, $ext === 'html');
-				$err = ' (' . $err . '/' . count($files) .')';
+				$mode = (($ext === 'html') AND substr_count($dir, '/') <= 1);
+				list($err, $terr, $res) = valider_resultats($res, $mode);
+				$err = '<br /><h2>' . $terr . " " . _T('erreur_texte') . " ($err/" . count($files) .')</h2>';
+				$res = $err . $res;
 			} else {
 				$res = _T('texte_vide');
 				$err = '';
 			}
-			$bandeau = $dir . '*' . $ext . $err;
+			$bandeau = $dir . '*' . $ext ;
 		} else {
 			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
 			  list(,$server, $dir, $script, $args) = $r;
@@ -80,8 +81,13 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
-				$res = $transformer_xml(charger_fonction($url, $dir), $args);
-				$url_aff = valider_pseudo_url($dir, $script);
+				if (($dir=='exec') AND (tester_url_ecrire($url) == 'fond')) {
+					include_spip('exec/fond');
+					$args = array($url, array());
+					$url = 'fond_args';
+				}
+				$res = valider_script($transformer_xml, $script, $dir, $ext, $args);
+				$url_aff = $res[3];
 			} else {
 				$res = $transformer_xml(recuperer_page($url));
 				$url_aff = entites_html($url);
@@ -90,7 +96,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 				list($texte, $err) = emboite_texte($res);
 			}
 			else {
-				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
+				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>x';
 				list($texte, ) = emboite_texte($res);
 			}
 
@@ -100,7 +106,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			$bandeau = "<a href='$url_aff'>$url</a>";
 		}
 	}
-
+	$titre .= ' ' . $url_aff; 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$debut = $commencer_page($titre);
 	$jq = http_script("", 'jquery.js');
@@ -109,7 +115,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" id="var_url" onfocus="'.$onfocus . '" />';
 	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
 
-	echo "<h1>", $titre, '<br>', $bandeau, '</h1>',
+	echo "<h1>", $titre, '<br />', $bandeau, '</h1>',
 	  "<div style='text-align: center'>", $onfocus, "</div>",
 	  $res,
 	  fin_page();
@@ -118,7 +124,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 // http://doc.spip.org/@valider_resultats
 function valider_resultats($res, $mode)
 {
-	$i = $j = 0;
+	$i = $j = $k = 0;
 	$table = '';
 	rsort($res);
 	foreach($res as $l) {
@@ -133,7 +139,7 @@ function valider_resultats($res, $mode)
 		$err = (!intval($nb)) ? '' : 
 		  ($erreurs[0][0] . ' ' . _T('ligne') . ' ' .
 		   $erreurs[0][1] .($nb==1? '': '  ...'));
-		if ($err) $j++;
+		if ($err) {$j++; $k+= $nb;}
 		$h = $mode
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
@@ -143,10 +149,10 @@ function valider_resultats($res, $mode)
 		. "<td style='text-align: right$color'>$texte</td>"
 		. "<td style='text-align: right'>$temps</td>"
 		. "<td style='text-align: left'>$err</td>"
-		. "<td>$script</td>"
-		. "<td><a href='$h'>$appel</a></td>";
+		. "<td><a href='$h' title='$appel'>$script</a></td>";
 	}
-	return array($j, "<table class='spip'>"
+
+	return array($j, $k, "<table class='spip' width='95%'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
 	  . "</th><th>" 
@@ -154,48 +160,46 @@ function valider_resultats($res, $mode)
 	  . "</th><th>"
 	  . _T('zbug_profile', array('time' =>''))
 	  . "</th><th>"
-	  . _T('message')
-	  . "</th><th>Page</th><th>args"
+	  . _T('public:message')
+	  . "</th><th>"
+	  . _T('ecrire:info_url')
 	  . "</th></tr>"
 	  . $table
-		     . "</table>");
+	  . "</table>");
 }
 
 // http://doc.spip.org/@valider_script
-function valider_script($transformer_xml, $script, $dir, $ext)
+function valider_script($transformer_xml, $script, $dir, $ext, $args=true)
 {
 	$script = basename($script, '.php');
 	$dir = basename($dir);
 	$f = charger_fonction($script, $dir, true);
 // ne pas se controler soi-meme ni l'index du repertoire ni un fichier annexe
-	if ($script == _request('exec') OR $script=='index' OR !$f)
-		return array('/', 0, '', $script,''); 
 
-	list($texte, $err) = $transformer_xml($f, true);
+	if ($script == _request('exec') OR $script=='index' OR !$f)
+		return array(0, array(), $script,''); 
+
+	list($texte, $err) = $transformer_xml($f, $args);
 	$appel = '';
 	
 	// s'il y a l'attribut minipres, le test est non significatif
-	// le script necessite peut-etre des arguments, on lui en donne,
-	// en appelant la fonction _args associee si elle existe
-	// Si ca ne marche toujours pas, les arguments n'étaient pas bons
-	// ou c'est une authentification pour action d'administration;
-	// tant pis, on signale le cas par un resultat negatif
+	// le script necessite peut-etre des arguments.
+	// On regarde alors s'il existe une fonction de meme nom
+	// mais avec "_args" au bout:
+	// elle est censee recevoir les valeurs de $_REQUEST  et ne pas faire
+	// les controles d'autorisation (fait par la fonction principale)
+	// Si ou on l'appelle avec des arguments arbitraires;
+	// si nouvel echec on abandonne:
+	// que faire contre l'absence de reflexivite et de typage de ce fichu PHP
 
-	if (strpos($texte, "id='minipres'")) {
-		if (!$g = charger_fonction($script . '_args', $dir, true)) {
-			$res = 0 - strlen($res);
-		} else {
-			$args = array(1, 'id_article', 1);
-			list($texte, $err) = $transformer_xml($g, $args);
-			$appel = 'id_article=1&type=id_article&id=1';
-			if (strpos($texte, "id='minipres'")) {
-				$res = 0 - strlen($texte);
-			} else $res = strlen($texte);
-		}
-	} else $res = strlen($texte);
-
+	if (strpos($texte, "id='minipres'")
+	AND ($g = charger_fonction($script . '_args', $dir, true))) {
+		$args = array(1, 'id_article', 1, 0);
+		list($texte, $err) = $transformer_xml($g, $args);
+		$appel = 'id_article=1&type=id_article&id=1';
+	}
 	$appel = valider_pseudo_url($dir, $script, $appel);
-	return array(count($err), $res, $err, $script, $appel);
+	return array($texte, $err, $script, $appel);
 }
 
 // http://doc.spip.org/@valider_pseudo_url
@@ -213,9 +217,9 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 {
 	if (!lire_fichier ($file, $text)) return array('/', '/', $file,''); 
 	if (!strpos($text, 'DOCTYPE')) {
-		preg_match(",Content[-]Type: *\w+/(\S)+,", $text, $r);
+		preg_match(",Content[-]Type:\s*[^/]+/([^ ;]+),", $text, $r);
 		if ($r[1] === 'css' OR $r[1] === 'plain')
-			return array('/', 'DOCTYPE?', $file,'');
+		  return array(0, array(), $file,'');
 	}
 
 	if ($ext != 'html') {
@@ -225,21 +229,21 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 		$script = $file;
 	} else {
 		$script = basename($file,'.html');
-		// pas de validation solitaire pour les squelettes internes, a revoir.
+		// les squelettes en sous-repertoire sont problematiques,
+		// traitons au moins le cas prive/exec
 		if (substr_count($dir, '/') <= 1) {
 			$url = generer_url_public($script, $contexte);
-		} else 	$url = '';
+		} else 	$url = valider_pseudo_url(basename($dir), basename($file, '.html'), $contexte);
 		$composer = charger_fonction('composer', 'public');
 		list($skel_nom, $skel_code) = $composer($text, 'html', 'html', $file);
 
 		spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
-		if (!$skel_nom) return array('/', '/', $file,''); 
+		if (!$skel_nom) return array('/', 0, $file,''); 
 		$contexte = valider_contexte($skel_code, $file);
 		$page = $skel_nom(array('cache'=>''), array($contexte));
 	}
 	list($texte, $err) = $transformer_xml($page['texte']);
-	$res = strlen($texte);
-	return array(count($err), $res, $err, $script, $url);
+	return array($texte, $err, $script, $url);
 }
 
 // Analyser le code pour construire un contexte plausible complet
@@ -290,11 +294,19 @@ function valider_dir($files, $ext, $dir)
 	$res = array();
 	$transformer_xml = charger_fonction('valider', 'xml');
 	$valideur = $ext=='php' ? 'valider_script' : 'valider_skel' ;
+	include_spip('public/assembler');
 	foreach($files as $f) {
 		spip_timer($f);
 		$val = $valideur($transformer_xml, $f, $dir, $ext);
+		// Ne pas saturer la memoire, donner juste la taille de la page
+		// avec un nombre negatif quand c'est un message d'erreur
+		if (is_string($val[0])) {
+			$n = strlen($val[0]);
+			$val[0] = strpos($val[0], "id='minipres'") ? (0-$n):$n;
+		}
 		$n = spip_timer($f); 
 		$val[]= $n;
+		array_unshift($val, count($val[1]));
 		spip_log("validation de $f en $n secondes");
 		$res[]= $val;
 	}

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -105,7 +105,7 @@ function analyser_backend($rss, $url_syndic='') {
 		else if (preg_match(',<link[^>]*[[:space:]]rel=.alternate[^>]*>,Uims',
 		$item, $regs))
 			$data['url'] = extraire_attribut($regs[0], 'href');
-		else if (preg_match(',<link[^>]*>(.*)</link>,Uims', $item, $regs))
+		else if (preg_match(',<link[^>]*>\s*([^\s]+)\s*</link>,Uims', $item, $regs))
 			$data['url'] = $regs[1];
 		else if (preg_match(',<link[^>]*>,Uims', $item, $regs))
 			$data['url'] = extraire_attribut($regs[0], 'href');
@@ -148,7 +148,8 @@ function analyser_backend($rss, $url_syndic='') {
 		// (note: ca pourrait etre defini site par site, mais ca risque d'etre
 		// plus lourd que vraiment utile)
 		if ($GLOBALS['controler_dates_rss']) {
-			if ($la_date > time() + 48 * 3600)
+			if (!$la_date
+				OR $la_date > time() + 48 * 3600)
 				$la_date = time();
 		}
 

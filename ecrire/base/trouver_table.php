@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -101,7 +101,9 @@ function base_trouver_table_dist($nom, $serveur=''){
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
 				$fdesc = &$tables_auxiliaires[$nom_sql];
-			}  # table locale a cote de SPIP, comme non SPIP:
+			} else {  # table locale a cote de SPIP, comme non SPIP:
+				$fdesc = array();
+			}
 		}
 
 		// faut il interpreter le prefixe 'spip_' ?
@@ -123,8 +125,10 @@ function base_trouver_table_dist($nom, $serveur=''){
 		// S'il n'y a pas de key (cas d'une VIEW),
 		// on va inventer une PRIMARY KEY en prenant le premier champ
 		// de la table
-		if (!$desc['key'])
-			$desc['key']['PRIMARY KEY'] = array_shift(array_keys($desc['field']));
+		if (!$desc['key']){
+			$p = array_keys($desc['field']);
+			$desc['key']['PRIMARY KEY'] = array_shift($p);
+		}
 
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;

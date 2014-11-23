@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -71,7 +71,7 @@ function surcharger_langue($fichier) {
 	}
 	if (is_array($surcharges[$fichier])) {
 		$GLOBALS[$GLOBALS['idx_lang']] = array_merge(
-			$GLOBALS[$GLOBALS['idx_lang']],
+			(array)$GLOBALS[$GLOBALS['idx_lang']],
 			$surcharges[$fichier]
 		);
 	}

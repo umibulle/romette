@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -45,9 +45,9 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 				   "A.email != '' AND L.id_article=$id");
 		foreach($s as $row) {
 			if (email_valide($row['email']))
-				$r .= ','.$row['email'];
+				$r .= ', '.$row['email'];
 		}
-		$args[2] = substr($r, 1);
+		$args[2] = substr($r, 2);
 	}
 
 	// On ne peut pas ecrire a un auteur dont le mail n'est pas valide

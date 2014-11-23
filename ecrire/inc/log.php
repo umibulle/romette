@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -56,7 +56,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	$f = @fopen($logfile, "ab");
 	if ($f) {
-		fputs($f, ($logname!==NULL) ? $m : str_replace('<','&lt;',$m));
+		fputs($f, (defined('_LOG_BRUT') AND _LOG_BRUT) ? $m : str_replace('<','&lt;',$m));
 		fclose($f);
 	}
 

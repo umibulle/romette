@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -239,7 +239,8 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		array(
 			$le_lien,
 			$now_id_syndic,
-			$data
+			$data,
+			$ajout
 		)
 	);
 

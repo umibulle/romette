@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -104,6 +104,18 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$source = $img;
 		$img = "<img src='$source' />";
 	}
+	# gerer img src="data:....base64"
+	else if (preg_match('@^data:image/(jpe?g|png|gif);base64,(.*)$@isS', $source, $regs)) {
+		$local = sous_repertoire(_DIR_VAR,'image-data').md5($regs[2]).'.'.str_replace('jpeg', 'jpg', $regs[1]);
+		if (!file_exists($local)) {
+			ecrire_fichier($local, base64_decode($regs[2]));
+		}
+		$source = $local;
+		$img = inserer_attribut($img, 'src', $source);
+		# eviter les mauvaises surprises lors de conversions de format
+		$img = inserer_attribut($img, 'width', '');
+		$img = inserer_attribut($img, 'height', '');
+	}
 
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
@@ -117,8 +129,8 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 
 	$terminaison_dest = "";
-	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
-		$terminaison = $regs[1];
+	if (preg_match(",\.(gif|jpe?g|png)($|[?]),i", $fichier, $regs)) {
+		$terminaison = strtolower($regs[1]);
 		$terminaison_dest = $terminaison;
 		
 		if ($terminaison == "gif") $terminaison_dest = "png";
@@ -130,12 +142,12 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
 
-	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
+	$nom_fichier = substr($fichier, 0, strlen($fichier) - (strlen($terminaison) + 1));
 	$fichier_dest = $nom_fichier;
 
 	if (@file_exists($f = $fichier)){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
-		$date_src = @filemtime($f);
+		$date_src = filemtime($f);
 	}
 	elseif (@file_exists($f = "$fichier.src")
 		AND lire_fichier($f,$valeurs)
@@ -225,7 +237,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
-	$ret["format_source"] = $terminaison;
+	$ret["format_source"] = ($terminaison != 'jpeg' ? $terminaison : 'jpg');
 	$ret["format_dest"] = $terminaison_dest;
 	$ret["date_src"] = $date_src;
 	$ret["creer"] = $creer;
@@ -310,7 +322,7 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 		if (@file_exists($valeurs['fichier_dest'])){
 			// dans tous les cas mettre a jour la taille de l'image finale
 			list ($valeurs["hauteur_dest"],$valeurs["largeur_dest"]) = taille_image($valeurs['fichier_dest']);
-			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
+			$valeurs['date'] = filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
 		
@@ -378,7 +390,9 @@ function image_graver($img){
 }
 
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
+// Existe seulement pour compatibilite avec PHP < 5.5
 // http://doc.spip.org/@imagepalettetotruecolor
+if (!function_exists("imagepalettetotruecolor")) {
  function imagepalettetotruecolor(&$img) {
 	if ($img AND !imageistruecolor($img) AND function_exists('imagecreatetruecolor')) {
 		$w = imagesx($img);
@@ -396,6 +410,7 @@ function image_graver($img){
 
 		$img = $img1;
 	}
+}
 }
 
 // http://doc.spip.org/@image_tag_changer_taille
@@ -659,7 +674,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 	
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
-	$retour['date'] = @filemtime($vignette);
+	$retour['date'] = (file_exists($vignette)) ? filemtime($vignette) : 0;
 	
 	// renvoyer l'image
 	return $retour;

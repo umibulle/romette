@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -146,7 +146,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 		if (isset($maj[$installee])) {
 			$etape = serie_alter($installee, $maj[$installee], $meta, $table);
 			
-			if ($etape) return array($installe, $etape);
+			if ($etape) return array($installee, $etape);
 			$n = time() - $time;
 			spip_log("$table $meta: $installee en $n secondes",'maj');
 			if ($meta) ecrire_meta($meta, $installee,'non', $table);

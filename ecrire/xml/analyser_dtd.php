@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -19,15 +19,19 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 {
 	static $dtd = array(); # cache bien utile pour le validateur en boucle
 
+	if (isset($dtd[$grammaire]))
+		return $dtd[$grammaire];
+
+	if ($avail == 'SYSTEM') {
+		$grammaire = find_in_path($grammaire);
+	}
+	if (!$grammaire) return	$dtd[''] = array();
+
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
-	if (isset($dtd[$file]))
-		return $dtd[$file];
 
 	if (lire_fichier($file, $r)) {
-		if ($avail == 'SYSTEM') {
-			if (!$grammaire OR filemtime($file) < filemtime($grammaire))
+		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
-		}
 	}
 
 	if ($r) {
@@ -52,7 +56,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 		}
 		
 	}
-	$dtd[$file] = $dtc;
+	$dtd[$grammaire] = $dtc;
 	return $dtc;
 }
 
@@ -103,7 +107,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 
 	$dtd = ltrim($dtd);
 	if (!$dtd) {
-		spip_log("DTD '$loc' inaccessible");
+		spip_log("DTD '$loc' ($file) inaccessible");
 		return false;
 	} else 	spip_log("analyse de la DTD $loc ");
 
@@ -251,7 +255,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ELEMENT\s+([^>%\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
 	list(,$nom, $contenu, $dtd) = $m;
@@ -337,7 +341,6 @@ function expanserEntite($val, $macros=array())
 			@$vu[$ent]++;
 			$val = str_replace($m[0], $macros[$ent], $val);
 		}
-
 	  }
 	}
 

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -248,7 +248,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot'){
 					if (!$parent) {
-						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
+						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . intval($principal), '','','','',$connect);
 					}
 					if ($parent)
 						$exposer[$m]['id_groupe'][$parent] = true;

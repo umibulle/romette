@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -66,7 +66,7 @@ function test_oubli_dist($email)
 function formulaires_oubli_verifier_dist(){
 	$erreurs = array();
 
-	$email = _request('oubli');
+	$email = strval(_request('oubli'));
 
 	$r = formulaires_oubli_mail($email);
 

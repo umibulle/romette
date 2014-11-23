@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,11 +18,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function exec_fond_dist(){
 
+	exec_fond_args(_request('exec'));
+}
+
+function exec_fond_args($exec){
+
+	$fond = trim(recuperer_fond("prive/exec/$exec", $_REQUEST));
 	// pas d'autorisation
-	// c'est au fond de les gerer avec #AUTORISER, et de renvoyer un fond vide le cas echeant
+	// c'est au fond de les gerer avec #AUTORISER,
+	// et de renvoyer un fond vide le cas echeant
 	// qui declenchera un minipres acces interdit
-	$exec = _request('exec');
-	$fond = trim(recuperer_fond("prive/exec/$exec",$_REQUEST));
 	if (!$fond) {
 		include_spip('inc/minipres');
 		echo minipres();

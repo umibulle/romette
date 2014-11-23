@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -43,9 +43,9 @@ function forum_envoi(
 {
 	if ($modif_forum == 'fin') {
 		include_spip('inc/headers');
-		$script = preg_replace('/\W/','', $script);
-		$objet = preg_replace('/\W/','', $texte);
-		redirige_url_ecrire('discuter', "script=$script&objet=$texte&$texte=$id&statut=$statut" . ($id_parent ? "&id_parent=$id_parent" : ''));
+		$script = preg_replace('/\W/','', $script); // article etc
+		$objet = preg_replace('/\W/','', $texte); // id_article etc
+		redirige_url_ecrire('discuter', "script=$script&objet=$objet&$objet=$id&statut=$statut" . ($id_parent ? "&id_parent=$id_parent" : ''));
 	} else {
 		$statut = preg_replace('/\W/','', $statut);
 		$forum_envoi = charger_fonction('forum_envoi', 'inc');

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -68,18 +68,6 @@ define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
 define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
-/*
- * detecteur de robot d'indexation
- * utilise en divers endroits, centralise ici
- */
-if (!defined('_IS_BOT'))
-	define('_IS_BOT',
-		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex,i',
-			$_SERVER['HTTP_USER_AGENT'])
-	);
-
-
 // Le nom du fichier de personnalisation
 define('_NOM_CONFIG', 'mes_options');
 
@@ -103,6 +91,18 @@ define('MODULES_IDIOMES', 'public/spip/ecrire');
 if (!defined('_ECRAN_SECURITE')
 AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
 	include $f;
+
+
+/*
+ * detecteur de robot d'indexation
+ * utilise en divers endroits, centralise ici
+ */
+if (!defined('_IS_BOT'))
+	define('_IS_BOT',
+		isset($_SERVER['HTTP_USER_AGENT'])
+		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex,i',
+			$_SERVER['HTTP_USER_AGENT'])
+	);
 
 
 //
@@ -214,14 +214,12 @@ $xml_indent = false;
 
 // Vignettes de previsulation des referers
 // dans les statistiques
-// 3 de trouves, possibilite de switcher
-// - Thumbshots.org: le moins instrusif, quand il n'a pas, il renvoit un pixel vide
-// - Girafa semble le plus complet, bicoz renvoit toujours la page d'accueil; mais avertissement si pas de preview
+// 2 de trouves, possibilite de switcher
 // - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
 //   Pour Alexa, penser a indiquer l'url du site dans l'id.
 //   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
-$source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
-// $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
+// - apercite.fr : on conserve exactement la même expression pour insérer l'url du site
+$source_vignettes = "http://www.apercite.fr/api/apercite/120x90/oui/oui/http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
 $formats_logos =  array ('gif', 'jpg', 'png');
@@ -291,6 +289,7 @@ $spip_pipeline = array(
 	'declarer_tables_principales'=>'',
 	'declarer_tables_auxiliaires'=>'',
 	'declarer_tables_objets_surnoms' => '',
+	'declarer_type_surnoms' => '',
 	'declarer_url_objets' => '',
 	'definir_session' => '',
 	'delete_tables' => '',
@@ -409,12 +408,12 @@ $liste_des_authentifications = array(
 // numero de branche, utilise par les plugins
 // pour specifier les versions de SPIP necessaire
 // il faut s'en tenir a un nombre de decimales fixe ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "2.1.10";
+$spip_version_branche = "2.1.26";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 15375;
 // version de la base SQL (= numero SVN de sa derniere modif, a verifier dans le fichier ecrire/maj/sv10000.php)
-$spip_version_base = 15828;
+$spip_version_base = 15830;
 
 // version de l'interface a la base
 $spip_sql_version = 1;

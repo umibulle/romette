@@ -25,7 +25,7 @@ paramdefaut="" le parametre par defaut eventuel
 <bloc statut="3">rubrique-head</bloc>
 <bloc statut="3">rubrique-head-logo-bandeau</bloc>
 <bloc statut="3">rubrique-texte</bloc>
-<bloc statut="3" param="par date,par date inverse,par titre,slide,par logo" paramdefaut="par date inverse" paramdescr="Type de listage">liste-articles</bloc>
+<bloc statut="3" param="par date,par date inverse,par titre,slide,par logo,par titre complet" paramdefaut="par date inverse" paramdescr="Type de listage">liste-articles</bloc>
 
 <bloc statut="3" param="par date,par titre,titre-seul,slide" paramdefaut="par titre" paramdescr="Type de listage">liste-rubriques</bloc>
 

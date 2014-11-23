@@ -1,6 +1,6 @@
 body {
   color: black;
-  font-family: 'Jura', sans-serif, "Arial", Helvetica, sans-serif;
+  font-family: 'Dosis', sans-serif, "Arial", Helvetica, sans-serif;
   font-size: 10px;
   line-height: 1.4;
   /*letter-spacing: 0.085em;*/
@@ -8,16 +8,13 @@ body {
   font-weight: 550;
 
   background-image:linear-gradient(#f7f7f7, white ); /* Norme W3C */
-background-image:-moz-linear-gradient(#f7f7f7, white); /* Firefox */
-background-image:-webkit-gradient(linear,#f7f7f7, white); /* Chrome, Safari */
-background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
- background-image:-ms-linear-gradient(#f7f7f7, white); /* IE */
-
-
+  background-image:-moz-linear-gradient(#f7f7f7, white); /* Firefox */
+  background-image:-webkit-gradient(linear,#f7f7f7, white); /* Chrome, Safari */
+  background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
+  background-image:-ms-linear-gradient(#f7f7f7, white); /* IE */
 
   /*"New York"*/ /* "Helvetica Neue",Helvetica,Arial,sans-serif; 
  "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", Arial, Helvetica, sans-serif;*/
-
 }
 
 /*
@@ -25,14 +22,12 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
 */
 #general {
   width: 996px;
-  /*height: 616px;*/
   margin: 0 auto;
   position: relative;
   background-color: white;
   border-color: black;
   border-style: solid;
   border-width: 17px 0 0 0;
-  
 }
 
 /*
@@ -78,6 +73,7 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
   float: left;
   height: 100px;
   width: 525px;
+  margin-top: -15px;
 }
 
 #texteconteneur {
@@ -88,33 +84,29 @@ background-image:-o-linear-gradient(#f7f7f7, white); /* Opera */
   position: relative;
   float: right;
   /*height: 405px;*/
-  margin-top: 100px;
-  padding-top: 20px;
+  margin-top: 85px;
+  /*padding-top: 20px;*/
   z-index: 5;
   margin-left:45px;
-  border-top: 1px  solid #666;
+  /*border-top: 1px  solid #666;*/
   width: 276px;
+  background-color: #fff;
 }
 
 #contexte1 {
-  width: 210px;
-  float: left;
-  margin: 0px 20px;
-  background-color: #fff;
-  color: #888888;
+  float: right;
+  /*margin: 0px 20px;*/
+  /*color: #888888;*/
   text-decoration: none;
   word-spacing: normal;
   line-height: 1.2em;
   font-size: 11px;
-  text-align: left;
+  text-align: right;
+  width: 276px;
 }
 
 #contexte2 {
-  float: right;
-  width: 100px;
-  margin-left: 15px;
-  font-weight: bold;
-  font-size: 10px;
+  display: none;
 }
 
 #contexte2 a {

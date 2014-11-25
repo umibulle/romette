@@ -66,7 +66,7 @@ body {
 }
 
 #texteconteneur {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 #contextes {
@@ -174,14 +174,10 @@ body {
 }
 
 #page-sommaire #corps {
-  margin-top:50px;
+  margin-top:20px;
 }
 
 #page-sommaire #contextes {
-  display: none;
-}
-
-#page-sommaire #bandeau {
   display: none;
 }
 

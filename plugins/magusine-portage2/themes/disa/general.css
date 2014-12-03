@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #corps a {
-  color: #000000;
+  color: #555;
   text-decoration: none;
   /*border-bottom:1px dotted;*/
   outline: none;
@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #corps a:hover {
   /*color: grey;*/
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 /* Header de l'article (ou est placé le titre) */
@@ -258,7 +258,13 @@ blockquote p {
 }
 
 #contextes #galerieimg {
-  border-top: 1px solid #666666;
+  border-top: 1px solid #666;
   margin-bottom: 10px;
   padding-top: 10px;
+}
+
+hr {
+  height: 1px;
+  border-width:0;
+  background-color: #666;
 }

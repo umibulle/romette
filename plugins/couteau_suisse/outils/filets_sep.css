@@ -76,7 +76,7 @@
 /** Images **/
 
 .filet_sep_image {
-	height: 10px; /* hauteur par defaut */
+	height: 15px; /* hauteur par defaut */
 	background-position: center;
 	background-repeat: no-repeat;
 	border-style: none;

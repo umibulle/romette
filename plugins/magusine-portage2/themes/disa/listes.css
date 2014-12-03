@@ -32,15 +32,20 @@
 .fancygal li {
   list-style-type: none;
   display: inline-table;
-  /*text-align: center;*/
   padding: 10px;
   margin: 0px;
-  /*width: 100px;
-  height: 95px;*/
+}
+
+#contextes .fancygal li {
+  padding: 2px;
 }
 
 ul.fancygal {
   margin-left: 15px;
+}
+
+#contextes ul.fancygal {
+  margin-left: 5px;
 }
 
 .listageconteneur li {

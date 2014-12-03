@@ -40,7 +40,7 @@ function filets_sep_installe_dist() {
 			$filets[6][] = preg_quote($reg[1]);
 			$filets[2][] = $reg[2];
 			list(,$haut) = @getimagesize($path.'/'.$reg[1]);
-			if ($haut) $haut="height:{$haut}px;";
+			if ($haut) $haut="height:15px;margin-top:15px;";
 			$f = url_absolue($path).'/'.$reg[1];
 			$filets[1][$reg[1]] = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background: url($f) repeat;\""._FILETS_SEP_BALISE_FIN, '', $mode);
 			if($bt)

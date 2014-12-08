@@ -21,16 +21,21 @@ body {
 * Ici c'est l'emplacement du logo de la compagnie
 */
 #bandeau-main {
-  top: 5px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  /*top: 5px;
   /*background: url('Johanny.png') top right no-repeat;*/
   /*display:none;*/
-  position: absolute;
+  /*position: absolute;
   width: 996px;
-  height: 645px;
+  height: 645px;*/
   background-color: white;
-  right: 0px;
+  /*right: 0px;*/
   z-index: 50;
 }
+
+
 
 /*
 * Ici c'est l'emplacement du titre (image de l'écriture manuscrite) de chaque rubrique 

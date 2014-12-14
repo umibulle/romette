@@ -3,7 +3,9 @@
   ### /!\ boucle POUR (spip Bonux) ###
   
   Parametres :
-  - ** datas : tableau de donnees cle=>valeur
+  - datas : tableau de donnees cle=>valeur
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
 	[(#SAISIE{radio, afficher_liste,
@@ -20,8 +22,9 @@
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
 
 <BOUCLE_radio(POUR){tableau #GET{datas}}>
-<div class="choix">
-	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#ENV{valeur,#ENV{defaut}}|=={#CLE}|oui)checked='checked'] value='#CLE' [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
-	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
+#SET{disabled, #ENV{disable}|is_string|?{#ENV{disable}, #ENV{disable}|table_valeur{#CLE}}}
+<div class="#ENV{choix,choix}[ (#ENV{choix,choix})_#CLE]">
+	<input type="radio" name="#ENV{nom}" class="radio" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[ (#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)checked="checked"] value="#CLE"[(#GET{disabled}|oui) disabled="disabled"][ readonly="(#ENV{readonly})"] />
+	<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)class="on"]>#VALEUR</label>
 </div>
 </BOUCLE_radio>

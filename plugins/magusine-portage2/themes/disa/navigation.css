@@ -18,20 +18,25 @@
 }
 
 .niveau1 {
-  font-size: 9pt;
+  padding: 5px 15px;
 }
 
-.niveau1 a {
-  padding: 5px 15px;
-  text-decoration: none;
-  color: #666666;
+.niveau1,.niveau2 {
+  font-size: 9pt;
   display: block;
   border-left: solid;
   border-width: 5px;
   border-color: white;
+  cursor: pointer;
+  color: #666666;
 }
 
-.niveau1 a:hover {
+.niveau1 a {
+  text-decoration: none;
+  color: #666666;
+}
+
+.niveau1:hover,.niveau2:hover {
   color: black;
   border-left: solid;
   border-width: 5px;
@@ -40,7 +45,8 @@
 
 .ulniveau2 {
   list-style-image: none;
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-left:-20px;
   display: none;
   width: 270px;
   position: absolute;

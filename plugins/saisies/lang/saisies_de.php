@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/saisies?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -14,24 +14,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Mediathek durchsuchen',
 
 	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est diff&eacute;rent du formulaire initial. Vous avez la possibilit&eacute; de le r&eacute;initialiser &agrave; son &eacute;tat avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.', # NEW
-	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'R&eacute;initialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer', # NEW
+	'construire_action_annuler' => 'Abbrechen',
+	'construire_action_configurer' => 'Konfigurieren',
+	'construire_action_deplacer' => 'Verschieben',
+	'construire_action_dupliquer' => 'Duplizieren',
+	'construire_action_dupliquer_copie' => '(Kopie)',
+	'construire_action_supprimer' => 'Löschen',
+	'construire_ajouter_champ' => 'Feld hinzufügen',
+	'construire_attention_enregistrer' => 'Vergessen Sie nicht, Ihre Änderungen zu speichern.',
+	'construire_attention_modifie' => 'Das untere Formular unterscheidet sich vom ursprünglichen. Sie können es in den Zustand vor den Änderungen zurücksetzen.',
+	'construire_attention_supprime' => 'Ihre Änderungen umfassen das Löschen von Feldern. Bitte bestätigen das Speichern dieser neuen Version des Formulars.',
+	'construire_aucun_champs' => 'Dieses Formular enthält noch keine Felder.',
+	'construire_confirmer_supprimer_champ' => 'Wollen Sie dieses Feld wirklich löschen?',
+	'construire_info_nb_champs_masques' => '@nb@ Feld/er während der Konfiguration der Gruppe ausgeblendet.',
+	'construire_position_explication' => 'Geben Sie an, vor welchem anderen Feld dieses erscheinen soll.',
+	'construire_position_fin_formulaire' => 'Am Ende des Formulars',
+	'construire_position_fin_groupe' => 'Am Ende der Gruppe @groupe@',
+	'construire_position_label' => 'Feldposition',
+	'construire_reinitialiser' => 'Formular neu initialisieren',
+	'construire_reinitialiser_confirmer' => 'Alle Ihre Änderungen werden verlorengehen. Wollen Sie wirklich das ursprüngliche Formular wieder herstellen?',
+	'construire_verifications_aucune' => 'Keine',
+	'construire_verifications_label' => 'Art der Überprüfung',
+
+	// E
+	'erreur_generique' => 'Fehler im folgenden Feld. Bitte überprüfen Sie Ihre Eingabe.',
+	'erreur_option_nom_unique' => 'Dieser Name wird bereits für ein anderes Feld verwendet; er kann in diesem Formular nur einmal verwendet werden.',
+
+	// I
+	'info_configurer_saisies' => 'Testseite der Eingabefelder.',
 
 	// L
 	'label_annee' => 'Jahr',
@@ -47,19 +57,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Mehrsprachige Anzeige',
 	'option_attention_explication' => 'Nachricht wichtiger als Meldung',
 	'option_attention_label' => 'Achtung',
+	'option_autocomplete_defaut' => 'Standardeinstellung belassen',
+	'option_autocomplete_explication' => 'Beim Laden der Seite kann Ihr Browser das Feld mit bereits verwendeten Werten vorausfüllen.',
+	'option_autocomplete_label' => 'Feld vorausfüllen',
+	'option_autocomplete_off' => 'Deaktivieren',
+	'option_autocomplete_on' => 'Aktivieren',
 	'option_cacher_option_intro_label' => 'Erste leere Auswahl ausblenden',
 	'option_choix_destinataires_explication' => 'Einer oder mehrere Empfänger, welche der Besucher auswählen kann. Wenn er keine Auswahl trifft, geht die Nachricht an den ersten Administrator (Autor 1).',
 	'option_choix_destinataires_label' => 'Mögliche Empfänger',
 	'option_class_label' => 'Zusätzliche CSS-Klassen',
 	'option_cols_explication' => 'Breite des Blocks in Zeichen. Diese Option kann durch ihre CSS-Stile unwirksam grmacht werden.',
 	'option_cols_label' => 'Breite',
-	'option_datas_explication' => 'Sie müssen in jeder Zeile eine Option im Format "Schlüssel|Bezeichnung" angeben.',
+	'option_datas_explication' => 'Sie müssen in jeder Zeile eine Option im Format "Schlüssel|Bezeichnung" angeben.', # MODIF
 	'option_datas_label' => 'Mögliche Angaben',
 	'option_defaut_label' => 'Standardwert',
 	'option_disable_avec_post_explication' => 'Identisch mit voriger Option, jedoch wird der Wert in ein verstecktes Feld eingefügt.',
 	'option_disable_avec_post_label' => 'Senden trotz Deaktivierung',
 	'option_disable_explication' => 'Das Feld erhält keinen Fokus.',
 	'option_disable_label' => 'Feld deaktivieren',
+	'option_erreur_obligatoire_explication' => 'Sie können eine eigene Fehlermeldung bei nicht ausgefüllten Pflichtfeldern eingeben oder darauf verzichten.',
+	'option_erreur_obligatoire_label' => 'Hinweis Pflichtfeld',
 	'option_explication_explication' => 'Falls erforderlich kurze Beschreibung des Feldobjekts',
 	'option_explication_label' => 'Erläuterung',
 	'option_groupe_affichage' => 'Anzeige',
@@ -83,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Feldname',
 	'option_obligatoire_label' => 'Pflichtfeld',
 	'option_option_intro_label' => 'Bezeichnung der ersten leeren Auswahl',
+	'option_option_statut_label' => 'Status anzeigen',
 	'option_pliable_label' => 'Klappbar',
 	'option_pliable_label_case' => 'Die Feldgruppe kann zugeklappt werden',
 	'option_plie_label' => 'Bereits zugeklappt',
@@ -97,13 +115,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_size_label' => 'Feldgröße',
 	'option_type_choix_plusieurs' => 'Auswahl <strong>mehrerer</strong> Empfänger erlauben',
 	'option_type_choix_tous' => '<strong>Alle</strong> diese Autoren als Empfänger hinzufügen. Der Besucher kann keine Auswahl treffen.',
-	'option_type_choix_un' => 'Der Besucher kann nur <strong>einen einzigen</strong> Empfänger auswählen.',
+	'option_type_choix_un' => 'Der Besucher kann nur <strong>einen einzigen</strong> Empfänger auswählen.', # MODIF
 	'option_type_explication' => 'Im "versteckten" Modus wird der Inhalt dieses Felds nicht angezeigt.',
 	'option_type_label' => 'Feldtyp',
-	'option_type_password' => 'Versteckt',
+	'option_type_password' => 'Versteckt', # MODIF
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Ermöglicht einen oder mehrere Autoren auszuwählen',
+	'saisie_auteurs_titre' => 'Autoren',
 	'saisie_case_explication' => 'Ermöglicht Dinge zu aktivieren und deaktivieren',
 	'saisie_case_titre' => 'Nur eine Option',
 	'saisie_checkbox_explication' => 'Erlaubt mehrer Optionen auszuwählen',
@@ -144,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Alle Besucher (auch nicht eingeschriebene)',
+	'tout_selectionner' => 'Alles auswählen',
 
 	// V
 	'vue_sans_reponse' => '<i>Ohne Antwort</i>',

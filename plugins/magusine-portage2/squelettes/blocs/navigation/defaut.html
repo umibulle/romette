@@ -20,17 +20,21 @@ $hierarchie[]="article#ENV{id_article}";
 </B_cacher_edito><!-- menu alternatif, deux niveaux -->
 <?php if(!is_array($hierarchie)){ $hierarchie=array(); } ?>
 <BOUCLE_menu_alternatif(RUBRIQUES){id_parent=0}{lang}{doublons cacher}{par num titre}>
-  <li class="niveau1 item#COMPTEUR_BOUCLE<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo" courante"; } ?>"><a href="#URL_RUBRIQUE" accesskey="[(#COMPTEUR_BOUCLE)]">[(#TITRE|supprimer_numero)]</a> 
+  <li class="niveau1 item#COMPTEUR_BOUCLE<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo" courante"; } ?>">
   #SET{ulaffiche,0} 
   <BOUCLE_parametre_niveau(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur2=#LANG}{valeur!=1}>
     <B_sous_menu_alternatif>
+    [(#TITRE|supprimer_numero)]
     <ul class="ulniveau2">
     <BOUCLE_sous_menu_alternatif(RUBRIQUES){id_parent}{lang}{doublons cacher}{par num titre}>
     <li class="niveau2<?php if(in_array("rubrique#ID_RUBRIQUE",$hierarchie)) { echo" courante"; } ?>"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
     </BOUCLE_sous_menu_alternatif>
     #SET{ulaffiche,1}
   </B_sous_menu_alternatif>
+	<a href="#URL_RUBRIQUE" accesskey="[(#COMPTEUR_BOUCLE)]">[(#TITRE|supprimer_numero)]</a>
+  <//B_sous_menu_alternatif>
   </BOUCLE_parametre_niveau>
+  <//BOUCLE_parametre_niveau>
   
   		<BOUCLE_parametre_niveaux_articles(spip_arty_parametres){parametre==config_niveaux_menu$}{valeur!=1}{valeur2=#LANG}{valeur3=on}>
 			<B_navigation2>

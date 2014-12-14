@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/saisies?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,128 +8,186 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
-	'bouton_parcourir_docs_breve' => 'Parcourir la brève', # NEW
-	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
-	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque', # NEW
+	'bouton_parcourir_docs_article' => 'Prehľadať článok',
+	'bouton_parcourir_docs_breve' => 'Prehľadať novinku',
+	'bouton_parcourir_docs_rubrique' => 'Prehľadať rubriku',
+	'bouton_parcourir_mediatheque' => 'Prehľadať knižnicu multimédií',
+
+	// C
+	'construire_action_annuler' => 'Zrušiť',
+	'construire_action_configurer' => 'Nastaviť',
+	'construire_action_deplacer' => 'Presunúť',
+	'construire_action_dupliquer' => 'Duplikovať',
+	'construire_action_dupliquer_copie' => '(kópia)',
+	'construire_action_supprimer' => 'Odstrániť',
+	'construire_ajouter_champ' => 'Pridať pole',
+	'construire_attention_enregistrer' => 'Nezabudnite uložiť zmeny!',
+	'construire_attention_modifie' => 'Tento formulár sa odlišuje od pôvodného. Máte možnosť ho obnoviť do stavu pred svojimi zmenami.',
+	'construire_attention_supprime' => 'Medzi vašimi zmenami je vymazanie niekoľkých polí. Potvrďte, prosím, registráciu tejto verzie formulára.',
+	'construire_aucun_champs' => 'V tomto formulári nie je momentálne žiadne pole',
+	'construire_confirmer_supprimer_champ' => 'Chcete odstrániť toto pole?',
+	'construire_info_nb_champs_masques' => '@nb@ skryté (-ých) pole (-í/-ia) času na nastavenie skupiny.',
+	'construire_position_explication' => 'Uveďte akékoľvek ďalšie pole predtým, ako sa vloží.',
+	'construire_position_fin_formulaire' => 'Na koniec formulára',
+	'construire_position_fin_groupe' => 'Na koniec skupiny @groupe@',
+	'construire_position_label' => 'Umiestnenie poľa',
+	'construire_reinitialiser' => 'Znova načítať formulár',
+	'construire_reinitialiser_confirmer' => 'Stratíte všetky svoje zmeny. Určite sa chcete vrátiť na pôvodný formulár?',
+	'construire_verifications_aucune' => 'Žiadne',
+	'construire_verifications_label' => 'Typ overenia, ktorý sa má vykonať',
+
+	// E
+	'erreur_generique' => 'V poliach sú chyby; prosím, skontrolujte údaje, ktoré ste zadali',
+	'erreur_option_nom_unique' => 'Tento názov už používa iné pole, a v tomto formulári musí byť jedinečný.',
+
+	// I
+	'info_configurer_saisies' => 'Testovacia stránka Saisies',
 
 	// L
-	'label_annee' => 'Année', # NEW
-	'label_jour' => 'Jour', # NEW
-	'label_mois' => 'Mois', # NEW
+	'label_annee' => 'Rok',
+	'label_jour' => 'Deň',
+	'label_mois' => 'Mesiac',
 
 	// O
-	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l\'utilisateur', # NEW
-	'option_aff_art_interface_label' => 'Affichage multilingue', # NEW
-	'option_aff_langue_explication' => 'Affiche la langue de l\'article ou rubrique sélectionné devant le titre', # NEW
-	'option_aff_langue_label' => 'Afficher la langue', # NEW
-	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l\'utilisateur', # NEW
-	'option_aff_rub_interface_label' => 'Affichage multilingue', # NEW
-	'option_attention_explication' => '<NEW>Správa dôležitejšia ako vysvetlívka.',
-	'option_attention_label' => '<NEW>Upozornenie',
-	'option_cacher_option_intro_label' => 'Cacher le premier choix vide', # NEW
-	'option_choix_destinataires_explication' => '<NEW>Autori, z ktorých si používateľ môže vybrať. Ak si nevyberie, bude to autor, ktorý nainštaloval stránku, ktorá má byť vybraná.',
-	'option_choix_destinataires_label' => '<NEW>Možní príjemcovia',
-	'option_class_label' => '<NEW>Ďalšie CSS triedy',
-	'option_cols_explication' => '<NEW>Šírka poľa v znakoch. Táto možnosť sa vždy nepoužíva, lebo CSS štýly vašej stránky to môžu zrušiť.', # MODIF
-	'option_cols_label' => '<NEW>Šírka',
-	'option_datas_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label du choix"', # NEW
-	'option_datas_label' => 'Liste des choix possibles', # NEW
-	'option_defaut_label' => '<NEW>Predvolená hodnota',
-	'option_disable_avec_post_explication' => 'Same as previous option position but still post value in a hidden field.',
-	'option_disable_avec_post_label' => 'Disabled but posted.',
-	'option_disable_explication' => 'The field can not get the focus.', # MODIF
-	'option_disable_label' => 'Disable the field',
-	'option_explication_explication' => 'If necessary, a short sentence describing the subject field.',
-	'option_explication_label' => 'Explanation', # MODIF
-	'option_groupe_affichage' => 'Display', # MODIF
-	'option_groupe_description' => 'Description', # MODIF
-	'option_groupe_utilisation' => 'Usage', # MODIF
-	'option_groupe_validation' => 'Validation', # MODIF
-	'option_info_obligatoire_explication' => 'You can modify the default indication of obligation: <i>[Obligatoire]</i>.',
-	'option_info_obligatoire_label' => 'Indication of obligation', # MODIF
-	'option_inserer_barre_choix_edition' => 'barre d\'édition complète', # NEW
-	'option_inserer_barre_choix_forum' => 'barre des forums', # NEW
-	'option_inserer_barre_explication' => 'Insère une barre d\'outils du porte-plume si ce dernier est activé.', # NEW
-	'option_inserer_barre_label' => 'Insérer une barre d\'outils', # NEW
-	'option_label_case_label' => 'Label placé à côté de la case', # NEW
-	'option_label_explication' => 'The title that will be displayed.',
-	'option_label_label' => 'Label', # MODIF
-	'option_maxlength_explication' => 'The user can not type more characters than this number.',
-	'option_maxlength_label' => 'Maximum number of characters',
-	'option_multiple_explication' => 'L\'utilisateur pourra sélectionner plusieurs valeurs', # NEW
-	'option_multiple_label' => 'Sélection multiple', # NEW
-	'option_nom_explication' => 'A digital name that identifies the field. It should contain only lowercase alphanumeric characters or the character "_".', # MODIF
-	'option_nom_label' => 'Field name', # MODIF
-	'option_obligatoire_label' => 'Required field', # MODIF
-	'option_option_intro_label' => 'Label du premier choix vide', # NEW
-	'option_pliable_label' => 'Pliable', # NEW
-	'option_pliable_label_case' => 'Le groupe de champs pourra être replié.', # NEW
-	'option_plie_label' => 'Déjà plié', # NEW
-	'option_plie_label_case' => 'Si le groupe de champs est pliable, il sera déjà plié à l\'affichage du formulaire.', # NEW
-	'option_previsualisation_explication' => 'Si le porte-plume est activé, ajoute un onglet pour prévisualiser le rendu du texte saisi.', # NEW
-	'option_previsualisation_label' => 'Activer la prévisualisation', # NEW
-	'option_readonly_explication' => 'The field can be viewed, selected, but not modified.',
-	'option_readonly_label' => 'Read only', # MODIF
-	'option_rows_explication' => 'Field height in lines. This option is not always applied/used because the CSS styles of your site can cancel it.',
-	'option_rows_label' => 'Lines number', # MODIF
-	'option_size_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site can cancel it.',
-	'option_size_label' => 'Field size', # MODIF
-	'option_type_choix_plusieurs' => 'Allow the user to choose <strong>many</ strong> recipients.', # MODIF
-	'option_type_choix_tous' => 'Make <strong>all</ strong> these authors as recipients. The user will not have choice.', # MODIF
-	'option_type_choix_un' => 'Allow the user to choose <strong>one</ strong> recipient.', # MODIF
-	'option_type_explication' => '<MODIF>Mode "password", the contents of the field will be hidden.',
-	'option_type_label' => '<NEW>Typ poľa',
-	'option_type_password' => '<NEW><MODIF>Heslo',
-	'option_type_text' => '<NEW>Normálny',
+	'option_aff_art_interface_explication' => 'Zobrazovať len články v jazyku používateľa',
+	'option_aff_art_interface_label' => 'Viacjazyčné zobrazenie',
+	'option_aff_langue_explication' => 'Pred názvom zobraziť vybratý jazyk článku alebo rubriky',
+	'option_aff_langue_label' => 'Zobraziť jazyk',
+	'option_aff_rub_interface_explication' => 'Zobraziť len rubriky v jazyku používateľa',
+	'option_aff_rub_interface_label' => 'Viacjazyčné zobrazenie',
+	'option_afficher_si_explication' => 'Uveďte podmienky zobrazenia poľa podľa hodnoty iných polí. Čísla iných polí musia byť medzi <code>@</code>. <br />Príklad <code>@selection_1@=="Toto"</code> prikazuje zobraziť pole, ktoré <code>selection_1</code> má hodnotu <code>Toto</code>.',
+	'option_afficher_si_label' => 'Podmienené zobrazenie',
+	'option_afficher_si_remplissage_explication' => 'V porovnaní s predchádzajúcou možnosťou táto podmienka sa týka zobrazenia formulára, nie jeho výsledkov. Jej syntax je rovnaká.',
+	'option_afficher_si_remplissage_label' => 'Podmienené zobrazenie pri vypĺňaní',
+	'option_attention_explication' => 'Správa je dôležitejšia ako vysvetlivka.',
+	'option_attention_label' => 'Varovanie',
+	'option_autocomplete_defaut' => 'Nechať ako predvolené',
+	'option_autocomplete_explication' => 'Pri nahrávaní stránky môže váš prehliadač automaticky vyplniť polia podľa histórie',
+	'option_autocomplete_label' => 'Automaticky vyplniť pole',
+	'option_autocomplete_off' => 'Deaktivovať',
+	'option_autocomplete_on' => 'Aktivovať',
+	'option_cacher_option_intro_label' => 'Skryť prvý prázdny výber',
+	'option_choix_alternatif_label' => 'Nastaviť možnosť vytvárania rozbaľovacích menu',
+	'option_choix_alternatif_label_defaut' => 'Iný výber',
+	'option_choix_alternatif_label_label' => 'Pomenovanie výberu z viacerých možností',
+	'option_choix_destinataires_explication' => 'Jeden autor alebo viacerí, z ktorých si používateľ môže vybrať. Ak nie je vybratý žiaden, vyberie sa autor, ktorý nainštaloval stránku.',
+	'option_choix_destinataires_label' => 'Možní príjemcovia',
+	'option_class_label' => 'Ďalšie triedy CSS',
+	'option_cols_explication' => 'Šírka poľa v znakoch. Táto možnosť sa vždy nepoužíva, lebo štýly CSS na vašej stránke ju môžu prepísať.',
+	'option_cols_label' => 'Šírka',
+	'option_datas_explication' => 'Musíte definovať výber pre každý riadok vo formulári "kľúč|označenie výberu"',
+	'option_datas_label' => 'Zoznam dostupných možností',
+	'option_datas_sous_groupe_explication' => 'Online výber musíte zadať vo forme "kľúč|menovka" výberu. <br />Môžete označiť začiatok podskupiny formulára "*Nadpis podskupiny". Skupinu môžete skončiť na riadku alebo do ďalšieho riadka môžete napísať len "/*".',
+	'option_defaut_label' => 'Predvolená hodnota',
+	'option_disable_avec_post_explication' => 'Rovnaká ako predošlá možnosť, ale hodnotu pošle v skrytom poli.',
+	'option_disable_avec_post_label' => 'Deaktivovať ale poslať.',
+	'option_disable_explication' => 'Na pole sa nedá zacieliť.',
+	'option_disable_label' => 'Deaktivovať pole',
+	'option_erreur_obligatoire_explication' => 'Zobrazovanú chybovú správu môžete upraviť tak, aby označovala povinnosť',
+	'option_erreur_obligatoire_label' => 'Správa s povinnosťou',
+	'option_explication_explication' => 'Ak je to potrebné, krátka veta opisujúca zmysel daného poľa.',
+	'option_explication_label' => 'Vysvetlenie',
+	'option_groupe_affichage' => 'Zobraziť',
+	'option_groupe_description' => 'Opis',
+	'option_groupe_utilisation' => 'Použitie',
+	'option_groupe_validation' => 'Overenie',
+	'option_heure_pas_explication' => 'Pri používaní diára sa zobrazí menu, ktoré vám pomôže zadať hodiny a minúty. Tak môžete vybrať časový interval pre každý údaj (predvolený – 30 min).',
+	'option_heure_pas_label' => 'Interval v minútach v menu pomocníka k zápisu do poľa',
+	'option_horaire_label' => 'Diár',
+	'option_horaire_label_case' => 'Povoliť zápis do diára',
+	'option_id_groupe_label' => 'Skupina slov',
+	'option_info_obligatoire_explication' => 'Môžete zmeniť predvolenú povinnosť vyplniť polia: <i>[Povinné]</i>.',
+	'option_info_obligatoire_label' => 'Označenie povinnosti',
+	'option_inserer_barre_choix_edition' => 'celý editovací panel s nástrojmi',
+	'option_inserer_barre_choix_forum' => 'panel s nástrojmi pre diskusné fóra',
+	'option_inserer_barre_explication' => 'Vložiť panel s nástrojmi porte-plume, ak je tento nástroj aktivovaný.',
+	'option_inserer_barre_label' => 'Vložiť panel s nástrojmi',
+	'option_label_case_label' => 'Označenie sa nachádza pod zaškrtávacím políčkom',
+	'option_label_explication' => 'Zobrazí sa titulok.',
+	'option_label_label' => 'Označenie',
+	'option_maxlength_explication' => 'Používateľ nemôže napísať viac znakov ako určuje toto číslo.',
+	'option_maxlength_label' => 'Maximálny počet znakov',
+	'option_multiple_explication' => 'Používateľ si bude môcť vybrať niekoľko hodnôt',
+	'option_multiple_label' => 'Výber z viacerých možností',
+	'option_nom_explication' => 'Počítačový názov, ktorý pomenúva pole. Môžu v ňom byť malé písmená abecedy alebo podčiarkovník "_".',
+	'option_nom_label' => 'Názov poľa',
+	'option_obligatoire_label' => 'Povinné pole',
+	'option_option_destinataire_intro_label' => 'Pomenovanie prvého prázdneho výberu(ak má formu zoznamu)',
+	'option_option_intro_label' => 'Označenie prvého prázdneho výberu',
+	'option_option_statut_label' => 'Zobraziť stav',
+	'option_pliable_label' => 'Roztiahnuteľné',
+	'option_pliable_label_case' => 'Skupina polí sa dá roztiahnuť alebo stiahnuť.',
+	'option_plie_label' => 'Už stiahnutá',
+	'option_plie_label_case' => 'Ak sa dá skupina polí stiahnuť a roztiahnuť, táto možnosť ju v zobrazeniach formulára nastaví ako už stiahnutú.',
+	'option_previsualisation_explication' => 'Ak je aktivovaný porte-plume, pridať kartu do ukážky vzhľadu zadaného textu.',
+	'option_previsualisation_label' => 'Aktivovať ukážky',
+	'option_readonly_explication' => 'Toto pole môžete zobraziť, vybrať, ale nie upravovať.',
+	'option_readonly_label' => 'Len na čítanie',
+	'option_rows_explication' => 'Výška poľa v riadkoch. Táto možnosť sa nepoužije vždy, pretože  štýly CSS na vašej stránke ju môžu zmeniť.',
+	'option_rows_label' => 'Počet riadkov',
+	'option_size_explication' => 'Šírka poľa v riadkoch. Táto možnosť sa nepoužije vždy, pretože štýly CSS na vašej stránke ju môžu zmeniť.',
+	'option_size_label' => 'Veľkosť poľa',
+	'option_type_choix_plusieurs' => 'Umožní používateľovi vybrať si <strong>mnohých</ strong> príjemcov.',
+	'option_type_choix_tous' => 'Urobiť príjemcov zo <strong>všetkých</ strong> týchto autorov. Používateľ nebude mať na výber.',
+	'option_type_choix_un' => 'Povoliť používateľovi vybrať si <strong>jedného</ strong> príjemcu (vo forme rozbaľovacieho menu).',
+	'option_type_choix_un_radio' => 'Umožniť používateľovi vybrať si <strong>jediného</strong> príjemcu (vo forme zoznamu s odrážkami).',
+	'option_type_explication' => 'V režime hesla sa obsah napísaný do poľa nahradí hviezdičkami.',
+	'option_type_label' => 'Typ poľa',
+	'option_type_password' => 'Skrývaný text pri písaní (napr. heslo)',
+	'option_type_text' => 'Normálny',
 
 	// S
-	'saisie_case_explication' => 'Permet d\'activer ou de désactiver quelque chose.', # NEW
-	'saisie_case_titre' => 'Case unique', # NEW
-	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.', # NEW
-	'saisie_checkbox_titre' => 'Cases à cocher', # NEW
-	'saisie_date_explication' => 'Permet de saisir une date ? l\'aide d\'un calendrier', # NEW
-	'saisie_date_titre' => 'Date', # NEW
-	'saisie_destinataires_explication' => '<NEW><MODIF>Umožňuje vybrať jedného alebo viacerých príjemcov z predvolených autorov .',
-	'saisie_destinataires_titre' => '<NEW>Príjemcovia',
-	'saisie_explication_explication' => 'Un texte explicatif général.', # NEW
-	'saisie_explication_titre' => 'Explication', # NEW
-	'saisie_fieldset_explication' => '<NEW>Rám, v ktorom môže byť niekoľko polí.',
-	'saisie_fieldset_titre' => 'Fieldset', # MODIF
-	'saisie_file_explication' => 'Envoi d\'un fichier', # NEW
-	'saisie_file_titre' => 'Fichier', # NEW
-	'saisie_hidden_explication' => 'Un champ pré-rempli que l\'utilisateur ne pourra pas voir.', # NEW
-	'saisie_hidden_titre' => 'Champ caché', # NEW
-	'saisie_input_explication' => '<NEW>Jednoduchý riadok textu, ktorý možno zobraziť alebo skryť (heslo).',
-	'saisie_input_titre' => '<NEW>Textové pole',
-	'saisie_oui_non_explication' => 'Oui ou non, c\'est clair ? :)', # NEW
-	'saisie_oui_non_titre' => 'Oui ou non', # NEW
-	'saisie_radio_defaut_choix1' => 'Un', # NEW
-	'saisie_radio_defaut_choix2' => 'Deux', # NEW
-	'saisie_radio_defaut_choix3' => 'Trois', # NEW
-	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.', # NEW
-	'saisie_radio_titre' => 'Boutons radios', # NEW
-	'saisie_selecteur_article' => 'Affiche un navigateur de sélection d\'article', # NEW
-	'saisie_selecteur_article_titre' => 'Sélecteur d\'article', # NEW
-	'saisie_selecteur_rubrique' => 'Affiche un navigateur de sélection de rubrique', # NEW
-	'saisie_selecteur_rubrique_article' => 'Affiche un navigateur de sélection d\'article ou de rubrique', # NEW
-	'saisie_selecteur_rubrique_article_titre' => 'Sélecteur d\'article ou rubrique', # NEW
-	'saisie_selecteur_rubrique_titre' => 'Sélecteur de rubrique', # NEW
-	'saisie_selection_explication' => 'Choisir une option dans une liste déroulante.', # NEW
-	'saisie_selection_multiple_explication' => 'Permet de choisir plusieurs options avec une liste.', # NEW
-	'saisie_selection_multiple_titre' => 'Sélection multiple', # NEW
-	'saisie_selection_titre' => 'Liste déroulante', # NEW
-	'saisie_textarea_explication' => '<NEW>Textové pole s viacerými riadkami.',
-	'saisie_textarea_titre' => 'Textarea', # MODIF
+	'saisie_auteurs_explication' => 'Umožňuje vám vybrať jedného alebo viacerých autorov',
+	'saisie_auteurs_titre' => 'Autori',
+	'saisie_case_explication' => 'Používa sa na aktivovanie alebo deaktivovanie konkrétnej možnosti.',
+	'saisie_case_titre' => 'Jedno zaškrtávacie políčko',
+	'saisie_checkbox_explication' => 'Používa sa na výber niekoľkých možností pomocou zaškrtávacích políčok.',
+	'saisie_checkbox_titre' => 'Zaškrtávacie políčka',
+	'saisie_date_explication' => 'Používa sa na zadávanie dátumu pomocou nástroja kalendára',
+	'saisie_date_titre' => 'Dátum',
+	'saisie_destinataires_explication' => 'Používa sa na výber jedného príjemcu alebo viacerých z dopredu vybraných autorov.',
+	'saisie_destinataires_titre' => 'Príjemcovia',
+	'saisie_explication_explication' => 'Všeobecný vysvetľujúci text.',
+	'saisie_explication_titre' => 'Vysvetlenie',
+	'saisie_fieldset_explication' => 'Rám, v ktorom môže byť niekoľko polí.',
+	'saisie_fieldset_titre' => 'Skupina polí',
+	'saisie_file_explication' => 'Poslať súbor',
+	'saisie_file_titre' => 'Súbor',
+	'saisie_hidden_explication' => 'Predvyplnené pole, ktoré používateľ nikdy neuvidí.',
+	'saisie_hidden_titre' => 'Skryté pole',
+	'saisie_input_explication' => 'Jednoduchý riadok s textom, ktorý môže byť viditeľný alebo skrytý (heslo).',
+	'saisie_input_titre' => 'Textové pole',
+	'saisie_mot_explication' => 'Jedno alebo viac kľúčových slov zo skupiny slov',
+	'saisie_mot_titre' => 'Kľúčové slovo',
+	'saisie_oui_non_explication' => 'Odpoveď buď Áno alebo Nie',
+	'saisie_oui_non_titre' => 'Áno alebo Nie',
+	'saisie_radio_defaut_choix1' => 'Jeden',
+	'saisie_radio_defaut_choix2' => 'Dva',
+	'saisie_radio_defaut_choix3' => 'Tri',
+	'saisie_radio_explication' => 'Používa sa na výber jednej možnosti z viacerých dostupných.',
+	'saisie_radio_titre' => 'Rádiové gombíky',
+	'saisie_selecteur_article' => 'Zobraziť prehliadač výberu článku',
+	'saisie_selecteur_article_titre' => 'Výber článku',
+	'saisie_selecteur_rubrique' => 'Zobraziť prehliadač výberu rubriky',
+	'saisie_selecteur_rubrique_article' => 'Zobraziť prehliadač výberu článku alebo rubriky',
+	'saisie_selecteur_rubrique_article_titre' => 'Výber článku alebo rubriky',
+	'saisie_selecteur_rubrique_titre' => 'Výber rubriky',
+	'saisie_selection_explication' => 'Vyberte možnosť z rozbaľovacieho zoznamu.',
+	'saisie_selection_multiple_explication' => 'Používa sa na výber niekoľkých možností zo zoznamu.',
+	'saisie_selection_multiple_titre' => 'Výber z viacerých možností',
+	'saisie_selection_titre' => 'Rozbaľovací zoznam',
+	'saisie_textarea_explication' => 'Textové pole s viacerými riadkami.',
+	'saisie_textarea_titre' => 'Blok textu',
 
 	// T
-	'tous_visiteurs' => '<NEW>Všetci návštevníci (aj nezaregistrovaní)',
+	'tous_visiteurs' => 'Všetci návštevníci (aj ne­za­re­gis­tro­va­ní)',
+	'tout_selectionner' => 'Vybrať všetko',
 
 	// V
-	'vue_sans_reponse' => '<i>Sans réponse</i>', # NEW
+	'vue_sans_reponse' => '<i>Bez reakcie</i>',
 
 	// Z
-	'z' => 'zzz' # MODIF
+	'z' => 'zzz'
 );
 
 ?>

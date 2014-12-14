@@ -178,37 +178,44 @@ h3 a:hover {
 figcaption {
     display: none;
     position: absolute;
-    margin:-170px 0px 0px 25px;
+    margin:-268px 0px 0px 25px;
     width: 241px;
-    height: 150px;
+    height: 245px;
     /*padding: 25px;*/
     background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
     /*background-color: rgba(0,0,0,.15);*/
-    transition: opacity 0.4s ease-in-out 0s;
+    transition: opacity 0.4s ease-in-out 0.4s;
 }
 
-#image-wall h3 a {
-  color: #111;
-  font-weight: 500;
-}
 
-#image-wall h3 a:hover {
+.image-wall-li h3 a:hover {
   color: #444;
 }
 
 figcaption h3 {
-  margin-top: 25px;
+  color: #111;
+  font-weight: 500;
+  margin: 25px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
   text-transform: uppercase;
   text-align: center;
-  font-size: 16px;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 1.2px;
 }
 
 figcaption h4 {
+  text-align: center;
+  font-size: 20px;
+  text-transform: uppercase;
   margin-top: 15px;
 }
 
 figure:hover img {
-    opacity: .75;
+    opacity: .65;
+    transition:0.75s;
 }
 
 figure:hover figcaption {

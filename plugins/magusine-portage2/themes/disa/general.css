@@ -192,6 +192,10 @@ figcaption {
   color: #444;
 }
 
+h3 .auteur {
+  font-size: 18px;
+}
+
 figcaption h3 {
   color: #111;
   font-weight: 500;
